@@ -1,0 +1,671 @@
+package frontend;
+
+import java.awt.EventQueue;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+import java.awt.Color;
+import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import java.awt.Font;
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
+import java.awt.Window.Type;
+import java.awt.CardLayout;
+
+import javax.swing.BorderFactory;
+import javax.swing.GroupLayout;
+import javax.swing.GroupLayout.Alignment;
+import javax.swing.LayoutStyle.ComponentPlacement;
+import java.awt.BorderLayout;
+import javax.swing.SwingConstants;
+import javax.swing.UIManager;
+
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.JTextField;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.border.BevelBorder;
+import java.awt.Component;
+import java.awt.Cursor;
+import java.awt.Dimension;
+
+public class AdminDashboard extends JFrame {
+
+	private JPanel AdminDashboard;
+	private JPanel panel;
+	public CardLayout cardPanel = new CardLayout(0, 0);
+	private JButton coursesButton;
+	private JButton dashboardButton;
+	private JButton instructorsButton;
+	private JButton studentsButton;
+	private JButton settingButton;
+	private JTable courseTable;
+	private JTable instructorTable;
+	static AdminDashboard frame;
+	private JTable studentTable;
+	static int selectedRow = 0;
+	static int moduleTitleColumnIndex = 0;
+	static int moduleDurationColumnIndex = 0;
+	static int moduleMarkColumnIndex = 0;
+	/**
+	 * Launch the application.
+	 */
+	
+	DefaultTableModel modalValue =  new DefaultTableModel(
+			new Object[][] {
+				{"ISA", "3 months", "100%"},
+				{"OOP", "3 months", "100%"},
+				
+			},
+			new String[] {
+				"Module Title", "Moudle Duration", "Moudle Mark"
+			}
+		);
+	
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					frame = new AdminDashboard();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the frame.
+	 */
+	public AdminDashboard() {
+		setType(Type.UTILITY);
+		setResizable(false);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 1290, 720);
+		AdminDashboard = new JPanel();
+		AdminDashboard.setBackground(new Color(255, 255, 255));
+		AdminDashboard.setBorder(new EmptyBorder(5, 5, 5, 5));
+
+		setContentPane(AdminDashboard);
+		AdminDashboard.setLayout(null);
+		
+		JPanel sideBar = new JPanel();
+		sideBar.setBackground(new Color(52, 73, 94));
+		sideBar.setBounds(0, 0, 251, 683);
+		AdminDashboard.add(sideBar);
+		sideBar.setLayout(null);
+		
+		dashboardButton = new JButton("Dashboard");
+		dashboardButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		dashboardButton.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				dashboardButton.setBackground(new Color(35,51,66));
+				coursesButton.setBackground(new Color(52, 73, 94));
+				studentsButton.setBackground(new Color(52, 73, 94));
+				instructorsButton.setBackground(new Color(52, 73, 94));
+				settingButton.setBackground(new Color(52,73,94));
+				
+			}
+		});
+		dashboardButton.setIcon(new ImageIcon(AdminDashboard.class.getResource("/Images/dashboard.png")));
+		dashboardButton.setForeground(new Color(255, 255, 255));
+		dashboardButton.setFont(new Font("Century Gothic", Font.BOLD, 20));
+		dashboardButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+
+				cardPanel.show(panel,"name_482633956555500");
+			}
+		});
+		dashboardButton.setBackground(new Color(52, 73, 94));
+		dashboardButton.setBounds(0, 82, 251, 70);
+		sideBar.add(dashboardButton);
+		
+		coursesButton = new JButton("Courses");
+		coursesButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		coursesButton.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				coursesButton.setBackground(new Color(35,51,66));
+				dashboardButton.setBackground(new Color(52, 73, 94));
+				studentsButton.setBackground(new Color(52, 73, 94));
+				instructorsButton.setBackground(new Color(52, 73, 94));
+				settingButton.setBackground(new Color(52,73,94));
+			}
+		});
+		coursesButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				cardPanel.show(panel,"name_482673721529900");
+			}
+		});
+		
+		coursesButton.setIcon(new ImageIcon(AdminDashboard.class.getResource("/Images/courses.png")));
+		coursesButton.setBackground(new Color(52, 73, 94));
+		coursesButton.setForeground(new Color(255, 255, 255));
+		coursesButton.setFont(new Font("Century Gothic", Font.BOLD, 20));
+		coursesButton.setBounds(0, 151, 251, 70);
+		sideBar.add(coursesButton);
+		
+		settingButton = new JButton("Setting");
+		settingButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		settingButton.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				coursesButton.setBackground(new Color(52,73,94));
+				dashboardButton.setBackground(new Color(52, 73, 94));
+				studentsButton.setBackground(new Color(52, 73, 94));
+				instructorsButton.setBackground(new Color(52, 73, 94));
+				settingButton.setBackground(new Color(35,51,66));
+			}
+		});
+		settingButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				cardPanel.show(panel,"name_484968827713500");
+			}
+			
+		});
+		settingButton.setIcon(new ImageIcon(AdminDashboard.class.getResource("/Images/settings.png")));
+		settingButton.setBackground(new Color(52, 73, 94));
+		settingButton.setForeground(new Color(255, 255, 255));
+		settingButton.setFont(new Font("Century Gothic", Font.BOLD, 20));
+		settingButton.setBounds(0, 551, 251, 70);
+		sideBar.add(settingButton);
+		
+		JButton logoutButton = new JButton("Log Out");
+		logoutButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		logoutButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				cardPanel.show(panel, "name_484982008089500");
+			}
+		});
+		logoutButton.setIcon(new ImageIcon(AdminDashboard.class.getResource("/Images/log-out.png")));
+		logoutButton.setBackground(new Color(52, 73, 94));
+		logoutButton.setForeground(new Color(255, 255, 255));
+		logoutButton.setFont(new Font("Century Gothic", Font.BOLD, 20));
+		logoutButton.setBounds(0, 619, 251, 64);
+		sideBar.add(logoutButton);
+		
+		instructorsButton = new JButton("Instructors");
+		instructorsButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		instructorsButton.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				coursesButton.setBackground(new Color(52,73,94));
+				dashboardButton.setBackground(new Color(52, 73, 94));
+				studentsButton.setBackground(new Color(52, 73, 94));
+				settingButton.setBackground(new Color(52,73,94));
+				instructorsButton.setBackground(new Color(35,51,66));
+			}
+		});
+		instructorsButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				cardPanel.show(panel,"name_483861222823500");
+			}
+		});
+		instructorsButton.setIcon(new ImageIcon(AdminDashboard.class.getResource("/Images/instructor.png")));
+		instructorsButton.setBackground(new Color(52, 73, 94));
+		instructorsButton.setForeground(new Color(255, 255, 255));
+		instructorsButton.setFont(new Font("Century Gothic", Font.BOLD, 20));
+		instructorsButton.setBounds(0, 220, 251, 70);
+		sideBar.add(instructorsButton);
+		
+		studentsButton = new JButton("Students");
+		studentsButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		studentsButton.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				coursesButton.setBackground(new Color(52, 73, 94));
+				dashboardButton.setBackground(new Color(52, 73, 94));
+				instructorsButton.setBackground(new Color(52, 73, 94));
+				settingButton.setBackground(new Color(52,73,94));
+				studentsButton.setBackground(new Color(35,51,66));
+			}
+		});
+		studentsButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				cardPanel.show(panel, "name_484683737557400");
+			}
+		});
+		studentsButton.setBackground(new Color(52, 73, 94));
+		studentsButton.setIcon(new ImageIcon(AdminDashboard.class.getResource("/Images/graduates.png")));
+		studentsButton.setForeground(new Color(255, 255, 255));
+		studentsButton.setFont(new Font("Century Gothic", Font.BOLD, 20));
+		studentsButton.setBounds(0, 288, 251, 70);
+		sideBar.add(studentsButton);
+		
+		JPanel headerGreen = new JPanel();
+		headerGreen.setBackground(new Color(45, 204, 112));
+		headerGreen.setBounds(0, 0, 251, 85);
+		sideBar.add(headerGreen);
+		headerGreen.setLayout(null);
+		
+		JLabel lblNewLabel = new JLabel("CMS");
+		lblNewLabel.setBounds(0, 0, 251, 85);
+		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		headerGreen.add(lblNewLabel);
+		lblNewLabel.setForeground(new Color(255, 255, 255));
+		lblNewLabel.setFont(new Font("Century Gothic", Font.BOLD, 30));
+		
+		panel = new JPanel();
+		panel.setBackground(new Color(245, 245, 245));
+		panel.setBounds(248, 0, 1028, 683);
+		AdminDashboard.add(panel);
+		panel.setLayout(cardPanel);
+		
+		JPanel dashBoard = new JPanel();
+		panel.add(dashBoard, "name_482633956555500");
+		dashBoard.setLayout(null);
+		
+		JPanel mainDashBoardFrame = new JPanel();
+		mainDashBoardFrame.setBackground(new Color(192, 192, 192));
+		mainDashBoardFrame.setBounds(0, 0, 1028, 683);
+		dashBoard.add(mainDashBoardFrame);
+		
+		JPanel headerDashboard = new JPanel();
+		headerDashboard.setLayout(new BorderLayout(0, 0));
+		
+		JLabel dashboardTitle = new JLabel("Dashboard");
+		dashboardTitle.setBackground(new Color(245, 246, 250));
+		dashboardTitle.setHorizontalAlignment(SwingConstants.CENTER);
+		dashboardTitle.setFont(new Font("Century Gothic", Font.BOLD, 30));
+		headerDashboard.add(dashboardTitle);
+		
+		JPanel panel_2 = new JPanel();
+		panel_2.setBackground(new Color(245, 246, 250));
+		GroupLayout gl_mainDashBoardFrame = new GroupLayout(mainDashBoardFrame);
+		gl_mainDashBoardFrame.setHorizontalGroup(
+			gl_mainDashBoardFrame.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_mainDashBoardFrame.createSequentialGroup()
+					.addGroup(gl_mainDashBoardFrame.createParallelGroup(Alignment.LEADING)
+						.addComponent(headerDashboard, GroupLayout.PREFERRED_SIZE, 1028, GroupLayout.PREFERRED_SIZE)
+						.addComponent(panel_2, GroupLayout.PREFERRED_SIZE, 1037, GroupLayout.PREFERRED_SIZE))
+					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+		);
+		gl_mainDashBoardFrame.setVerticalGroup(
+			gl_mainDashBoardFrame.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_mainDashBoardFrame.createSequentialGroup()
+					.addComponent(headerDashboard, GroupLayout.PREFERRED_SIZE, 81, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+					.addComponent(panel_2, GroupLayout.PREFERRED_SIZE, 614, GroupLayout.PREFERRED_SIZE))
+		);
+		panel_2.setLayout(null);
+		
+		JPanel panel_3 = new JPanel();
+		panel_3.setBackground(new Color(255, 255, 255));
+		panel_3.setBounds(59, 28, 859, 112);
+		panel_2.add(panel_3);
+		panel_3.setLayout(null);
+		
+		JLabel lblNewLabel_2 = new JLabel("Hello,");
+		lblNewLabel_2.setFont(new Font("Century Gothic", Font.BOLD, 30));
+		lblNewLabel_2.setBounds(10, 23, 126, 47);
+		panel_3.add(lblNewLabel_2);
+		
+		JLabel lblNewLabel_3 = new JLabel("Admin");
+		lblNewLabel_3.setFont(new Font("Century Gothic", Font.PLAIN, 30));
+		lblNewLabel_3.setBounds(98, 28, 109, 37);
+		panel_3.add(lblNewLabel_3);
+		
+		JLabel lblNewLabel_4 = new JLabel("Welcome to the Course Management System Dashboard");
+		lblNewLabel_4.setFont(new Font("Century Gothic", Font.PLAIN, 15));
+		lblNewLabel_4.setBounds(10, 59, 444, 32);
+		panel_3.add(lblNewLabel_4);
+		
+		JLabel lblNewLabel_5 = new JLabel("");
+		lblNewLabel_5.setIcon(new ImageIcon(AdminDashboard.class.getResource("/images/helolo.png")));
+		lblNewLabel_5.setBounds(347, 0, 512, 279);
+		panel_3.add(lblNewLabel_5);
+		
+		JPanel panel_4 = new JPanel();
+		panel_4.setBackground(new Color(214, 234, 247));
+		panel_4.setBounds(59, 192, 210, 215);
+		panel_2.add(panel_4);
+		panel_4.setLayout(null);
+		
+		JLabel lblNewLabel_6 = new JLabel("");
+		lblNewLabel_6.setIcon(new ImageIcon(AdminDashboard.class.getResource("/images/studentsicon2.png")));
+		lblNewLabel_6.setBounds(10, 10, 78, 85);
+		panel_4.add(lblNewLabel_6);
+		
+		JLabel lblNewLabel_7 = new JLabel("Students");
+		lblNewLabel_7.setFont(new Font("Century Gothic", Font.BOLD, 25));
+		lblNewLabel_7.setBounds(92, 145, 108, 60);
+		panel_4.add(lblNewLabel_7);
+		
+		JLabel lblNewLabel_10 = new JLabel("");
+		lblNewLabel_10.setBounds(-135, -107, 298, 264);
+		panel_4.add(lblNewLabel_10);
+		lblNewLabel_10.setIcon(new ImageIcon(AdminDashboard.class.getResource("/images/cirlce.png")));
+		
+		JLabel lblNewLabel_15 = new JLabel("101");
+		lblNewLabel_15.setFont(new Font("Century Gothic", Font.PLAIN, 30));
+		lblNewLabel_15.setBounds(23, 145, 63, 60);
+		panel_4.add(lblNewLabel_15);
+		
+		JPanel panel_5 = new JPanel();
+		panel_5.setBackground(new Color(214, 234, 247));
+		panel_5.setBounds(398, 192, 210, 215);
+		panel_2.add(panel_5);
+		panel_5.setLayout(null);
+		
+		JLabel lblNewLabel_8 = new JLabel("");
+		lblNewLabel_8.setIcon(new ImageIcon(AdminDashboard.class.getResource("/images/teachericon.png")));
+		lblNewLabel_8.setBounds(10, 10, 81, 87);
+		panel_5.add(lblNewLabel_8);
+		
+		JLabel lblNewLabel_11 = new JLabel("");
+		lblNewLabel_11.setIcon(new ImageIcon(AdminDashboard.class.getResource("/images/cirlce2.png")));
+		lblNewLabel_11.setBounds(-133, -106, 309, 260);
+		panel_5.add(lblNewLabel_11);
+		
+		JLabel lblNewLabel_13 = new JLabel("Instructors");
+		lblNewLabel_13.setFont(new Font("Century Gothic", Font.BOLD, 25));
+		lblNewLabel_13.setBounds(72, 159, 128, 32);
+		panel_5.add(lblNewLabel_13);
+		
+		JLabel lblNewLabel_16 = new JLabel("100");
+		lblNewLabel_16.setFont(new Font("Century Gothic", Font.PLAIN, 30));
+		lblNewLabel_16.setBounds(10, 164, 69, 24);
+		panel_5.add(lblNewLabel_16);
+		
+		JPanel panel_6 = new JPanel();
+		panel_6.setBackground(new Color(214, 234, 247));
+		panel_6.setBounds(708, 192, 210, 215);
+		panel_2.add(panel_6);
+		panel_6.setLayout(null);
+		
+		JLabel lblNewLabel_9 = new JLabel("");
+		lblNewLabel_9.setIcon(new ImageIcon(AdminDashboard.class.getResource("/images/courseicons.png")));
+		lblNewLabel_9.setBounds(10, 24, 81, 67);
+		panel_6.add(lblNewLabel_9);
+		
+		JLabel lblNewLabel_12 = new JLabel("");
+		lblNewLabel_12.setIcon(new ImageIcon(AdminDashboard.class.getResource("/images/cirlce3.png")));
+		lblNewLabel_12.setBounds(-137, -111, 311, 263);
+		panel_6.add(lblNewLabel_12);
+		
+		JLabel lblNewLabel_14 = new JLabel("Courses");
+		lblNewLabel_14.setFont(new Font("Century Gothic", Font.BOLD, 25));
+		lblNewLabel_14.setBounds(95, 161, 105, 26);
+		panel_6.add(lblNewLabel_14);
+		
+		JLabel lblNewLabel_17 = new JLabel("99");
+		lblNewLabel_17.setFont(new Font("Century Gothic", Font.PLAIN, 30));
+		lblNewLabel_17.setBounds(48, 150, 43, 44);
+		panel_6.add(lblNewLabel_17);
+		mainDashBoardFrame.setLayout(gl_mainDashBoardFrame);
+		
+		JPanel courses = new JPanel();
+		panel.add(courses, "name_482673721529900");
+		courses.setLayout(null);
+		
+		JPanel mainCoursesFrame = new JPanel();
+		mainCoursesFrame.setBackground(new Color(192, 192, 192));
+		mainCoursesFrame.setBounds(0, 0, 1028, 683);
+		courses.add(mainCoursesFrame);
+		mainCoursesFrame.setLayout(null);
+		
+		JPanel headerCourses = new JPanel();
+		headerCourses.setBounds(0, 0, 1028, 82);
+		mainCoursesFrame.add(headerCourses);
+		headerCourses.setLayout(new BorderLayout(0, 0));
+		
+		JLabel courseTitle = new JLabel("Courses");
+		courseTitle.setHorizontalAlignment(SwingConstants.CENTER);
+		courseTitle.setFont(new Font("Century Gothic", Font.BOLD, 30));
+		headerCourses.add(courseTitle);
+		
+		JScrollPane scrollPaneCourse = new JScrollPane();
+		scrollPaneCourse.setFont(new Font("Century Gothic", Font.PLAIN, 10));
+		scrollPaneCourse.setBounds(0, 81, 1028, 592);
+		mainCoursesFrame.add(scrollPaneCourse);
+		
+		courseTable = new JTable();
+		courseTable.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				Object[] options = { "Update", "Delete" };
+				int optionSelected = JOptionPane.showOptionDialog(null, "Do you want to update or delete?", "Update or Delete Landlord",
+				JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE, null, options, options[0]);
+				//Updating table
+				if(optionSelected == 0) {
+					UpdateModal updateCourse = new UpdateModal();
+					JTextField moduleTitleTextfield = updateCourse.getModuleTitle();
+					JTextField mouduleDurationTextfield = updateCourse.getModuleDuration();
+					JTextField moduleMarkTextfield = updateCourse.getModuleMark();
+					
+					String moduleTitle = "";
+					String moduleDuration = "";
+					String moduleMark = "";
+					selectedRow = courseTable.getSelectedRow();
+					for(int columnIndex = 0; columnIndex < courseTable.getColumnCount(); columnIndex++) {
+						if (moduleTitle.isEmpty()){
+							moduleTitle = (String) courseTable.getValueAt(courseTable.getSelectedRow(), columnIndex);
+							moduleTitleColumnIndex = columnIndex;
+						} else if (moduleDuration.isEmpty()){
+							moduleDuration = (String) courseTable.getValueAt(courseTable.getSelectedRow(),
+									columnIndex);
+							moduleDurationColumnIndex = columnIndex;
+
+						} else if (moduleMark.isEmpty()) {
+							moduleMark = (String) courseTable.getValueAt(courseTable.getSelectedRow(), columnIndex);
+							moduleMarkColumnIndex = columnIndex;
+						}
+					}
+					moduleTitleTextfield.setText(moduleTitle);
+					mouduleDurationTextfield.setText(moduleDuration);
+					moduleMarkTextfield.setText(moduleMark);
+					
+					JButton submitButton = updateCourse.getSubmitbutton();
+					submitButton.setText("update");
+					submitButton.addActionListener(new ActionListener() {
+
+						@Override
+						public void actionPerformed(ActionEvent e) {
+
+					
+							courseTable.setValueAt(moduleTitleTextfield.getText(), selectedRow, moduleTitleColumnIndex);
+							courseTable.setValueAt(mouduleDurationTextfield.getText(), selectedRow, moduleDurationColumnIndex);
+							courseTable.setValueAt(moduleMarkTextfield.getText(), selectedRow, moduleMarkColumnIndex);
+
+							updateCourse.setVisible(false);
+						}
+					});
+					
+					updateCourse.setVisible(true);
+					
+					
+				}
+				else if(optionSelected == 1) {
+					modalValue.removeRow(courseTable.getSelectedRow());
+					modalValue.addRow(new Object[] {"Hello", "kiki", "NabinGay"});
+				}
+			}
+		});
+		courseTable.setDefaultEditor(Object.class,null);
+		courseTable.getTableHeader().setBackground(Color.decode("#d6eaf7"));
+		courseTable.getTableHeader().setFont(new Font("Century Gothic", Font.BOLD, 20));
+		UIManager.getDefaults().put("TableHeader.cellBorder" , BorderFactory.createEmptyBorder(0,0,0,0));
+		courseTable.setIntercellSpacing(new Dimension(5, 5));
+		courseTable.setBackground(new Color(255, 255, 255));
+		courseTable.setRowHeight(35);
+		courseTable.setFont(new Font("Century Gothic", Font.PLAIN, 15));
+		courseTable.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
+		courseTable.setShowVerticalLines(false);
+		courseTable.setModel(modalValue);
+		scrollPaneCourse.setViewportView(courseTable);
+		
+		JPanel instructors = new JPanel();
+		panel.add(instructors, "name_483861222823500");
+		instructors.setLayout(null);
+		
+		JPanel mainInstructor = new JPanel();
+		mainInstructor.setBackground(new Color(192, 192, 192));
+		mainInstructor.setBounds(0, 0, 1028, 683);
+		instructors.add(mainInstructor);
+		mainInstructor.setLayout(null);
+		
+		JPanel headerInstructors = new JPanel();
+		headerInstructors.setBounds(0, 0, 1028, 83);
+		mainInstructor.add(headerInstructors);
+		headerInstructors.setLayout(new BorderLayout(0, 0));
+		
+		JLabel instructorsTitle = new JLabel("Instructors");
+		instructorsTitle.setHorizontalAlignment(SwingConstants.CENTER);
+		instructorsTitle.setFont(new Font("Century Gothic", Font.BOLD, 30));
+		headerInstructors.add(instructorsTitle, BorderLayout.CENTER);
+		
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(0, 80, 1028, 320);
+		mainInstructor.add(scrollPane);
+		
+		instructorTable = new JTable();
+		instructorTable.getTableHeader().setBackground(Color.decode("#d6eaf7"));
+		instructorTable.getTableHeader().setFont(new Font("Century Gothic", Font.BOLD, 20));
+		UIManager.getDefaults().put("TableHeader.cellBorder" , BorderFactory.createEmptyBorder(0,0,0,0));
+		instructorTable.setModel(new DefaultTableModel(
+			new Object[][] {
+				{"Raj Prasad Shrestha", "63", "Lalitpur", "OOP", "30"},
+				{"Deepson Shrestha", "87", "New Road", "ISA", "26"},
+				{null, null, null, null, null},
+			},
+			new String[] {
+				"Instrucotr Name", "Instructor ID", "Address", "Module", "Age"
+			}
+		));
+		instructorTable.setShowVerticalLines(false);
+		instructorTable.setRowHeight(35);
+		instructorTable.setIntercellSpacing(new Dimension(5, 5));
+		instructorTable.setFont(new Font("Century Gothic", Font.PLAIN, 15));
+		instructorTable.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
+		instructorTable.setBackground(Color.WHITE);
+		scrollPane.setViewportView(instructorTable);
+		
+		JPanel students = new JPanel();
+		panel.add(students, "name_484683737557400");
+		students.setLayout(null);
+		
+		JPanel mainStudents = new JPanel();
+		mainStudents.setBackground(new Color(192, 192, 192));
+		mainStudents.setBounds(0, 0, 1028, 683);
+		students.add(mainStudents);
+		mainStudents.setLayout(null);
+		
+		JPanel headerStudents = new JPanel();
+		headerStudents.setBounds(0, 0, 1028, 83);
+		mainStudents.add(headerStudents);
+		headerStudents.setLayout(new BorderLayout(0, 0));
+		
+		JLabel studentsTitle = new JLabel("Students");
+		studentsTitle.setBackground(new Color(245, 246, 250));
+		studentsTitle.setFont(new Font("Century Gothic", Font.BOLD, 30));
+		studentsTitle.setHorizontalAlignment(SwingConstants.CENTER);
+		headerStudents.add(studentsTitle, BorderLayout.CENTER);
+		
+		JScrollPane scrollPane_1 = new JScrollPane();
+		scrollPane_1.setBounds(0, 83, 1028, 600);
+		mainStudents.add(scrollPane_1);
+		
+		studentTable = new JTable();
+		studentTable.getTableHeader().setBackground(Color.decode("#d6eaf7"));
+		studentTable.getTableHeader().setFont(new Font("Century Gothic", Font.BOLD, 20));
+		UIManager.getDefaults().put("TableHeader.cellBorder" , BorderFactory.createEmptyBorder(0,0,0,0));
+		studentTable.setModel(new DefaultTableModel(
+			new Object[][] {
+				{"Prabit", "Lalitpur", "2.5", "4", "BIT"},
+				{"Salin", "Bhaktapur", "9.7", "4", "BIBM"},
+				{"Sahel", "New Road", "53", "4", "BIT"},
+				{"Yurisha", "Chabahil", "1", "4", "BIT"},
+				{null, null, null, null, null},
+			},
+			new String[] {
+				"Name", "Address", "ID", "Level", "Course"
+			}
+		));
+		studentTable.setShowVerticalLines(false);
+		studentTable.setRowHeight(35);
+		studentTable.setIntercellSpacing(new Dimension(5, 5));
+		studentTable.setFont(new Font("Century Gothic", Font.PLAIN, 15));
+		studentTable.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
+		studentTable.setBackground(Color.WHITE);
+		scrollPane_1.setViewportView(studentTable);
+		
+		JPanel setting = new JPanel();
+		panel.add(setting, "name_484968827713500");
+		setting.setLayout(null);
+		
+		JPanel mainSetting = new JPanel();
+		mainSetting.setBackground(new Color(192, 192, 192));
+		mainSetting.setBounds(0, 0, 1028, 683);
+		setting.add(mainSetting);
+		mainSetting.setLayout(null);
+		
+		JPanel headerSetting = new JPanel();
+		headerSetting.setBounds(0, 0, 1028, 82);
+		mainSetting.add(headerSetting);
+		headerSetting.setLayout(new BorderLayout(0, 0));
+		
+		JLabel settingTitle = new JLabel("Setting");
+		settingTitle.setHorizontalAlignment(SwingConstants.CENTER);
+		settingTitle.setFont(new Font("Century Gothic", Font.BOLD, 30));
+		headerSetting.add(settingTitle, BorderLayout.CENTER);
+		
+		JPanel logOut = new JPanel();
+		panel.add(logOut, "name_484982008089500");
+		logOut.setLayout(null);
+		
+		JPanel mainLogOut = new JPanel();
+		mainLogOut.setBackground(new Color(192, 192, 192));
+		mainLogOut.setBounds(-11, 0, 1039, 683);
+		logOut.add(mainLogOut);
+		mainLogOut.setLayout(null);
+		
+		JPanel headerLogOut = new JPanel();
+		headerLogOut.setBounds(10, 0, 1029, 81);
+		mainLogOut.add(headerLogOut);
+		headerLogOut.setLayout(new BorderLayout(0, 0));
+		
+		JLabel logOutTitle = new JLabel("Log Out");
+		logOutTitle.setFont(new Font("Century Gothic", Font.BOLD, 30));
+		logOutTitle.setHorizontalAlignment(SwingConstants.CENTER);
+		headerLogOut.add(logOutTitle, BorderLayout.CENTER);
+		
+		JPanel panel_1 = new JPanel();
+		panel_1.setBackground(new Color(255, 255, 255));
+		panel_1.setBounds(267, 156, 449, 431);
+		mainLogOut.add(panel_1);
+		panel_1.setLayout(null);
+		
+		JLabel lblNewLabel_1 = new JLabel("You sure want to log out?");
+		lblNewLabel_1.setBounds(101, 22, 246, 26);
+		lblNewLabel_1.setFont(new Font("Century Gothic", Font.BOLD, 20));
+		panel_1.add(lblNewLabel_1);
+		
+		JButton btnNewButton = new JButton("Log Out");
+		btnNewButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		btnNewButton.setFont(new Font("Century Gothic", Font.BOLD, 15));
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				LogIn frameLogin = new LogIn();
+				frameLogin.setVisible(true);
+				frame.dispose();
+			}
+		});
+		btnNewButton.setBackground(new Color(255, 114, 92));
+		btnNewButton.setBounds(186, 364, 109, 21);
+		panel_1.add(btnNewButton);
+		
+		JLabel lblNewLabel_18 = new JLabel("");
+		lblNewLabel_18.setIcon(new ImageIcon(AdminDashboard.class.getResource("/images/250.jpg")));
+		lblNewLabel_18.setBounds(98, 86, 270, 244);
+		panel_1.add(lblNewLabel_18);
+	}
+}
