@@ -31,6 +31,9 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
+
+import backend.Database;
+
 import javax.swing.border.BevelBorder;
 import java.awt.Component;
 import java.awt.Cursor;
@@ -54,6 +57,7 @@ public class AdminDashboard extends JFrame {
 	static int moduleTitleColumnIndex = 0;
 	static int moduleDurationColumnIndex = 0;
 	static int moduleMarkColumnIndex = 0;
+	Database db = new Database();
 	/**
 	 * Launch the application.
 	 */
@@ -501,6 +505,9 @@ public class AdminDashboard extends JFrame {
 		courseTable.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		courseTable.setShowVerticalLines(false);
 		courseTable.setModel(modalValue);
+		for(int i = 0 ; i<db.getArrayID().size();i++) {
+			modalValue.addRow(new Object[] {db.getArrayID().get(i),db.getArrayName().get(i)});
+		}
 		scrollPaneCourse.setViewportView(courseTable);
 		
 		JPanel instructors = new JPanel();
