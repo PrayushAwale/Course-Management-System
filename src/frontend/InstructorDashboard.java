@@ -350,7 +350,7 @@ public class InstructorDashboard extends JFrame {
 		
 		JPanel panel_4 = new JPanel();
 		panel_4.setBackground(new Color(214, 234, 247));
-		panel_4.setBounds(59, 192, 210, 215);
+		panel_4.setBounds(59, 277, 210, 215);
 		panel_2.add(panel_4);
 		panel_4.setLayout(null);
 		
@@ -376,7 +376,7 @@ public class InstructorDashboard extends JFrame {
 		
 		JPanel panel_5 = new JPanel();
 		panel_5.setBackground(new Color(214, 234, 247));
-		panel_5.setBounds(398, 192, 210, 215);
+		panel_5.setBounds(395, 277, 210, 215);
 		panel_2.add(panel_5);
 		panel_5.setLayout(null);
 		
@@ -402,7 +402,7 @@ public class InstructorDashboard extends JFrame {
 		
 		JPanel panel_6 = new JPanel();
 		panel_6.setBackground(new Color(214, 234, 247));
-		panel_6.setBounds(708, 192, 210, 215);
+		panel_6.setBounds(708, 277, 210, 215);
 		panel_2.add(panel_6);
 		panel_6.setLayout(null);
 		
@@ -425,6 +425,13 @@ public class InstructorDashboard extends JFrame {
 		lblNewLabel_17.setFont(new Font("Century Gothic", Font.PLAIN, 30));
 		lblNewLabel_17.setBounds(48, 150, 43, 44);
 		panel_6.add(lblNewLabel_17);
+		
+		JButton btnNewButton_1 = new JButton("Create Assignments");
+		btnNewButton_1.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		btnNewButton_1.setBackground(new Color(255, 255, 255));
+		btnNewButton_1.setFont(new Font("Century Gothic", Font.BOLD, 20));
+		btnNewButton_1.setBounds(59, 175, 859, 56);
+		panel_2.add(btnNewButton_1);
 		mainDashBoardFrame.setLayout(gl_mainDashBoardFrame);
 		
 		JPanel courses = new JPanel();

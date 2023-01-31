@@ -1,5 +1,6 @@
 package frontend;
 
+
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -27,12 +28,19 @@ import javax.swing.UIManager;
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.math.BigDecimal;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
+import com.mysql.cj.api.jdbc.Statement;
+
 import backend.Database;
+import backend.UpdateDb;
 
 import javax.swing.border.BevelBorder;
 import java.awt.Component;
@@ -49,6 +57,15 @@ public class AdminDashboard extends JFrame {
 	private JButton instructorsButton;
 	private JButton studentsButton;
 	private JButton settingButton;
+	private String moduleCode = "";
+	private String moduleTitle = "";
+	private String moduleDuration = "";
+	private String moduleMark = "";
+	private String moduleLeader = "";
+	private String newmoduleTitle = "";
+	private String newmoduleDuration = "";
+	private String newmoduleMark = "";
+	private String newmoduleLeader = "";
 	static AdminDashboard frame;
 	static int selectedRow = 0;
 	static int moduleTitleColumnIndex = 0;
@@ -57,11 +74,12 @@ public class AdminDashboard extends JFrame {
 	static int moduleCodeColumnIndex  = 0;
 	static int moduleLeaderColumnIndex = 0;
 	Database db = new Database();
+	UpdateModal updateCourse = new UpdateModal();
 	/**
 	 * Launch the application.
 	 */
 	
-	//Default value for module
+	static //Default value for module
 	DefaultTableModel modalValue =  new DefaultTableModel(
 			new Object[][] {
 				
@@ -73,7 +91,7 @@ public class AdminDashboard extends JFrame {
 			}
 		);
 	
-	//Default value for teacher
+	static //Default value for teacher
 	DefaultTableModel teacherValue =  new DefaultTableModel(
 			new Object[][] {
 				
@@ -96,6 +114,31 @@ public class AdminDashboard extends JFrame {
 				"University ID","Student Name", "Phone Number", "Address", "Level", "Course"
 			}
 		);
+	public static void showDataFromDatabase() {
+        Statement statement = (Statement) UpdateDB.getStatement();
+
+        String selectQuery = "SELECT * FROM `course`";
+
+        try {
+            ResultSet resultSet = statement.executeQuery(selectQuery);
+            modalValue.setRowCount(0);
+            while (resultSet.next()) {
+                String teacherIdFromDB = resultSet.getString("module_code");
+                String teacherNameFromDB = resultSet.getString("module_title");
+                String teacherPhoneFromDB = resultSet.getString("module_duration");
+                String teacherAddressFromDB = resultSet.getString("module_mark");
+                String assignedModuleFromDB = resultSet.getString("module_leader");
+
+                modalValue.addRow(new Object[] { teacherIdFromDB, teacherNameFromDB, teacherPhoneFromDB,
+                        teacherAddressFromDB, assignedModuleFromDB
+
+                });
+            }
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+    }
 	private JTable courseTables;
 	private JTable instructorTables;
 	private JTable studentTables;
@@ -486,6 +529,7 @@ public class AdminDashboard extends JFrame {
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				cardPanel.show(panel,"name_793698549557300");
+//				frame.showDataFromDatabase();
 			}
 		});
 		btnNewButton_1.setBackground(new Color(250, 229, 227));
@@ -794,10 +838,16 @@ public class AdminDashboard extends JFrame {
 		courseTablePanel.setLayout(null);
 		
 		JScrollPane scrollPane_2 = new JScrollPane();
-		scrollPane_2.setBounds(0, 0, 1028, 683);
+		scrollPane_2.setBounds(0, 0, 1028, 554);
 		courseTablePanel.add(scrollPane_2);
 		
 		courseTables = new JTable();
+		courseTables.setFillsViewportHeight(true);
+		JTextField moduleCodeValue = updateCourse.getModuleCodeTextfield();
+		JTextField mouduleTitleValue = updateCourse.getModuleTitleTextfield();
+		JTextField moduleDurationValue = updateCourse.getModuleDurationTextfield();
+		JTextField moduleMarkValue = updateCourse.getModuleMarkTextfield();
+		JTextField moduleLeaderValue = updateCourse.getModuleLeaderTextfield();
 		courseTables.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -806,17 +856,6 @@ public class AdminDashboard extends JFrame {
 				JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE, null, options, options[0]);
 				//Updating table
 				if(optionSelected == 0) {
-					UpdateModal updateCourse = new UpdateModal();
-					JTextField moduleCodeValue = updateCourse.getModuleCodeTextfield();
-					JTextField mouduleTitleValue = updateCourse.getModuleTitleTextfield();
-					JTextField moduleDurationValue = updateCourse.getModuleDurationTextfield();
-					JTextField moduleMarkValue = updateCourse.getModuleMarkTextfield();
-					JTextField moduleLeaderValue = updateCourse.getModuleLeaderTextfield();
-					String moduleCode = "";
-					String moduleTitle = "";
-					String moduleDuration = "";
-					String moduleMark = "";
-					String moduleLeader = "";
 					selectedRow = courseTables.getSelectedRow();
 					for(int columnIndex = 0; columnIndex < courseTables.getColumnCount(); columnIndex++) {
 					
@@ -848,7 +887,7 @@ public class AdminDashboard extends JFrame {
 					
 					
 					JButton submitButton = updateCourse.getSubmitbutton();
-					submitButton.setText("update");
+					submitButton.setText("Update");
 					submitButton.addActionListener(new ActionListener() {
 
 						@Override
@@ -864,6 +903,8 @@ public class AdminDashboard extends JFrame {
 							updateCourse.setVisible(false);
 						}
 					});
+				String updateQuery = "UPDATE `course SET `module_code` = '"+moduleCodeValue.getText()+"', module_title='"+mouduleTitleValue.getText()+"',"
+						+ "module_duration='"+moduleDurationValue.getText()+"',module_duration='"+moduleDurationValue.getText()+"',";
 					
 					updateCourse.setVisible(true);
 					
@@ -888,15 +929,69 @@ public class AdminDashboard extends JFrame {
 		courseTables.setBackground(Color.WHITE);
 		scrollPane_2.setViewportView(courseTables);
 		
+		JButton addCourseButton = new JButton("Add");
+		addCourseButton.addActionListener(new ActionListener() {
+			
+			public void actionPerformed(ActionEvent e) {
+				updateCourse.setVisible(true);
+				updateCourse.getModuleCodeTextfield().setVisible(false);
+				updateCourse.getShowthis().setVisible(true);
+				JTextField mouduleTitleValue = updateCourse.getModuleTitleTextfield();
+				JTextField moduleDurationValue = updateCourse.getModuleDurationTextfield();
+				JTextField moduleMarkValue = updateCourse.getModuleMarkTextfield();
+				JTextField moduleLeaderValue = updateCourse.getModuleLeaderTextfield();
+				JButton addButton = updateCourse.getSubmitbutton();
+				addButton.setText("Add");
+				
+				
+				addButton.addActionListener(new ActionListener() {
+
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						newmoduleTitle = mouduleTitleValue.getText();
+						newmoduleDuration= moduleDurationValue.getText();
+						newmoduleMark= moduleMarkValue.getText();
+						newmoduleLeader= moduleLeaderValue.getText();
+//						Statement statement = dbUpdate.getStatement();
+						Statement statement =  (Statement) UpdateDB.getStatement();
+						
+						String insertQuery = "INSERT INTO `course` ( `module_title`,  `module_duration`,`module_mark`, `module_leader`) " + "VALUES ( '"+newmoduleTitle+"','"+newmoduleDuration+"','"+newmoduleMark+"','"+newmoduleLeader+"')";
+							
+					try {
+						int success = statement.executeUpdate(insertQuery);
+					
+						if (success==1) {
+							frame.showDataFromDatabase();
+							updateCourse.dispose();
+                            JOptionPane.showMessageDialog(null, "Added Teacher data successfully!");
+						}
+						
+					} catch (SQLException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+						JOptionPane.showMessageDialog(null, "Unable to add the course, please try!");
+					}
+					}
+				});
+				
+			}
+		});
+		addCourseButton.setForeground(new Color(255, 255, 255));
+		addCourseButton.setBackground(new Color(45, 204, 112));
+		addCourseButton.setFont(new Font("Century Gothic", Font.BOLD, 20));
+		addCourseButton.setBounds(463, 605, 101, 35);
+		courseTablePanel.add(addCourseButton);
+		
 		JPanel instructorTablePanel = new JPanel();
 		panel.add(instructorTablePanel, "name_796135818434000");
 		instructorTablePanel.setLayout(null);
 		
 		JScrollPane scrollPane_3 = new JScrollPane();
-		scrollPane_3.setBounds(0, 0, 1028, 497);
+		scrollPane_3.setBounds(0, 0, 1028, 556);
 		instructorTablePanel.add(scrollPane_3);
 		
 		instructorTables = new JTable();
+		instructorTables.setFillsViewportHeight(true);
 		instructorTables.setModel(teacherValue);
 		instructorTables.getTableHeader().setBackground(Color.decode("#d6eaf7"));
 		instructorTables.getTableHeader().setFont(new Font("Century Gothic", Font.BOLD, 20));
@@ -908,15 +1003,23 @@ public class AdminDashboard extends JFrame {
 		instructorTables.setBackground(Color.WHITE);
 		scrollPane_3.setViewportView(instructorTables);
 		
+		JButton addCourseButton_1 = new JButton("Add");
+		addCourseButton_1.setForeground(Color.WHITE);
+		addCourseButton_1.setFont(new Font("Century Gothic", Font.BOLD, 20));
+		addCourseButton_1.setBackground(new Color(45, 204, 112));
+		addCourseButton_1.setBounds(467, 613, 101, 35);
+		instructorTablePanel.add(addCourseButton_1);
+		
 		JPanel studentTablePanel = new JPanel();
 		panel.add(studentTablePanel, "name_797954346157000");
 		studentTablePanel.setLayout(null);
 		
 		JScrollPane scrollPane_4 = new JScrollPane();
-		scrollPane_4.setBounds(0, 0, 1028, 683);
+		scrollPane_4.setBounds(0, 0, 1028, 551);
 		studentTablePanel.add(scrollPane_4);
 		
 		studentTables = new JTable();
+		studentTables.setFillsViewportHeight(true);
 		studentTables.setModel(studentValue);
 		studentTables.getTableHeader().setBackground(Color.decode("#d6eaf7"));
 		studentTables.getTableHeader().setFont(new Font("Century Gothic", Font.BOLD, 20));
@@ -927,5 +1030,12 @@ public class AdminDashboard extends JFrame {
 		studentTables.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		studentTables.setBackground(Color.WHITE);
 		scrollPane_4.setViewportView(studentTables);
+		
+		JButton addCourseButton_1_1 = new JButton("Add");
+		addCourseButton_1_1.setForeground(Color.WHITE);
+		addCourseButton_1_1.setFont(new Font("Century Gothic", Font.BOLD, 20));
+		addCourseButton_1_1.setBackground(new Color(45, 204, 112));
+		addCourseButton_1_1.setBounds(440, 604, 101, 35);
+		studentTablePanel.add(addCourseButton_1_1);
 	}
 }

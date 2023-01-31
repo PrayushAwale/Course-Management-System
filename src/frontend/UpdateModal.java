@@ -22,10 +22,15 @@ public class UpdateModal extends JFrame {
 	private JTextField moduleMarkTextfield;
 	private JTextField moduleLeaderTextfield;
 	private JLabel lblNewLabel_2_2;
+	private JLabel showthis;
 
 	
 	
 	
+
+	public JLabel getShowthis() {
+		return showthis;
+	}
 
 	public JTextField getModuleCodeTextfield() {
 		return moduleCodeTextfield;
@@ -118,7 +123,8 @@ public class UpdateModal extends JFrame {
 		moduleDurationTextfield.setColumns(10);
 		
 		submitbutton = new JButton("Submit");
-		submitbutton.setBounds(433, 447, 85, 21);
+		submitbutton.setBackground(new Color(255, 255, 255));
+		submitbutton.setBounds(431, 429, 85, 21);
 		panel.add(submitbutton);
 		
 		moduleMarkTextfield = new JTextField();
@@ -140,5 +146,11 @@ public class UpdateModal extends JFrame {
 		lblNewLabel_2_2.setFont(new Font("Century Gothic", Font.PLAIN, 20));
 		lblNewLabel_2_2.setBounds(490, 13, 152, 38);
 		panel.add(lblNewLabel_2_2);
+		
+		showthis = new JLabel("Auto Generated");
+		showthis.setVisible(false);
+		showthis.setFont(new Font("Century Gothic", Font.BOLD, 20));
+		showthis.setBounds(69, 41, 171, 44);
+		panel.add(showthis);
 	}
 }

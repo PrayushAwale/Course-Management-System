@@ -23,6 +23,8 @@ import java.util.Arrays;
 import java.awt.event.ActionEvent;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
+import java.awt.event.ItemListener;
+import java.awt.event.ItemEvent;
 
 public class LogIn extends JFrame {
 
@@ -31,6 +33,7 @@ public class LogIn extends JFrame {
 	private JPasswordField passwordField;
 	private JLabel lblNewLabel;
 	private static LogIn frame;
+	private String loginAs = "";
 	/**
 	 * Launch the application.
 	 */
@@ -93,11 +96,23 @@ public class LogIn extends JFrame {
 		JButton loginButton = new JButton("Log in");
 		loginButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if(usernameField.getText().equals("student")&& Arrays.equals(passwordField.getPassword(),new char[] {'1','2','3'})) {
+				if(loginAs.equals("Admin") &&  usernameField.getText().equals("admin")&& Arrays.equals(passwordField.getPassword(),new char[] {'1','2','3'})) {
+					AdminDashboard frameLogin = new AdminDashboard();
+					frameLogin.setVisible(true);
+					frame.dispose();
+				}
+				if(loginAs.equals("Student") && usernameField.getText().equals("student")&& Arrays.equals(passwordField.getPassword(),new char[] {'1','2','3'})) {
 					StudentDashboard frameLogin = new StudentDashboard();
 					frameLogin.setVisible(true);
 					frame.dispose();
-				}else {
+				}
+				if(loginAs.equals("Instructor") &&  usernameField.getText().equals("teacher")&& Arrays.equals(passwordField.getPassword(),new char[] {'1','2','3'})) {
+					InstructorDashboard frameLogin = new InstructorDashboard();
+					frameLogin.setVisible(true);
+					frame.dispose();
+				}
+				
+				else {
 					lblNewLabel.setVisible(true);
 				}
 //				if(usernameField.getText().equals("std")&& Arrays.equals(passwordField.getPassword(),new char[] {'s','t','d'})) {
@@ -132,13 +147,20 @@ public class LogIn extends JFrame {
 		lblNewLabel_4.setBounds(111, 108, 57, 13);
 		loginPanel.add(lblNewLabel_4);
 		
-		lblNewLabel = new JLabel("Incorrect Username or Password");
+		lblNewLabel = new JLabel("Cannot Login Please Try Again!");
 		lblNewLabel.setForeground(new Color(255, 0, 0));
 		lblNewLabel.setFont(new Font("Century Gothic", Font.PLAIN, 15));
 		lblNewLabel.setBounds(91, 315, 285, 13);
 		loginPanel.add(lblNewLabel);
 		
 		JButton btnNewButton = new JButton("Sign up");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				SignUpFrame frameLogin = new SignUpFrame();
+				frameLogin.setVisible(true);
+				frame.dispose();
+			}
+		});
 		btnNewButton.setFont(new Font("Century Gothic", Font.BOLD, 16));
 		btnNewButton.setBackground(new Color(254, 179, 22));
 		btnNewButton.setBounds(215, 345, 94, 34);
@@ -150,6 +172,13 @@ public class LogIn extends JFrame {
 		loginPanel.add(lblNewLabel_1);
 		
 		JComboBox comboBox = new JComboBox();
+		comboBox.addItemListener(new ItemListener() {
+			public void itemStateChanged(ItemEvent e) {
+				if(e.getStateChange() == 1) {
+					loginAs = (String) e.getItem();
+				}
+			}
+		});
 		comboBox.setBackground(new Color(255, 255, 255));
 		comboBox.setModel(new DefaultComboBoxModel(new String[] {"Select", "Admin", "Instructor", "Student"}));
 		comboBox.setBounds(91, 135, 218, 21);
