@@ -151,7 +151,7 @@ public class LogIn extends JFrame {
 		
 		JComboBox comboBox = new JComboBox();
 		comboBox.setBackground(new Color(255, 255, 255));
-		comboBox.setModel(new DefaultComboBoxModel(new String[] {"Admin", "Instructor", "Student"}));
+		comboBox.setModel(new DefaultComboBoxModel(new String[] {"Select", "Admin", "Instructor", "Student"}));
 		comboBox.setBounds(91, 135, 218, 21);
 		loginPanel.add(comboBox);
 		lblNewLabel.setVisible(false);

@@ -49,30 +49,56 @@ public class AdminDashboard extends JFrame {
 	private JButton instructorsButton;
 	private JButton studentsButton;
 	private JButton settingButton;
-	private JTable courseTable;
-	private JTable instructorTable;
 	static AdminDashboard frame;
-	private JTable studentTable;
 	static int selectedRow = 0;
 	static int moduleTitleColumnIndex = 0;
 	static int moduleDurationColumnIndex = 0;
 	static int moduleMarkColumnIndex = 0;
+	static int moduleCodeColumnIndex  = 0;
+	static int moduleLeaderColumnIndex = 0;
 	Database db = new Database();
 	/**
 	 * Launch the application.
 	 */
 	
+	//Default value for module
 	DefaultTableModel modalValue =  new DefaultTableModel(
 			new Object[][] {
-				{"ISA", "3 months", "100%"},
-				{"OOP", "3 months", "100%"},
+				
+				
 				
 			},
 			new String[] {
-				"Module Title", "Moudle Duration", "Moudle Mark"
+				"Module Code","Module Title", "Moudle Duration", "Moudle Mark", "Module Leader"
 			}
 		);
 	
+	//Default value for teacher
+	DefaultTableModel teacherValue =  new DefaultTableModel(
+			new Object[][] {
+				
+				
+				
+			},
+			new String[] {
+				"Teacher ID","Teacher Name", "Phone Number", "Module", "Address", "Full Time"
+			}
+		);
+	
+	//Default value for student
+	DefaultTableModel studentValue =  new DefaultTableModel(
+			new Object[][] {
+				
+				
+				
+			},
+			new String[] {
+				"University ID","Student Name", "Phone Number", "Address", "Level", "Course"
+			}
+		);
+	private JTable courseTables;
+	private JTable instructorTables;
+	private JTable studentTables;
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -423,92 +449,91 @@ public class AdminDashboard extends JFrame {
 		headerCourses.setLayout(new BorderLayout(0, 0));
 		
 		JLabel courseTitle = new JLabel("Courses");
+		courseTitle.setBackground(new Color(214, 234, 247));
 		courseTitle.setHorizontalAlignment(SwingConstants.CENTER);
 		courseTitle.setFont(new Font("Century Gothic", Font.BOLD, 30));
 		headerCourses.add(courseTitle);
+		UIManager.getDefaults().put("TableHeader.cellBorder" , BorderFactory.createEmptyBorder(0,0,0,0));
+		for(int i = 0 ; i<db.getCourseCode().size();i++) {
+			modalValue.addRow(new Object[] {db.getCourseCode().get(i),db.getCourseTitle().get(i),db.getCourseDuration().get(i),db.getCourseMark().get(i),db.getCourseLeader().get(i)});
+		}
+		for(int i = 0 ; i<db.getStudentId().size();i++) {
+			studentValue.addRow(new Object[] {db.getStudentId().get(i),db.getStudentName().get(i),db.getPhoneNum().get(i),db.getStudentAddress().get(i),db.get_level().get(i),db.getStudentCourse().get(i)});
+		}
 		
-		JScrollPane scrollPaneCourse = new JScrollPane();
-		scrollPaneCourse.setFont(new Font("Century Gothic", Font.PLAIN, 10));
-		scrollPaneCourse.setBounds(0, 81, 1028, 592);
-		mainCoursesFrame.add(scrollPaneCourse);
+		JPanel panel_7 = new JPanel();
+		panel_7.setBackground(new Color(255, 255, 255));
+		panel_7.setBounds(70, 189, 359, 349);
+		mainCoursesFrame.add(panel_7);
+		panel_7.setLayout(null);
 		
-		courseTable = new JTable();
-		courseTable.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				Object[] options = { "Update", "Delete" };
-				int optionSelected = JOptionPane.showOptionDialog(null, "Do you want to update or delete?", "Update or Delete Landlord",
-				JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE, null, options, options[0]);
-				//Updating table
-				if(optionSelected == 0) {
-					UpdateModal updateCourse = new UpdateModal();
-					JTextField moduleTitleTextfield = updateCourse.getModuleTitle();
-					JTextField mouduleDurationTextfield = updateCourse.getModuleDuration();
-					JTextField moduleMarkTextfield = updateCourse.getModuleMark();
-					
-					String moduleTitle = "";
-					String moduleDuration = "";
-					String moduleMark = "";
-					selectedRow = courseTable.getSelectedRow();
-					for(int columnIndex = 0; columnIndex < courseTable.getColumnCount(); columnIndex++) {
-						if (moduleTitle.isEmpty()){
-							moduleTitle = (String) courseTable.getValueAt(courseTable.getSelectedRow(), columnIndex);
-							moduleTitleColumnIndex = columnIndex;
-						} else if (moduleDuration.isEmpty()){
-							moduleDuration = (String) courseTable.getValueAt(courseTable.getSelectedRow(),
-									columnIndex);
-							moduleDurationColumnIndex = columnIndex;
-
-						} else if (moduleMark.isEmpty()) {
-							moduleMark = (String) courseTable.getValueAt(courseTable.getSelectedRow(), columnIndex);
-							moduleMarkColumnIndex = columnIndex;
-						}
-					}
-					moduleTitleTextfield.setText(moduleTitle);
-					mouduleDurationTextfield.setText(moduleDuration);
-					moduleMarkTextfield.setText(moduleMark);
-					
-					JButton submitButton = updateCourse.getSubmitbutton();
-					submitButton.setText("update");
-					submitButton.addActionListener(new ActionListener() {
-
-						@Override
-						public void actionPerformed(ActionEvent e) {
-
-					
-							courseTable.setValueAt(moduleTitleTextfield.getText(), selectedRow, moduleTitleColumnIndex);
-							courseTable.setValueAt(mouduleDurationTextfield.getText(), selectedRow, moduleDurationColumnIndex);
-							courseTable.setValueAt(moduleMarkTextfield.getText(), selectedRow, moduleMarkColumnIndex);
-
-							updateCourse.setVisible(false);
-						}
-					});
-					
-					updateCourse.setVisible(true);
-					
-					
-				}
-				else if(optionSelected == 1) {
-					modalValue.removeRow(courseTable.getSelectedRow());
-					modalValue.addRow(new Object[] {"Hello", "kiki", "NabinGay"});
-				}
+		JLabel lblNewLabel_20 = new JLabel("");
+		lblNewLabel_20.setIcon(new ImageIcon(AdminDashboard.class.getResource("/images/computer.png")));
+		lblNewLabel_20.setBounds(146, 10, 77, 136);
+		panel_7.add(lblNewLabel_20);
+		
+		JLabel lblNewLabel_19 = new JLabel("");
+		lblNewLabel_19.setBounds(25, -62, 306, 248);
+		panel_7.add(lblNewLabel_19);
+		lblNewLabel_19.setIcon(new ImageIcon(AdminDashboard.class.getResource("/images/cirlce2.png")));
+		
+		JLabel lblNewLabel_23 = new JLabel("BSC(Hons)");
+		lblNewLabel_23.setFont(new Font("Century Gothic", Font.BOLD, 25));
+		lblNewLabel_23.setBounds(120, 196, 134, 56);
+		panel_7.add(lblNewLabel_23);
+		
+		JButton btnNewButton_1 = new JButton("View");
+		btnNewButton_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				cardPanel.show(panel,"name_793698549557300");
 			}
 		});
-		courseTable.setDefaultEditor(Object.class,null);
-		courseTable.getTableHeader().setBackground(Color.decode("#d6eaf7"));
-		courseTable.getTableHeader().setFont(new Font("Century Gothic", Font.BOLD, 20));
-		UIManager.getDefaults().put("TableHeader.cellBorder" , BorderFactory.createEmptyBorder(0,0,0,0));
-		courseTable.setIntercellSpacing(new Dimension(5, 5));
-		courseTable.setBackground(new Color(255, 255, 255));
-		courseTable.setRowHeight(35);
-		courseTable.setFont(new Font("Century Gothic", Font.PLAIN, 15));
-		courseTable.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
-		courseTable.setShowVerticalLines(false);
-		courseTable.setModel(modalValue);
-		for(int i = 0 ; i<db.getArrayID().size();i++) {
-			modalValue.addRow(new Object[] {db.getArrayID().get(i),db.getArrayName().get(i)});
-		}
-		scrollPaneCourse.setViewportView(courseTable);
+		btnNewButton_1.setBackground(new Color(250, 229, 227));
+		btnNewButton_1.setFont(new Font("Century Gothic", Font.BOLD, 20));
+		btnNewButton_1.setBounds(138, 270, 85, 35);
+		panel_7.add(btnNewButton_1);
+		
+		JPanel panel_7_1 = new JPanel();
+		panel_7_1.setLayout(null);
+		panel_7_1.setBackground(new Color(255, 255, 255));
+		panel_7_1.setBounds(592, 189, 359, 349);
+		mainCoursesFrame.add(panel_7_1);
+		
+		JLabel lblNewLabel_21 = new JLabel("");
+		lblNewLabel_21.setIcon(new ImageIcon(AdminDashboard.class.getResource("/images/business.png")));
+		lblNewLabel_21.setBounds(147, 10, 83, 121);
+		panel_7_1.add(lblNewLabel_21);
+		
+		JLabel lblNewLabel_22 = new JLabel("");
+		lblNewLabel_22.setIcon(new ImageIcon(AdminDashboard.class.getResource("/images/cirlce3.png")));
+		lblNewLabel_22.setBounds(20, -61, 339, 247);
+		panel_7_1.add(lblNewLabel_22);
+		
+		JLabel lblNewLabel_24 = new JLabel("BIBM");
+		lblNewLabel_24.setFont(new Font("Century Gothic", Font.BOLD, 25));
+		lblNewLabel_24.setBounds(147, 196, 68, 46);
+		panel_7_1.add(lblNewLabel_24);
+		
+		JButton btnNewButton_2 = new JButton("View");
+		btnNewButton_2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				cardPanel.show(panel,"name_793698549557300");
+			}
+		});
+		btnNewButton_2.setFont(new Font("Century Gothic", Font.BOLD, 20));
+		btnNewButton_2.setBackground(new Color(229, 223, 243));
+		btnNewButton_2.setBounds(145, 273, 85, 32);
+		panel_7_1.add(btnNewButton_2);
+		
+	
+		
+
+		
+		JLabel lblNewLabel_25 = new JLabel("");
+		lblNewLabel_25.setOpaque(true);
+		lblNewLabel_25.setIcon(new ImageIcon(AdminDashboard.class.getResource("/images/asc.jpg")));
+		lblNewLabel_25.setBounds(0, 76, 1028, 607);
+		mainCoursesFrame.add(lblNewLabel_25);
 		
 		JPanel instructors = new JPanel();
 		panel.add(instructors, "name_483861222823500");
@@ -529,32 +554,79 @@ public class AdminDashboard extends JFrame {
 		instructorsTitle.setHorizontalAlignment(SwingConstants.CENTER);
 		instructorsTitle.setFont(new Font("Century Gothic", Font.BOLD, 30));
 		headerInstructors.add(instructorsTitle, BorderLayout.CENTER);
-		
-		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(0, 80, 1028, 320);
-		mainInstructor.add(scrollPane);
-		
-		instructorTable = new JTable();
-		instructorTable.getTableHeader().setBackground(Color.decode("#d6eaf7"));
-		instructorTable.getTableHeader().setFont(new Font("Century Gothic", Font.BOLD, 20));
 		UIManager.getDefaults().put("TableHeader.cellBorder" , BorderFactory.createEmptyBorder(0,0,0,0));
-		instructorTable.setModel(new DefaultTableModel(
-			new Object[][] {
-				{"Raj Prasad Shrestha", "63", "Lalitpur", "OOP", "30"},
-				{"Deepson Shrestha", "87", "New Road", "ISA", "26"},
-				{null, null, null, null, null},
-			},
-			new String[] {
-				"Instrucotr Name", "Instructor ID", "Address", "Module", "Age"
+		for(int i = 0 ; i<db.getTeacherId().size();i++) {
+			teacherValue.addRow(new Object[] {db.getTeacherId().get(i),db.getTeacherName().get(i),db.getPhoneNumber().get(i),db.get_module().get(i),db.get_address().get(i),db.get_fullTime().get(i)});
+		}
+		
+		JPanel panel_7_2 = new JPanel();
+		panel_7_2.setLayout(null);
+		panel_7_2.setBackground(Color.WHITE);
+		panel_7_2.setBounds(79, 199, 359, 349);
+		mainInstructor.add(panel_7_2);
+		
+		JLabel lblNewLabel_23_1 = new JLabel("BSC(Hons)");
+		lblNewLabel_23_1.setFont(new Font("Century Gothic", Font.BOLD, 25));
+		lblNewLabel_23_1.setBounds(120, 196, 134, 56);
+		panel_7_2.add(lblNewLabel_23_1);
+		
+		JButton btnNewButton_1_1 = new JButton("View");
+		btnNewButton_1_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				cardPanel.show(panel,"name_796135818434000");
 			}
-		));
-		instructorTable.setShowVerticalLines(false);
-		instructorTable.setRowHeight(35);
-		instructorTable.setIntercellSpacing(new Dimension(5, 5));
-		instructorTable.setFont(new Font("Century Gothic", Font.PLAIN, 15));
-		instructorTable.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
-		instructorTable.setBackground(Color.WHITE);
-		scrollPane.setViewportView(instructorTable);
+		});
+		btnNewButton_1_1.setFont(new Font("Century Gothic", Font.BOLD, 20));
+		btnNewButton_1_1.setBackground(new Color(250, 229, 227));
+		btnNewButton_1_1.setBounds(138, 270, 85, 35);
+		panel_7_2.add(btnNewButton_1_1);
+		
+		JLabel lblNewLabel_26 = new JLabel("");
+		lblNewLabel_26.setIcon(new ImageIcon(AdminDashboard.class.getResource("/images/computer.png")));
+		lblNewLabel_26.setBounds(149, 35, 85, 106);
+		panel_7_2.add(lblNewLabel_26);
+		
+		JLabel lblNewLabel_27 = new JLabel("");
+		lblNewLabel_27.setIcon(new ImageIcon(AdminDashboard.class.getResource("/images/cirlce2.png")));
+		lblNewLabel_27.setBounds(21, -60, 309, 246);
+		panel_7_2.add(lblNewLabel_27);
+		
+		JPanel panel_7_2_1 = new JPanel();
+		panel_7_2_1.setLayout(null);
+		panel_7_2_1.setBackground(Color.WHITE);
+		panel_7_2_1.setBounds(605, 199, 359, 349);
+		mainInstructor.add(panel_7_2_1);
+		
+		JLabel lblNewLabel_23_1_1 = new JLabel("BIBM");
+		lblNewLabel_23_1_1.setFont(new Font("Century Gothic", Font.BOLD, 25));
+		lblNewLabel_23_1_1.setBounds(149, 194, 85, 56);
+		panel_7_2_1.add(lblNewLabel_23_1_1);
+		
+		JButton btnNewButton_1_1_1 = new JButton("View");
+		btnNewButton_1_1_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				cardPanel.show(panel,"name_796135818434000");
+			}
+		});
+		btnNewButton_1_1_1.setFont(new Font("Century Gothic", Font.BOLD, 20));
+		btnNewButton_1_1_1.setBackground(new Color(250, 229, 227));
+		btnNewButton_1_1_1.setBounds(138, 270, 85, 35);
+		panel_7_2_1.add(btnNewButton_1_1_1);
+		
+		JLabel lblNewLabel_28 = new JLabel("");
+		lblNewLabel_28.setIcon(new ImageIcon(AdminDashboard.class.getResource("/images/business.png")));
+		lblNewLabel_28.setBounds(159, 34, 85, 97);
+		panel_7_2_1.add(lblNewLabel_28);
+		
+		JLabel lblNewLabel_29 = new JLabel("");
+		lblNewLabel_29.setIcon(new ImageIcon(AdminDashboard.class.getResource("/images/cirlce3.png")));
+		lblNewLabel_29.setBounds(31, -53, 318, 240);
+		panel_7_2_1.add(lblNewLabel_29);
+		
+		JLabel lblNewLabel_30 = new JLabel("");
+		lblNewLabel_30.setIcon(new ImageIcon(AdminDashboard.class.getResource("/images/asc.jpg")));
+		lblNewLabel_30.setBounds(0, 79, 1028, 616);
+		mainInstructor.add(lblNewLabel_30);
 		
 		JPanel students = new JPanel();
 		panel.add(students, "name_484683737557400");
@@ -576,34 +648,76 @@ public class AdminDashboard extends JFrame {
 		studentsTitle.setFont(new Font("Century Gothic", Font.BOLD, 30));
 		studentsTitle.setHorizontalAlignment(SwingConstants.CENTER);
 		headerStudents.add(studentsTitle, BorderLayout.CENTER);
-		
-		JScrollPane scrollPane_1 = new JScrollPane();
-		scrollPane_1.setBounds(0, 83, 1028, 600);
-		mainStudents.add(scrollPane_1);
-		
-		studentTable = new JTable();
-		studentTable.getTableHeader().setBackground(Color.decode("#d6eaf7"));
-		studentTable.getTableHeader().setFont(new Font("Century Gothic", Font.BOLD, 20));
 		UIManager.getDefaults().put("TableHeader.cellBorder" , BorderFactory.createEmptyBorder(0,0,0,0));
-		studentTable.setModel(new DefaultTableModel(
-			new Object[][] {
-				{"Prabit", "Lalitpur", "2.5", "4", "BIT"},
-				{"Salin", "Bhaktapur", "9.7", "4", "BIBM"},
-				{"Sahel", "New Road", "53", "4", "BIT"},
-				{"Yurisha", "Chabahil", "1", "4", "BIT"},
-				{null, null, null, null, null},
-			},
-			new String[] {
-				"Name", "Address", "ID", "Level", "Course"
+		
+		JPanel panel_7_2_2 = new JPanel();
+		panel_7_2_2.setLayout(null);
+		panel_7_2_2.setBackground(Color.WHITE);
+		panel_7_2_2.setBounds(66, 174, 359, 349);
+		mainStudents.add(panel_7_2_2);
+		
+		JLabel lblNewLabel_23_1_2 = new JLabel("BSC(Hons)");
+		lblNewLabel_23_1_2.setFont(new Font("Century Gothic", Font.BOLD, 25));
+		lblNewLabel_23_1_2.setBounds(120, 196, 134, 56);
+		panel_7_2_2.add(lblNewLabel_23_1_2);
+		
+		JButton btnNewButton_1_1_2 = new JButton("View");
+		btnNewButton_1_1_2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				cardPanel.show(panel,"name_797954346157000");
 			}
-		));
-		studentTable.setShowVerticalLines(false);
-		studentTable.setRowHeight(35);
-		studentTable.setIntercellSpacing(new Dimension(5, 5));
-		studentTable.setFont(new Font("Century Gothic", Font.PLAIN, 15));
-		studentTable.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
-		studentTable.setBackground(Color.WHITE);
-		scrollPane_1.setViewportView(studentTable);
+		});
+		btnNewButton_1_1_2.setFont(new Font("Century Gothic", Font.BOLD, 20));
+		btnNewButton_1_1_2.setBackground(new Color(250, 229, 227));
+		btnNewButton_1_1_2.setBounds(138, 270, 85, 35);
+		panel_7_2_2.add(btnNewButton_1_1_2);
+		
+		JLabel lblNewLabel_31 = new JLabel("");
+		lblNewLabel_31.setIcon(new ImageIcon(AdminDashboard.class.getResource("/images/computer.png")));
+		lblNewLabel_31.setBounds(145, 59, 78, 72);
+		panel_7_2_2.add(lblNewLabel_31);
+		
+		JLabel lblNewLabel_32 = new JLabel("");
+		lblNewLabel_32.setIcon(new ImageIcon(AdminDashboard.class.getResource("/images/cirlce2.png")));
+		lblNewLabel_32.setBounds(20, -49, 299, 255);
+		panel_7_2_2.add(lblNewLabel_32);
+		
+		JPanel panel_7_2_2_1 = new JPanel();
+		panel_7_2_2_1.setLayout(null);
+		panel_7_2_2_1.setBackground(Color.WHITE);
+		panel_7_2_2_1.setBounds(577, 174, 359, 349);
+		mainStudents.add(panel_7_2_2_1);
+		
+		JLabel lblNewLabel_23_1_2_1 = new JLabel("BIBM");
+		lblNewLabel_23_1_2_1.setFont(new Font("Century Gothic", Font.BOLD, 25));
+		lblNewLabel_23_1_2_1.setBounds(154, 196, 69, 56);
+		panel_7_2_2_1.add(lblNewLabel_23_1_2_1);
+		
+		JButton btnNewButton_1_1_2_1 = new JButton("View");
+		btnNewButton_1_1_2_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				cardPanel.show(panel,"name_797954346157000");
+			}
+		});
+		btnNewButton_1_1_2_1.setFont(new Font("Century Gothic", Font.BOLD, 20));
+		btnNewButton_1_1_2_1.setBackground(new Color(250, 229, 227));
+		btnNewButton_1_1_2_1.setBounds(138, 270, 85, 35);
+		panel_7_2_2_1.add(btnNewButton_1_1_2_1);
+		
+		JLabel lblNewLabel_33 = new JLabel("");
+		lblNewLabel_33.setIcon(new ImageIcon(AdminDashboard.class.getResource("/images/business.png")));
+		lblNewLabel_33.setBounds(156, 51, 85, 72);
+		panel_7_2_2_1.add(lblNewLabel_33);
+		
+		JLabel lblNewLabel_34 = new JLabel("");
+		lblNewLabel_34.setIcon(new ImageIcon(AdminDashboard.class.getResource("/images/cirlce3.png")));
+		lblNewLabel_34.setBounds(27, -51, 291, 253);
+		panel_7_2_2_1.add(lblNewLabel_34);
+		
+		JLabel lblNewLabel_35 = new JLabel("");
+		lblNewLabel_35.setIcon(new ImageIcon(AdminDashboard.class.getResource("/images/asc.jpg")));
+		lblNewLabel_35.setBounds(0, 81, 1028, 602);
+		mainStudents.add(lblNewLabel_35);
 		
 		JPanel setting = new JPanel();
 		panel.add(setting, "name_484968827713500");
@@ -674,5 +788,144 @@ public class AdminDashboard extends JFrame {
 		lblNewLabel_18.setIcon(new ImageIcon(AdminDashboard.class.getResource("/images/250.jpg")));
 		lblNewLabel_18.setBounds(98, 86, 270, 244);
 		panel_1.add(lblNewLabel_18);
+		
+		JPanel courseTablePanel = new JPanel();
+		panel.add(courseTablePanel, "name_793698549557300");
+		courseTablePanel.setLayout(null);
+		
+		JScrollPane scrollPane_2 = new JScrollPane();
+		scrollPane_2.setBounds(0, 0, 1028, 683);
+		courseTablePanel.add(scrollPane_2);
+		
+		courseTables = new JTable();
+		courseTables.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				Object[] options = { "Update", "Delete" };
+				int optionSelected = JOptionPane.showOptionDialog(null, "Do you want to update, delete or add?", "Update or Delete Landlord",
+				JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE, null, options, options[0]);
+				//Updating table
+				if(optionSelected == 0) {
+					UpdateModal updateCourse = new UpdateModal();
+					JTextField moduleCodeValue = updateCourse.getModuleCodeTextfield();
+					JTextField mouduleTitleValue = updateCourse.getModuleTitleTextfield();
+					JTextField moduleDurationValue = updateCourse.getModuleDurationTextfield();
+					JTextField moduleMarkValue = updateCourse.getModuleMarkTextfield();
+					JTextField moduleLeaderValue = updateCourse.getModuleLeaderTextfield();
+					String moduleCode = "";
+					String moduleTitle = "";
+					String moduleDuration = "";
+					String moduleMark = "";
+					String moduleLeader = "";
+					selectedRow = courseTables.getSelectedRow();
+					for(int columnIndex = 0; columnIndex < courseTables.getColumnCount(); columnIndex++) {
+					
+						if(moduleCode.isEmpty()) {
+							moduleCode = (String) courseTables.getValueAt(courseTables.getSelectedRow(), columnIndex);
+							moduleCodeColumnIndex = columnIndex;
+						}
+						else if (moduleTitle.isEmpty()){
+							moduleTitle = (String) courseTables.getValueAt(courseTables.getSelectedRow(), columnIndex);
+							moduleTitleColumnIndex = columnIndex;
+						} else if (moduleDuration.isEmpty()){
+							moduleDuration = (String) courseTables.getValueAt(courseTables.getSelectedRow(),
+									columnIndex);
+							moduleDurationColumnIndex = columnIndex;
+
+						} else if (moduleMark.isEmpty()) {
+							moduleMark = (String) courseTables.getValueAt(courseTables.getSelectedRow(), columnIndex);
+							moduleMarkColumnIndex = columnIndex;
+						} else if (moduleLeader.isEmpty()) {
+							moduleLeader = (String) courseTables.getValueAt(courseTables.getSelectedRow(), columnIndex);
+							moduleLeaderColumnIndex = columnIndex;
+						}
+					}
+					moduleCodeValue.setText(moduleCode);
+					mouduleTitleValue.setText(moduleTitle);
+					moduleDurationValue.setText(moduleDuration);
+					moduleMarkValue.setText(moduleMark);
+					moduleLeaderValue.setText(moduleLeader);
+					
+					
+					JButton submitButton = updateCourse.getSubmitbutton();
+					submitButton.setText("update");
+					submitButton.addActionListener(new ActionListener() {
+
+						@Override
+						public void actionPerformed(ActionEvent e) {
+
+					
+							courseTables.setValueAt(moduleCodeValue.getText(), selectedRow, moduleCodeColumnIndex);
+							courseTables.setValueAt(mouduleTitleValue.getText(), selectedRow, moduleTitleColumnIndex);
+							courseTables.setValueAt(moduleDurationValue.getText(), selectedRow, moduleDurationColumnIndex);
+							courseTables.setValueAt(moduleMarkValue.getText(), selectedRow, moduleMarkColumnIndex);
+							courseTables.setValueAt(moduleLeaderValue.getText(), selectedRow, moduleLeaderColumnIndex);
+
+							updateCourse.setVisible(false);
+						}
+					});
+					
+					updateCourse.setVisible(true);
+					
+					
+				}
+				else if(optionSelected == 1) {
+					modalValue.removeRow(courseTables.getSelectedRow());
+//					modalValue.addRow(new Object[] {"Hello", "kiki", "NabinGay"});
+				}
+			}
+		});
+		courseTables.setModel(modalValue);
+		courseTables.setDefaultEditor(Object.class,null);
+		courseTables.getTableHeader().setBackground(Color.decode("#d6eaf7"));
+		courseTables.getTableHeader().setFont(new Font("Century Gothic", Font.BOLD, 20));
+		courseTables.setIntercellSpacing(new Dimension(5, 5));
+		courseTables.setShowVerticalLines(false);
+		courseTables.setRowHeight(35);
+		courseTables.setIntercellSpacing(new Dimension(5, 5));
+		courseTables.setFont(new Font("Century Gothic", Font.PLAIN, 15));
+		courseTables.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
+		courseTables.setBackground(Color.WHITE);
+		scrollPane_2.setViewportView(courseTables);
+		
+		JPanel instructorTablePanel = new JPanel();
+		panel.add(instructorTablePanel, "name_796135818434000");
+		instructorTablePanel.setLayout(null);
+		
+		JScrollPane scrollPane_3 = new JScrollPane();
+		scrollPane_3.setBounds(0, 0, 1028, 497);
+		instructorTablePanel.add(scrollPane_3);
+		
+		instructorTables = new JTable();
+		instructorTables.setModel(teacherValue);
+		instructorTables.getTableHeader().setBackground(Color.decode("#d6eaf7"));
+		instructorTables.getTableHeader().setFont(new Font("Century Gothic", Font.BOLD, 20));
+		instructorTables.setShowVerticalLines(false);
+		instructorTables.setRowHeight(35);
+		instructorTables.setIntercellSpacing(new Dimension(5, 5));
+		instructorTables.setFont(new Font("Century Gothic", Font.PLAIN, 15));
+		instructorTables.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
+		instructorTables.setBackground(Color.WHITE);
+		scrollPane_3.setViewportView(instructorTables);
+		
+		JPanel studentTablePanel = new JPanel();
+		panel.add(studentTablePanel, "name_797954346157000");
+		studentTablePanel.setLayout(null);
+		
+		JScrollPane scrollPane_4 = new JScrollPane();
+		scrollPane_4.setBounds(0, 0, 1028, 683);
+		studentTablePanel.add(scrollPane_4);
+		
+		studentTables = new JTable();
+		studentTables.setModel(studentValue);
+		studentTables.getTableHeader().setBackground(Color.decode("#d6eaf7"));
+		studentTables.getTableHeader().setFont(new Font("Century Gothic", Font.BOLD, 20));
+		studentTables.setShowVerticalLines(false);
+		studentTables.setRowHeight(35);
+		studentTables.setIntercellSpacing(new Dimension(5, 5));
+		studentTables.setFont(new Font("Century Gothic", Font.PLAIN, 15));
+		studentTables.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
+		studentTables.setBackground(Color.WHITE);
+		scrollPane_4.setViewportView(studentTables);
 	}
 }

@@ -12,15 +12,32 @@ import java.awt.event.ActionEvent;
 import java.awt.Font;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Window.Type;
 import java.awt.CardLayout;
+
+import javax.swing.BorderFactory;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import java.awt.BorderLayout;
 import javax.swing.SwingConstants;
+import javax.swing.UIManager;
+
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.JTextField;
+import javax.swing.table.DefaultTableModel;
+
+import backend.Database;
+
+import javax.swing.border.BevelBorder;
+import java.awt.Component;
+import java.awt.Cursor;
+import java.awt.Dimension;
 
 public class InstructorDashboard extends JFrame {
 
@@ -32,15 +49,55 @@ public class InstructorDashboard extends JFrame {
 	private JButton instructorsButton;
 	private JButton studentsButton;
 	private JButton settingButton;
-
+	private JTable courseTable;
+	private JTable instructorTable;
+	static InstructorDashboard frame;
+	private JTable studentTable;
+	static int selectedRow = 0;
+	static int moduleTitleColumnIndex = 0;
+	static int moduleDurationColumnIndex = 0;
+	static int moduleMarkColumnIndex = 0;
+	Database db = new Database();
 	/**
 	 * Launch the application.
 	 */
+	
+	DefaultTableModel modalValue =  new DefaultTableModel(
+			new Object[][] {
+				
+				
+				
+			},
+			new String[] {
+				"Module Code","Module Title", "Moudle Duration", "Moudle Mark", "Module Leader"
+			}
+		);
+	
+	DefaultTableModel studentValue =  new DefaultTableModel(
+			new Object[][] {
+				
+				
+			},
+			new String[] {
+					"University ID","Student Name", "Phone Number", "Address", "Level", "Course"
+			}
+		);
+	DefaultTableModel teacherValue =  new DefaultTableModel(
+			new Object[][] {
+				
+				
+				
+			},
+			new String[] {
+				"Teacher ID","Teacher Name", "Phone Number", "Module", "Address", "Full Time"
+			}
+		);
+	
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					InstructorDashboard frame = new InstructorDashboard();
+					frame = new InstructorDashboard();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -71,6 +128,7 @@ public class InstructorDashboard extends JFrame {
 		sideBar.setLayout(null);
 		
 		dashboardButton = new JButton("Dashboard");
+		dashboardButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		dashboardButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
@@ -96,6 +154,7 @@ public class InstructorDashboard extends JFrame {
 		sideBar.add(dashboardButton);
 		
 		coursesButton = new JButton("Courses");
+		coursesButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		coursesButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
@@ -120,6 +179,7 @@ public class InstructorDashboard extends JFrame {
 		sideBar.add(coursesButton);
 		
 		settingButton = new JButton("Setting");
+		settingButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		settingButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
@@ -144,6 +204,7 @@ public class InstructorDashboard extends JFrame {
 		sideBar.add(settingButton);
 		
 		JButton logoutButton = new JButton("Log Out");
+		logoutButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		logoutButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				cardPanel.show(panel, "name_484982008089500");
@@ -157,6 +218,7 @@ public class InstructorDashboard extends JFrame {
 		sideBar.add(logoutButton);
 		
 		instructorsButton = new JButton("Instructors");
+		instructorsButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		instructorsButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
@@ -180,6 +242,7 @@ public class InstructorDashboard extends JFrame {
 		sideBar.add(instructorsButton);
 		
 		studentsButton = new JButton("Students");
+		studentsButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		studentsButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
@@ -206,11 +269,12 @@ public class InstructorDashboard extends JFrame {
 		headerGreen.setBackground(new Color(45, 204, 112));
 		headerGreen.setBounds(0, 0, 251, 85);
 		sideBar.add(headerGreen);
-		headerGreen.setLayout(new BorderLayout(0, 0));
+		headerGreen.setLayout(null);
 		
 		JLabel lblNewLabel = new JLabel("CMS");
+		lblNewLabel.setBounds(0, 0, 251, 85);
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		headerGreen.add(lblNewLabel, BorderLayout.CENTER);
+		headerGreen.add(lblNewLabel);
 		lblNewLabel.setForeground(new Color(255, 255, 255));
 		lblNewLabel.setFont(new Font("Century Gothic", Font.BOLD, 30));
 		
@@ -228,17 +292,140 @@ public class InstructorDashboard extends JFrame {
 		mainDashBoardFrame.setBackground(new Color(192, 192, 192));
 		mainDashBoardFrame.setBounds(0, 0, 1028, 683);
 		dashBoard.add(mainDashBoardFrame);
-		mainDashBoardFrame.setLayout(null);
 		
 		JPanel headerDashboard = new JPanel();
-		headerDashboard.setBounds(0, 0, 1028, 81);
-		mainDashBoardFrame.add(headerDashboard);
 		headerDashboard.setLayout(new BorderLayout(0, 0));
 		
 		JLabel dashboardTitle = new JLabel("Dashboard");
+		dashboardTitle.setBackground(new Color(245, 246, 250));
 		dashboardTitle.setHorizontalAlignment(SwingConstants.CENTER);
 		dashboardTitle.setFont(new Font("Century Gothic", Font.BOLD, 30));
 		headerDashboard.add(dashboardTitle);
+		
+		JPanel panel_2 = new JPanel();
+		panel_2.setBackground(new Color(245, 246, 250));
+		GroupLayout gl_mainDashBoardFrame = new GroupLayout(mainDashBoardFrame);
+		gl_mainDashBoardFrame.setHorizontalGroup(
+			gl_mainDashBoardFrame.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_mainDashBoardFrame.createSequentialGroup()
+					.addGroup(gl_mainDashBoardFrame.createParallelGroup(Alignment.LEADING)
+						.addComponent(headerDashboard, GroupLayout.PREFERRED_SIZE, 1028, GroupLayout.PREFERRED_SIZE)
+						.addComponent(panel_2, GroupLayout.PREFERRED_SIZE, 1037, GroupLayout.PREFERRED_SIZE))
+					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+		);
+		gl_mainDashBoardFrame.setVerticalGroup(
+			gl_mainDashBoardFrame.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_mainDashBoardFrame.createSequentialGroup()
+					.addComponent(headerDashboard, GroupLayout.PREFERRED_SIZE, 81, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+					.addComponent(panel_2, GroupLayout.PREFERRED_SIZE, 614, GroupLayout.PREFERRED_SIZE))
+		);
+		panel_2.setLayout(null);
+		
+		JPanel panel_3 = new JPanel();
+		panel_3.setBackground(new Color(255, 255, 255));
+		panel_3.setBounds(59, 28, 859, 112);
+		panel_2.add(panel_3);
+		panel_3.setLayout(null);
+		
+		JLabel lblNewLabel_2 = new JLabel("Hello,");
+		lblNewLabel_2.setFont(new Font("Century Gothic", Font.BOLD, 30));
+		lblNewLabel_2.setBounds(10, 23, 126, 47);
+		panel_3.add(lblNewLabel_2);
+		
+		JLabel lblNewLabel_3 = new JLabel("Teachers");
+		lblNewLabel_3.setFont(new Font("Century Gothic", Font.PLAIN, 30));
+		lblNewLabel_3.setBounds(98, 28, 207, 37);
+		panel_3.add(lblNewLabel_3);
+		
+		JLabel lblNewLabel_4 = new JLabel("Welcome to the Course Management System Dashboard");
+		lblNewLabel_4.setFont(new Font("Century Gothic", Font.PLAIN, 15));
+		lblNewLabel_4.setBounds(10, 59, 444, 32);
+		panel_3.add(lblNewLabel_4);
+		
+		JLabel lblNewLabel_5 = new JLabel("");
+		lblNewLabel_5.setIcon(new ImageIcon(InstructorDashboard.class.getResource("/images/helolo.png")));
+		lblNewLabel_5.setBounds(347, 0, 512, 279);
+		panel_3.add(lblNewLabel_5);
+		
+		JPanel panel_4 = new JPanel();
+		panel_4.setBackground(new Color(214, 234, 247));
+		panel_4.setBounds(59, 192, 210, 215);
+		panel_2.add(panel_4);
+		panel_4.setLayout(null);
+		
+		JLabel lblNewLabel_6 = new JLabel("");
+		lblNewLabel_6.setIcon(new ImageIcon(InstructorDashboard.class.getResource("/images/studentsicon2.png")));
+		lblNewLabel_6.setBounds(10, 10, 78, 85);
+		panel_4.add(lblNewLabel_6);
+		
+		JLabel lblNewLabel_7 = new JLabel("Students");
+		lblNewLabel_7.setFont(new Font("Century Gothic", Font.BOLD, 25));
+		lblNewLabel_7.setBounds(92, 145, 108, 60);
+		panel_4.add(lblNewLabel_7);
+		
+		JLabel lblNewLabel_10 = new JLabel("");
+		lblNewLabel_10.setBounds(-135, -107, 298, 264);
+		panel_4.add(lblNewLabel_10);
+		lblNewLabel_10.setIcon(new ImageIcon(InstructorDashboard.class.getResource("/images/cirlce.png")));
+		
+		JLabel lblNewLabel_15 = new JLabel("101");
+		lblNewLabel_15.setFont(new Font("Century Gothic", Font.PLAIN, 30));
+		lblNewLabel_15.setBounds(23, 145, 63, 60);
+		panel_4.add(lblNewLabel_15);
+		
+		JPanel panel_5 = new JPanel();
+		panel_5.setBackground(new Color(214, 234, 247));
+		panel_5.setBounds(398, 192, 210, 215);
+		panel_2.add(panel_5);
+		panel_5.setLayout(null);
+		
+		JLabel lblNewLabel_8 = new JLabel("");
+		lblNewLabel_8.setIcon(new ImageIcon(InstructorDashboard.class.getResource("/images/teachericon.png")));
+		lblNewLabel_8.setBounds(10, 10, 81, 87);
+		panel_5.add(lblNewLabel_8);
+		
+		JLabel lblNewLabel_11 = new JLabel("");
+		lblNewLabel_11.setIcon(new ImageIcon(InstructorDashboard.class.getResource("/images/cirlce2.png")));
+		lblNewLabel_11.setBounds(-133, -106, 309, 260);
+		panel_5.add(lblNewLabel_11);
+		
+		JLabel lblNewLabel_13 = new JLabel("Instructors");
+		lblNewLabel_13.setFont(new Font("Century Gothic", Font.BOLD, 25));
+		lblNewLabel_13.setBounds(72, 159, 128, 32);
+		panel_5.add(lblNewLabel_13);
+		
+		JLabel lblNewLabel_16 = new JLabel("100");
+		lblNewLabel_16.setFont(new Font("Century Gothic", Font.PLAIN, 30));
+		lblNewLabel_16.setBounds(10, 164, 69, 24);
+		panel_5.add(lblNewLabel_16);
+		
+		JPanel panel_6 = new JPanel();
+		panel_6.setBackground(new Color(214, 234, 247));
+		panel_6.setBounds(708, 192, 210, 215);
+		panel_2.add(panel_6);
+		panel_6.setLayout(null);
+		
+		JLabel lblNewLabel_9 = new JLabel("");
+		lblNewLabel_9.setIcon(new ImageIcon(InstructorDashboard.class.getResource("/images/courseicons.png")));
+		lblNewLabel_9.setBounds(10, 24, 81, 67);
+		panel_6.add(lblNewLabel_9);
+		
+		JLabel lblNewLabel_12 = new JLabel("");
+		lblNewLabel_12.setIcon(new ImageIcon(InstructorDashboard.class.getResource("/images/cirlce3.png")));
+		lblNewLabel_12.setBounds(-137, -111, 311, 263);
+		panel_6.add(lblNewLabel_12);
+		
+		JLabel lblNewLabel_14 = new JLabel("Courses");
+		lblNewLabel_14.setFont(new Font("Century Gothic", Font.BOLD, 25));
+		lblNewLabel_14.setBounds(95, 161, 105, 26);
+		panel_6.add(lblNewLabel_14);
+		
+		JLabel lblNewLabel_17 = new JLabel("99");
+		lblNewLabel_17.setFont(new Font("Century Gothic", Font.PLAIN, 30));
+		lblNewLabel_17.setBounds(48, 150, 43, 44);
+		panel_6.add(lblNewLabel_17);
+		mainDashBoardFrame.setLayout(gl_mainDashBoardFrame);
 		
 		JPanel courses = new JPanel();
 		panel.add(courses, "name_482673721529900");
@@ -260,6 +447,39 @@ public class InstructorDashboard extends JFrame {
 		courseTitle.setFont(new Font("Century Gothic", Font.BOLD, 30));
 		headerCourses.add(courseTitle);
 		
+		JScrollPane scrollPaneCourse = new JScrollPane();
+		scrollPaneCourse.setFont(new Font("Century Gothic", Font.PLAIN, 10));
+		scrollPaneCourse.setBounds(0, 81, 1028, 592);
+		mainCoursesFrame.add(scrollPaneCourse);
+		
+		courseTable = new JTable();
+		courseTable.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {}
+		});
+		courseTable.setDefaultEditor(Object.class,null);
+		courseTable.getTableHeader().setBackground(Color.decode("#d6eaf7"));
+		courseTable.getTableHeader().setFont(new Font("Century Gothic", Font.BOLD, 20));
+		UIManager.getDefaults().put("TableHeader.cellBorder" , BorderFactory.createEmptyBorder(0,0,0,0));
+		courseTable.setIntercellSpacing(new Dimension(5, 5));
+		courseTable.setBackground(new Color(255, 255, 255));
+		courseTable.setRowHeight(35);
+		courseTable.setFont(new Font("Century Gothic", Font.PLAIN, 15));
+		courseTable.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
+		courseTable.setShowVerticalLines(false);
+		for(int i = 0 ; i<db.getCourseCode().size();i++) {
+			modalValue.addRow(new Object[] {db.getCourseCode().get(i),db.getCourseTitle().get(i),db.getCourseDuration().get(i),db.getCourseMark().get(i),db.getCourseLeader().get(i)});
+		}
+		for(int i = 0 ; i<db.getTeacherId().size();i++) {
+			teacherValue.addRow(new Object[] {db.getTeacherId().get(i),db.getTeacherName().get(i),db.getPhoneNumber().get(i),db.get_module().get(i),db.get_address().get(i),db.get_fullTime().get(i)});
+		}
+		for(int i = 0 ; i<db.getStudentId().size();i++) {
+			studentValue.addRow(new Object[] {db.getStudentId().get(i),db.getStudentName().get(i),db.getPhoneNum().get(i),db.getStudentAddress().get(i),db.get_level().get(i),db.getStudentCourse().get(i)});
+		}
+		courseTable.setModel(modalValue);
+		
+		scrollPaneCourse.setViewportView(courseTable);
+		
 		JPanel instructors = new JPanel();
 		panel.add(instructors, "name_483861222823500");
 		instructors.setLayout(null);
@@ -280,6 +500,23 @@ public class InstructorDashboard extends JFrame {
 		instructorsTitle.setFont(new Font("Century Gothic", Font.BOLD, 30));
 		headerInstructors.add(instructorsTitle, BorderLayout.CENTER);
 		
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(0, 80, 1028, 320);
+		mainInstructor.add(scrollPane);
+		
+		instructorTable = new JTable();
+		instructorTable.getTableHeader().setBackground(Color.decode("#d6eaf7"));
+		instructorTable.getTableHeader().setFont(new Font("Century Gothic", Font.BOLD, 20));
+		UIManager.getDefaults().put("TableHeader.cellBorder" , BorderFactory.createEmptyBorder(0,0,0,0));
+		instructorTable.setModel(teacherValue);
+		instructorTable.setShowVerticalLines(false);
+		instructorTable.setRowHeight(35);
+		instructorTable.setIntercellSpacing(new Dimension(5, 5));
+		instructorTable.setFont(new Font("Century Gothic", Font.PLAIN, 15));
+		instructorTable.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
+		instructorTable.setBackground(Color.WHITE);
+		scrollPane.setViewportView(instructorTable);
+		
 		JPanel students = new JPanel();
 		panel.add(students, "name_484683737557400");
 		students.setLayout(null);
@@ -296,9 +533,27 @@ public class InstructorDashboard extends JFrame {
 		headerStudents.setLayout(new BorderLayout(0, 0));
 		
 		JLabel studentsTitle = new JLabel("Students");
+		studentsTitle.setBackground(new Color(245, 246, 250));
 		studentsTitle.setFont(new Font("Century Gothic", Font.BOLD, 30));
 		studentsTitle.setHorizontalAlignment(SwingConstants.CENTER);
 		headerStudents.add(studentsTitle, BorderLayout.CENTER);
+		
+		JScrollPane scrollPane_1 = new JScrollPane();
+		scrollPane_1.setBounds(0, 83, 1028, 600);
+		mainStudents.add(scrollPane_1);
+		
+		studentTable = new JTable();
+		studentTable.getTableHeader().setBackground(Color.decode("#d6eaf7"));
+		studentTable.getTableHeader().setFont(new Font("Century Gothic", Font.BOLD, 20));
+		UIManager.getDefaults().put("TableHeader.cellBorder" , BorderFactory.createEmptyBorder(0,0,0,0));
+		studentTable.setModel(studentValue);
+		studentTable.setShowVerticalLines(false);
+		studentTable.setRowHeight(35);
+		studentTable.setIntercellSpacing(new Dimension(5, 5));
+		studentTable.setFont(new Font("Century Gothic", Font.PLAIN, 15));
+		studentTable.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
+		studentTable.setBackground(Color.WHITE);
+		scrollPane_1.setViewportView(studentTable);
 		
 		JPanel setting = new JPanel();
 		panel.add(setting, "name_484968827713500");
@@ -341,7 +596,8 @@ public class InstructorDashboard extends JFrame {
 		headerLogOut.add(logOutTitle, BorderLayout.CENTER);
 		
 		JPanel panel_1 = new JPanel();
-		panel_1.setBounds(267, 233, 449, 283);
+		panel_1.setBackground(new Color(255, 255, 255));
+		panel_1.setBounds(267, 156, 449, 431);
 		mainLogOut.add(panel_1);
 		panel_1.setLayout(null);
 		
@@ -351,8 +607,22 @@ public class InstructorDashboard extends JFrame {
 		panel_1.add(lblNewLabel_1);
 		
 		JButton btnNewButton = new JButton("Log Out");
-		btnNewButton.setBackground(new Color(255, 255, 255));
-		btnNewButton.setBounds(186, 226, 85, 21);
+		btnNewButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		btnNewButton.setFont(new Font("Century Gothic", Font.BOLD, 15));
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				LogIn frameLogin = new LogIn();
+				frameLogin.setVisible(true);
+				frame.dispose();
+			}
+		});
+		btnNewButton.setBackground(new Color(255, 114, 92));
+		btnNewButton.setBounds(186, 364, 109, 21);
 		panel_1.add(btnNewButton);
+		
+		JLabel lblNewLabel_18 = new JLabel("");
+		lblNewLabel_18.setIcon(new ImageIcon(InstructorDashboard.class.getResource("/images/250.jpg")));
+		lblNewLabel_18.setBounds(98, 86, 270, 244);
+		panel_1.add(lblNewLabel_18);
 	}
 }

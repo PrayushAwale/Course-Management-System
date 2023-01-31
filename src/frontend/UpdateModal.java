@@ -15,43 +15,40 @@ import javax.swing.JButton;
 public class UpdateModal extends JFrame {
 
 	private JPanel contentPane;
-	private JTextField moduleTitle;
-	private JTextField moduleDuration;
-	private JTextField moduleMark;
+	private JTextField moduleCodeTextfield;
+	private JTextField moduleTitleTextfield;
+	private JTextField moduleDurationTextfield;
 	private JButton submitbutton;
+	private JTextField moduleMarkTextfield;
+	private JTextField moduleLeaderTextfield;
+	private JLabel lblNewLabel_2_2;
 
 	
 	
-	public JTextField getModuleTitle() {
-		return moduleTitle;
+	
+
+	public JTextField getModuleCodeTextfield() {
+		return moduleCodeTextfield;
 	}
 
-	public void setModuleTitle(JTextField moduleTitle) {
-		this.moduleTitle = moduleTitle;
+	public JTextField getModuleTitleTextfield() {
+		return moduleTitleTextfield;
 	}
 
-	public JTextField getModuleDuration() {
-		return moduleDuration;
-	}
-
-	public void setModuleDuration(JTextField moduleDuration) {
-		this.moduleDuration = moduleDuration;
-	}
-
-	public JTextField getModuleMark() {
-		return moduleMark;
-	}
-
-	public void setModuleMark(JTextField moduleMark) {
-		this.moduleMark = moduleMark;
+	public JTextField getModuleDurationTextfield() {
+		return moduleDurationTextfield;
 	}
 
 	public JButton getSubmitbutton() {
 		return submitbutton;
 	}
 
-	public void setSubmitbutton(JButton submitbutton) {
-		this.submitbutton = submitbutton;
+	public JTextField getModuleMarkTextfield() {
+		return moduleMarkTextfield;
+	}
+
+	public JTextField getModuleLeaderTextfield() {
+		return moduleLeaderTextfield;
 	}
 
 	/**
@@ -77,7 +74,7 @@ public class UpdateModal extends JFrame {
 		setType(Type.UTILITY);
 		setResizable(false);
 		setDefaultCloseOperation(UpdateModal.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 996, 537);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
@@ -86,42 +83,62 @@ public class UpdateModal extends JFrame {
 		
 		JPanel panel = new JPanel();
 		panel.setBackground(new Color(204, 255, 255));
-		panel.setBounds(0, 0, 453, 274);
+		panel.setBounds(0, 0, 992, 500);
 		contentPane.add(panel);
 		panel.setLayout(null);
 		
-		JLabel lblNewLabel = new JLabel("Module Title");
+		JLabel lblNewLabel = new JLabel("Module Code");
 		lblNewLabel.setFont(new Font("Century Gothic", Font.PLAIN, 20));
-		lblNewLabel.setBounds(69, 10, 134, 44);
+		lblNewLabel.setBounds(69, 10, 198, 44);
 		panel.add(lblNewLabel);
 		
-		moduleTitle = new JTextField();
-		moduleTitle.setBounds(69, 53, 253, 29);
-		panel.add(moduleTitle);
-		moduleTitle.setColumns(10);
+		moduleCodeTextfield = new JTextField();
+		moduleCodeTextfield.setBounds(69, 53, 253, 29);
+		panel.add(moduleCodeTextfield);
+		moduleCodeTextfield.setColumns(10);
 		
-		JLabel lblNewLabel_1 = new JLabel("Module Duration");
+		JLabel lblNewLabel_1 = new JLabel("Module Title");
 		lblNewLabel_1.setFont(new Font("Century Gothic", Font.PLAIN, 20));
 		lblNewLabel_1.setBounds(68, 92, 171, 49);
 		panel.add(lblNewLabel_1);
 		
-		moduleDuration = new JTextField();
-		moduleDuration.setBounds(69, 131, 253, 29);
-		panel.add(moduleDuration);
-		moduleDuration.setColumns(10);
+		moduleTitleTextfield = new JTextField();
+		moduleTitleTextfield.setBounds(69, 131, 253, 29);
+		panel.add(moduleTitleTextfield);
+		moduleTitleTextfield.setColumns(10);
 		
-		JLabel lblNewLabel_2 = new JLabel("Module Mark");
+		JLabel lblNewLabel_2 = new JLabel("Module Duration");
 		lblNewLabel_2.setFont(new Font("Century Gothic", Font.PLAIN, 20));
-		lblNewLabel_2.setBounds(69, 170, 152, 38);
+		lblNewLabel_2.setBounds(69, 170, 253, 38);
 		panel.add(lblNewLabel_2);
 		
-		moduleMark = new JTextField();
-		moduleMark.setBounds(69, 208, 253, 29);
-		panel.add(moduleMark);
-		moduleMark.setColumns(10);
+		moduleDurationTextfield = new JTextField();
+		moduleDurationTextfield.setBounds(69, 208, 253, 29);
+		panel.add(moduleDurationTextfield);
+		moduleDurationTextfield.setColumns(10);
 		
 		submitbutton = new JButton("Submit");
-		submitbutton.setBounds(332, 212, 85, 21);
+		submitbutton.setBounds(433, 447, 85, 21);
 		panel.add(submitbutton);
+		
+		moduleMarkTextfield = new JTextField();
+		moduleMarkTextfield.setColumns(10);
+		moduleMarkTextfield.setBounds(69, 315, 253, 29);
+		panel.add(moduleMarkTextfield);
+		
+		JLabel lblNewLabel_2_1 = new JLabel("Module Mark");
+		lblNewLabel_2_1.setFont(new Font("Century Gothic", Font.PLAIN, 20));
+		lblNewLabel_2_1.setBounds(69, 267, 152, 38);
+		panel.add(lblNewLabel_2_1);
+		
+		moduleLeaderTextfield = new JTextField();
+		moduleLeaderTextfield.setColumns(10);
+		moduleLeaderTextfield.setBounds(472, 53, 253, 29);
+		panel.add(moduleLeaderTextfield);
+		
+		lblNewLabel_2_2 = new JLabel("Module Leader");
+		lblNewLabel_2_2.setFont(new Font("Century Gothic", Font.PLAIN, 20));
+		lblNewLabel_2_2.setBounds(490, 13, 152, 38);
+		panel.add(lblNewLabel_2_2);
 	}
 }
