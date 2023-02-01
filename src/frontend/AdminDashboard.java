@@ -57,6 +57,7 @@ public class AdminDashboard extends JFrame {
 	private JButton instructorsButton;
 	private JButton studentsButton;
 	private JButton settingButton;
+//	For Coures
 	private String moduleCode = "";
 	private String moduleTitle = "";
 	private String moduleDuration = "";
@@ -66,15 +67,33 @@ public class AdminDashboard extends JFrame {
 	private String newmoduleDuration = "";
 	private String newmoduleMark = "";
 	private String newmoduleLeader = "";
+//	For Teachers
+	private String teacherId = "";
+	private String teacherName = "";
+	private String teacherAddress = "";
+	private String teacherPhoneNum = "";
+	private String teacherModule = "";
+	private String teacherIsPartTime = "";
+	
 	static AdminDashboard frame;
 	static int selectedRow = 0;
+//	For Courses
 	static int moduleTitleColumnIndex = 0;
 	static int moduleDurationColumnIndex = 0;
 	static int moduleMarkColumnIndex = 0;
 	static int moduleCodeColumnIndex  = 0;
 	static int moduleLeaderColumnIndex = 0;
+//	For Instructors
+	static int teacherNameColumnIndex = 0;
+	static int teacherIdColumnIndex = 0;
+	static int teacherAddressColumnIndex = 0;
+	static int teacherPhoneNumColumnIndex  = 0;
+	static int teacherIsPartTimeColumnIndex = 0;
+	static int teacherModuleColumnIndex = 0;
+	
 	Database db = new Database();
 	UpdateModal updateCourse = new UpdateModal();
+	AddTeacherModal updateTeacher = new AddTeacherModal();
 	/**
 	 * Launch the application.
 	 */
@@ -114,6 +133,23 @@ public class AdminDashboard extends JFrame {
 				"University ID","Student Name", "Phone Number", "Address", "Level", "Course"
 			}
 		);
+	private static void extractData() {
+		Statement statement = (Statement) UpdateDB.getStatement();
+		String getCountQuery = "SELECT COUNT(module_code) FROM course";
+		try {
+			int success = statement.executeUpdate(getCountQuery);
+		
+			if (success==1) {
+				frame.showDataFromDatabase();
+				
+			}
+			
+		} catch (SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+			JOptionPane.showMessageDialog(null, "Unable to update the course, please try!");
+		}
+	}
 	public static void showDataFromDatabase() {
         Statement statement = (Statement) UpdateDB.getStatement();
 
@@ -843,19 +879,20 @@ public class AdminDashboard extends JFrame {
 		
 		courseTables = new JTable();
 		courseTables.setFillsViewportHeight(true);
-		JTextField moduleCodeValue = updateCourse.getModuleCodeTextfield();
-		JTextField mouduleTitleValue = updateCourse.getModuleTitleTextfield();
-		JTextField moduleDurationValue = updateCourse.getModuleDurationTextfield();
-		JTextField moduleMarkValue = updateCourse.getModuleMarkTextfield();
-		JTextField moduleLeaderValue = updateCourse.getModuleLeaderTextfield();
+		
 		courseTables.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				Object[] options = { "Update", "Delete" };
-				int optionSelected = JOptionPane.showOptionDialog(null, "Do you want to update, delete or add?", "Update or Delete Landlord",
+				int optionSelected = JOptionPane.showOptionDialog(null, "Do you want to update, delete or add?", "Update or Delete Courses",
 				JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE, null, options, options[0]);
 				//Updating table
 				if(optionSelected == 0) {
+					JTextField moduleCodeValue = updateCourse.getModuleCodeTextfield();
+					JTextField mouduleTitleValue = updateCourse.getModuleTitleTextfield();
+					JTextField moduleDurationValue = updateCourse.getModuleDurationTextfield();
+					JTextField moduleMarkValue = updateCourse.getModuleMarkTextfield();
+					JTextField moduleLeaderValue = updateCourse.getModuleLeaderTextfield();
 					selectedRow = courseTables.getSelectedRow();
 					for(int columnIndex = 0; columnIndex < courseTables.getColumnCount(); columnIndex++) {
 					
@@ -893,26 +930,63 @@ public class AdminDashboard extends JFrame {
 						@Override
 						public void actionPerformed(ActionEvent e) {
 
-					
+//					System.out.println(mouduleTitleValue.getText()+moduleCodeValue.getText());
 							courseTables.setValueAt(moduleCodeValue.getText(), selectedRow, moduleCodeColumnIndex);
 							courseTables.setValueAt(mouduleTitleValue.getText(), selectedRow, moduleTitleColumnIndex);
 							courseTables.setValueAt(moduleDurationValue.getText(), selectedRow, moduleDurationColumnIndex);
 							courseTables.setValueAt(moduleMarkValue.getText(), selectedRow, moduleMarkColumnIndex);
 							courseTables.setValueAt(moduleLeaderValue.getText(), selectedRow, moduleLeaderColumnIndex);
-
+							Statement statement =  (Statement) UpdateDB.getStatement();
+							String updateQuery = "UPDATE `course` SET `module_code` ='"+moduleCodeValue.getText()+"', module_title='"+mouduleTitleValue.getText()+"',"
+									+ "module_duration='"+moduleDurationValue.getText()+"',module_mark='"+moduleMarkValue.getText()+"',module_leader='"+moduleLeaderValue.getText()+"' WHERE module_code='"+moduleCodeValue.getText()+"'";
+							try {
+								int success = statement.executeUpdate(updateQuery);
+							
+								if (success==1) {
+									frame.showDataFromDatabase();
+									updateCourse.dispose();
+		                            JOptionPane.showMessageDialog(null, "Updated courses successfully!");
+								}
+								
+							} catch (SQLException e1) {
+								// TODO Auto-generated catch block
+								e1.printStackTrace();
+								JOptionPane.showMessageDialog(null, "Unable to update the course, please try!");
+							}
 							updateCourse.setVisible(false);
 						}
 					});
-				String updateQuery = "UPDATE `course SET `module_code` = '"+moduleCodeValue.getText()+"', module_title='"+mouduleTitleValue.getText()+"',"
-						+ "module_duration='"+moduleDurationValue.getText()+"',module_duration='"+moduleDurationValue.getText()+"',";
+//				
 					
 					updateCourse.setVisible(true);
 					
 					
 				}
 				else if(optionSelected == 1) {
+					JTextField moduleCodeValue = updateCourse.getModuleCodeTextfield();
+					moduleCode = (String) courseTables.getValueAt(courseTables.getSelectedRow(), 0);
+					moduleCodeValue.setText(moduleCode);
+					
+					
 					modalValue.removeRow(courseTables.getSelectedRow());
-//					modalValue.addRow(new Object[] {"Hello", "kiki", "NabinGay"});
+					Statement statement =  (Statement) UpdateDB.getStatement();
+					String deleteQuery = "DELETE FROM course WHERE module_code='"+moduleCodeValue.getText()+"'";
+					try {
+						int success = statement.executeUpdate(deleteQuery);
+					
+						if (success==1) {
+							updateCourse.dispose();
+                            JOptionPane.showMessageDialog(null, "Updated deleted successfully!");
+						}
+						
+					} catch (SQLException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+						JOptionPane.showMessageDialog(null, "Unable to delete the course, please try!");
+					}
+					
+					
+//					modalValue.addRow(new Object[] {"Hello", "kiki", "NabinG"});
 				}
 			}
 		});
@@ -952,7 +1026,6 @@ public class AdminDashboard extends JFrame {
 						newmoduleDuration= moduleDurationValue.getText();
 						newmoduleMark= moduleMarkValue.getText();
 						newmoduleLeader= moduleLeaderValue.getText();
-//						Statement statement = dbUpdate.getStatement();
 						Statement statement =  (Statement) UpdateDB.getStatement();
 						
 						String insertQuery = "INSERT INTO `course` ( `module_title`,  `module_duration`,`module_mark`, `module_leader`) " + "VALUES ( '"+newmoduleTitle+"','"+newmoduleDuration+"','"+newmoduleMark+"','"+newmoduleLeader+"')";
@@ -963,7 +1036,7 @@ public class AdminDashboard extends JFrame {
 						if (success==1) {
 							frame.showDataFromDatabase();
 							updateCourse.dispose();
-                            JOptionPane.showMessageDialog(null, "Added Teacher data successfully!");
+                            JOptionPane.showMessageDialog(null, "Added course successfully!");
 						}
 						
 					} catch (SQLException e1) {
@@ -991,7 +1064,132 @@ public class AdminDashboard extends JFrame {
 		instructorTablePanel.add(scrollPane_3);
 		
 		instructorTables = new JTable();
+		instructorTables.setDefaultEditor(Object.class,null);
 		instructorTables.setFillsViewportHeight(true);
+		
+		instructorTables.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				Object[] options = { "Update", "Delete" };
+				int optionSelected = JOptionPane.showOptionDialog(null, "Do you want to update, delete or add?", "Update or Delete Teacher List",
+				JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE, null, options, options[0]);
+				//Updating table
+				if(optionSelected == 0) {
+					JTextField teacherNameValue = updateTeacher.getNameTextField();
+					JTextField teacherPhoneNumValue = updateTeacher.getPhoneNumField();
+					JTextField teacherAddressValue = updateTeacher.getAddressTextField();
+					JTextField teacherIdValue = updateTeacher.getIdTextField();
+					JTextField teacherModuleValue = updateTeacher.getModuleTextField();
+					JTextField teacherIsPartTimeValue = updateTeacher.getIsPartTimeTextField();
+					
+					selectedRow = instructorTables.getSelectedRow();
+					for(int columnIndex = 0; columnIndex < instructorTables.getColumnCount(); columnIndex++) {
+					
+						if(teacherId.isEmpty()) {
+							teacherId = (String) instructorTables.getValueAt(instructorTables.getSelectedRow(), columnIndex);
+							teacherIdColumnIndex = columnIndex;
+						}
+						else if (teacherName.isEmpty()){
+							teacherName = (String) instructorTables.getValueAt(instructorTables.getSelectedRow(), columnIndex);
+							teacherNameColumnIndex = columnIndex;
+						}
+						else if (teacherPhoneNum.isEmpty()) {
+							teacherPhoneNum = (String) instructorTables.getValueAt(instructorTables.getSelectedRow(), columnIndex);
+							teacherPhoneNumColumnIndex = columnIndex;
+						}
+						else if (teacherModule.isEmpty()) {
+							teacherModule = (String) instructorTables.getValueAt(instructorTables.getSelectedRow(), columnIndex);
+							teacherModuleColumnIndex = columnIndex;
+						} 
+						else if (teacherAddress.isEmpty()){
+							teacherAddress = (String) instructorTables.getValueAt(instructorTables.getSelectedRow(),columnIndex);
+							teacherAddressColumnIndex = columnIndex;
+						}  
+						else if (teacherModule.isEmpty()) {
+							teacherModule = (String) instructorTables.getValueAt(instructorTables.getSelectedRow(), columnIndex);
+							teacherModuleColumnIndex = columnIndex;
+						} 
+						else if (teacherIsPartTime.isEmpty()) {
+							teacherIsPartTime = (String) instructorTables.getValueAt(instructorTables.getSelectedRow(), columnIndex);
+							teacherIsPartTimeColumnIndex = columnIndex;
+						}
+					}
+					teacherNameValue.setText(teacherName);
+					teacherPhoneNumValue.setText(teacherPhoneNum);
+					teacherAddressValue.setText(teacherAddress);
+					teacherIdValue.setText(teacherId);
+					teacherModuleValue.setText(teacherModule);
+					teacherIsPartTimeValue.setText(teacherIsPartTime);
+					
+					
+					JButton submitButton = updateTeacher.getAddButton();
+					submitButton.setText("Update");
+					submitButton.addActionListener(new ActionListener() {
+
+						@Override
+						public void actionPerformed(ActionEvent e) {
+							instructorTables.setValueAt(teacherNameValue.getText(), selectedRow, teacherNameColumnIndex);
+							instructorTables.setValueAt(teacherPhoneNumValue.getText(), selectedRow, teacherPhoneNumColumnIndex);
+							instructorTables.setValueAt(teacherAddressValue.getText(), selectedRow, teacherAddressColumnIndex);
+							instructorTables.setValueAt(teacherIdValue.getText(), selectedRow, teacherIdColumnIndex);
+							instructorTables.setValueAt(teacherModuleValue.getText(), selectedRow, teacherModuleColumnIndex);
+							instructorTables.setValueAt(teacherIsPartTimeValue.getText(), selectedRow, teacherIsPartTimeColumnIndex);
+							
+							Statement statement =  (Statement) UpdateDB.getStatement();
+							String updateQuery = "UPDATE `teacher` SET `teacher_name` ='"+teacherNameValue.getText()+"', phone_number='"+teacherPhoneNumValue.getText()+"',"
+									+ "address='"+teacherAddressValue.getText()+"',teacher_id='"+teacherIdValue.getText()+"',module='"+teacherModuleValue.getText()+"',full_time='"+teacherIsPartTimeValue.getText()+"' WHERE teacher_id='"+teacherIdValue.getText()+"'";
+							try {
+								int success = statement.executeUpdate(updateQuery);
+							
+								if (success==1) {
+									frame.showDataFromDatabase();
+									updateTeacher.dispose();
+		                            JOptionPane.showMessageDialog(null, "Updated Teachers List successfully!");
+								}
+								
+							} catch (SQLException e1) {
+								// TODO Auto-generated catch block
+								e1.printStackTrace();
+								JOptionPane.showMessageDialog(null, "Unable to update the teacher List, please try!");
+							}
+							updateTeacher.setVisible(false);
+						}
+					});
+//				
+					
+					updateTeacher.setVisible(true);
+					
+					
+				}
+				else if(optionSelected == 1) {
+					JTextField teacherIdValue = updateTeacher.getIdTextField();
+					teacherId = (String) instructorTables.getValueAt(instructorTables.getSelectedRow(), 0);
+					teacherIdValue.setText(teacherId);
+					
+					
+					teacherValue.removeRow(instructorTables.getSelectedRow());
+					Statement statement =  (Statement) UpdateDB.getStatement();
+					String deleteQuery = "DELETE FROM teacher WHERE teacher_id='"+teacherIdValue.getText()+"'";
+					try {
+						int success = statement.executeUpdate(deleteQuery);
+					
+						if (success==1) {
+							updateTeacher.dispose();
+                            JOptionPane.showMessageDialog(null, "Deleted successfully!");
+						}
+						
+					} catch (SQLException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+						JOptionPane.showMessageDialog(null, "Unable to delete the teacher list, please try!");
+					}
+					
+					
+//					
+				}
+			}
+		});
+		
 		instructorTables.setModel(teacherValue);
 		instructorTables.getTableHeader().setBackground(Color.decode("#d6eaf7"));
 		instructorTables.getTableHeader().setFont(new Font("Century Gothic", Font.BOLD, 20));

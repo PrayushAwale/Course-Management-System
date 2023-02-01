@@ -427,6 +427,11 @@ public class StudentDashboard extends JFrame {
 		panel_6.add(lblNewLabel_17);
 		
 		JButton btnNewButton_1 = new JButton("Veiw Assignments");
+		btnNewButton_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				cardPanel.show(panel,"name_950178954078100");
+			}
+		});
 		btnNewButton_1.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnNewButton_1.setBackground(new Color(255, 255, 255));
 		btnNewButton_1.setFont(new Font("Century Gothic", Font.BOLD, 20));
@@ -631,5 +636,34 @@ public class StudentDashboard extends JFrame {
 		lblNewLabel_18.setIcon(new ImageIcon(StudentDashboard.class.getResource("/images/250.jpg")));
 		lblNewLabel_18.setBounds(98, 86, 270, 244);
 		panel_1.add(lblNewLabel_18);
+		
+		JPanel assignments = new JPanel();
+		panel.add(assignments, "name_950178954078100");
+		assignments.setLayout(null);
+		
+		JPanel panel_7 = new JPanel();
+		panel_7.setBackground(new Color(192, 192, 192));
+		panel_7.setBounds(752, 24, 246, 638);
+		assignments.add(panel_7);
+		panel_7.setLayout(null);
+		
+		JLabel lblNewLabel_19_1 = new JLabel("This Week");
+		lblNewLabel_19_1.setBounds(59, 10, 126, 32);
+		lblNewLabel_19_1.setFont(new Font("Century Gothic", Font.BOLD, 25));
+		panel_7.add(lblNewLabel_19_1);
+		
+		JPanel panel_9 = new JPanel();
+		panel_9.setBounds(10, 62, 226, 2);
+		panel_7.add(panel_9);
+		
+		JLabel lblNewLabel_19 = new JLabel("Activites");
+		lblNewLabel_19.setFont(new Font("Century Gothic", Font.BOLD, 25));
+		lblNewLabel_19.setBounds(38, 24, 125, 51);
+		assignments.add(lblNewLabel_19);
+		
+		JPanel panel_8 = new JPanel();
+		panel_8.setBackground(new Color(192, 192, 192));
+		panel_8.setBounds(17, 85, 725, 3);
+		assignments.add(panel_8);
 	}
 }
