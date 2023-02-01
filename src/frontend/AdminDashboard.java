@@ -74,6 +74,25 @@ public class AdminDashboard extends JFrame {
 	private String teacherPhoneNum = "";
 	private String teacherModule = "";
 	private String teacherIsPartTime = "";
+	private String newteacheName = "";
+	private String newteacherAddress = "";
+	private String newteacherPhoneNum = "";
+	private String newteacherModule = "";
+	private String newteacherIsPartTime = "";
+	
+	
+//	For Students
+	private String studentId = "";
+	private String studentName = "";
+	private String studentAddress = "";
+	private String studentPhoneNum = "";
+	private String studentCourse = "";
+	private String studentLevel = "";
+	private String newstudentName = "";
+	private String newstudentAddress = "";
+	private String newstudentPhoneNum = "";
+	private String newstudentCourse = "";
+	private String newstudentLevel = "";
 	
 	static AdminDashboard frame;
 	static int selectedRow = 0;
@@ -91,9 +110,18 @@ public class AdminDashboard extends JFrame {
 	static int teacherIsPartTimeColumnIndex = 0;
 	static int teacherModuleColumnIndex = 0;
 	
+//	For studnets
+	static int studentNameColumnIndex = 0;
+	static int studentIdColumnIndex = 0;
+	static int studentAddressColumnIndex = 0;
+	static int studentPhoneNumColumnIndex  = 0;
+	static int studentCourseColumnIndex = 0;
+	static int studentLevelColumnIndex = 0;
+	
 	Database db = new Database();
 	UpdateModal updateCourse = new UpdateModal();
 	AddTeacherModal updateTeacher = new AddTeacherModal();
+	UpdateStudentModal updateStudent = new UpdateStudentModal();
 	/**
 	 * Launch the application.
 	 */
@@ -876,7 +904,7 @@ public class AdminDashboard extends JFrame {
 		JScrollPane scrollPane_2 = new JScrollPane();
 		scrollPane_2.setBounds(0, 0, 1028, 554);
 		courseTablePanel.add(scrollPane_2);
-		
+//////////////////////////////////////////////////////////////////////Course Update and Delete///////////////////////////////////////////////////////////////////////////////////
 		courseTables = new JTable();
 		courseTables.setFillsViewportHeight(true);
 		
@@ -985,8 +1013,7 @@ public class AdminDashboard extends JFrame {
 						JOptionPane.showMessageDialog(null, "Unable to delete the course, please try!");
 					}
 					
-					
-//					modalValue.addRow(new Object[] {"Hello", "kiki", "NabinG"});
+		
 				}
 			}
 		});
@@ -1002,6 +1029,8 @@ public class AdminDashboard extends JFrame {
 		courseTables.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		courseTables.setBackground(Color.WHITE);
 		scrollPane_2.setViewportView(courseTables);
+		
+//////////////////////////////////////////////////////////////////////ADD Course///////////////////////////////////////////////////////////////////////////////////
 		
 		JButton addCourseButton = new JButton("Add");
 		addCourseButton.addActionListener(new ActionListener() {
@@ -1062,6 +1091,9 @@ public class AdminDashboard extends JFrame {
 		JScrollPane scrollPane_3 = new JScrollPane();
 		scrollPane_3.setBounds(0, 0, 1028, 556);
 		instructorTablePanel.add(scrollPane_3);
+		
+		
+//////////////////////////////////////////////////////////////////////Teachers Update and Delete///////////////////////////////////////////////////////////////////////////////////
 		
 		instructorTables = new JTable();
 		instructorTables.setDefaultEditor(Object.class,null);
@@ -1216,8 +1248,134 @@ public class AdminDashboard extends JFrame {
 		scrollPane_4.setBounds(0, 0, 1028, 551);
 		studentTablePanel.add(scrollPane_4);
 		
+		
+		
+		//////////////////////////////////////////////////////////////////////Students Update and Delete///////////////////////////////////////////////////////////////////////////////////
 		studentTables = new JTable();
 		studentTables.setFillsViewportHeight(true);
+		studentTables.setDefaultEditor(Object.class,null);
+		
+		studentTables.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				Object[] options = { "Update", "Delete" };
+				int optionSelected = JOptionPane.showOptionDialog(null, "Do you want to update, delete or add?", "Update or Delete Student List",
+				JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE, null, options, options[0]);
+				//Updating table
+				if(optionSelected == 0) {
+					JTextField studentNameValue = updateStudent.getNameTextField();
+					JTextField studentPhoneNumValue = updateStudent.getPhoneNumField();
+					JTextField studentAddressValue = updateStudent.getAddressTextField();
+					JTextField studentIdValue = updateStudent.getIdTextField();
+					JTextField studentLevelValue = updateStudent.getLeveltextField();
+					JTextField studentCourseValue = updateStudent.getCoursetextFiled();
+					
+					selectedRow = studentTables.getSelectedRow();
+					for(int columnIndex = 0; columnIndex < studentTables.getColumnCount(); columnIndex++) {
+					
+						if(studentId.isEmpty()) {
+							studentId = (String) studentTables.getValueAt(studentTables.getSelectedRow(), columnIndex);
+							studentIdColumnIndex = columnIndex;
+						}
+						else if (studentName.isEmpty()){
+							studentName = (String) studentTables.getValueAt(studentTables.getSelectedRow(), columnIndex);
+							studentNameColumnIndex = columnIndex;
+						}
+						else if (studentPhoneNum.isEmpty()) {
+							studentPhoneNum = (String) studentTables.getValueAt(studentTables.getSelectedRow(), columnIndex);
+							studentPhoneNumColumnIndex = columnIndex;
+						}
+					
+						else if (studentAddress.isEmpty()){
+							studentAddress = (String) studentTables.getValueAt(studentTables.getSelectedRow(),columnIndex);
+							studentAddressColumnIndex = columnIndex;
+						}  
+						else if (studentLevel.isEmpty()) {
+							studentLevel = (String) studentTables.getValueAt(studentTables.getSelectedRow(), columnIndex);
+							studentLevelColumnIndex = columnIndex;
+						} 
+						else if (studentCourse.isEmpty()) {
+							studentCourse = (String) studentTables.getValueAt(studentTables.getSelectedRow(), columnIndex);
+							studentCourseColumnIndex = columnIndex;
+						}
+					}
+					studentNameValue.setText(studentName);
+					studentPhoneNumValue.setText(studentPhoneNum);
+					studentAddressValue.setText(studentAddress);
+					studentIdValue.setText(studentId);
+					studentLevelValue.setText(studentLevel);
+					studentCourseValue.setText(studentCourse);
+					
+					
+					JButton submitButton = updateStudent.getAddButton();
+					submitButton.setText("Update");
+					submitButton.addActionListener(new ActionListener() {
+
+						@Override
+						public void actionPerformed(ActionEvent e) {
+							studentTables.setValueAt(studentNameValue.getText(), selectedRow, studentNameColumnIndex);
+							studentTables.setValueAt(studentPhoneNumValue.getText(), selectedRow, studentPhoneNumColumnIndex);
+							studentTables.setValueAt(studentAddressValue.getText(), selectedRow, studentAddressColumnIndex);
+							studentTables.setValueAt(studentIdValue.getText(), selectedRow, studentIdColumnIndex);
+							studentTables.setValueAt(studentLevelValue.getText(), selectedRow, studentLevelColumnIndex);
+							studentTables.setValueAt(studentCourseValue.getText(), selectedRow, studentCourseColumnIndex);
+							
+							Statement statement =  (Statement) UpdateDB.getStatement();
+							String updateQuery = "UPDATE `student` SET `student_name` ='"+studentNameValue.getText()+"', phone_num='"+studentPhoneNumValue.getText()+"',"
+									+ "address='"+studentAddressValue.getText()+"',uni_id='"+studentIdValue.getText()+"',level='"+studentLevelValue.getText()+"',course='"+studentCourseValue.getText()+"' WHERE uni_id='"+studentIdValue.getText()+"'";
+							try {
+								int success = statement.executeUpdate(updateQuery);
+							
+								if (success==1) {
+									frame.showDataFromDatabase();
+									updateStudent.dispose();
+		                            JOptionPane.showMessageDialog(null, "Updated Students List successfully!");
+								}
+								
+							} catch (SQLException e1) {
+								// TODO Auto-generated catch block
+								e1.printStackTrace();
+								JOptionPane.showMessageDialog(null, "Unable to update the Student List, please try!");
+							}
+							updateStudent.setVisible(false);
+						}
+					});
+//				
+					
+					updateStudent.setVisible(true);
+					
+					
+				}
+				else if(optionSelected == 1) {
+					JTextField studentIdValue = updateStudent.getIdTextField();
+					studentId = (String) studentTables.getValueAt(studentTables.getSelectedRow(), 0);
+					studentIdValue.setText(studentId);
+					
+					
+					studentValue.removeRow(studentTables.getSelectedRow());
+					Statement statement =  (Statement) UpdateDB.getStatement();
+					String deleteQuery = "DELETE FROM student WHERE uni_id='"+studentIdValue.getText()+"'";
+					try {
+						int success = statement.executeUpdate(deleteQuery);
+					
+						if (success==1) {
+							updateStudent.dispose();
+                            JOptionPane.showMessageDialog(null, "Deleted successfully!");
+						}
+						
+					} catch (SQLException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+						JOptionPane.showMessageDialog(null, "Unable to delete the Student List, please try!");
+					}
+					
+					
+//					
+				}
+			}
+		});
+		
+		
 		studentTables.setModel(studentValue);
 		studentTables.getTableHeader().setBackground(Color.decode("#d6eaf7"));
 		studentTables.getTableHeader().setFont(new Font("Century Gothic", Font.BOLD, 20));
