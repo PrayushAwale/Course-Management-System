@@ -497,8 +497,9 @@ public class AdminDashboard extends JFrame {
 		lblNewLabel_10.setBounds(-135, -107, 298, 264);
 		panel_4.add(lblNewLabel_10);
 		lblNewLabel_10.setIcon(new ImageIcon(AdminDashboard.class.getResource("/images/cirlce.png")));
-		
-		JLabel lblNewLabel_15 = new JLabel("101");
+		String studentCount = String.valueOf(db.getStudentId().size());
+		JLabel lblNewLabel_15 = new JLabel("0");
+		lblNewLabel_15.setText(studentCount);
 		lblNewLabel_15.setFont(new Font("Century Gothic", Font.PLAIN, 30));
 		lblNewLabel_15.setBounds(23, 145, 63, 60);
 		panel_4.add(lblNewLabel_15);
@@ -524,9 +525,10 @@ public class AdminDashboard extends JFrame {
 		lblNewLabel_13.setBounds(72, 159, 128, 32);
 		panel_5.add(lblNewLabel_13);
 		
-		JLabel lblNewLabel_16 = new JLabel("100");
+		JLabel lblNewLabel_16 = new JLabel("0");
+		lblNewLabel_16.setText(String.valueOf(db.getTeacherId().size()));
 		lblNewLabel_16.setFont(new Font("Century Gothic", Font.PLAIN, 30));
-		lblNewLabel_16.setBounds(10, 164, 69, 24);
+		lblNewLabel_16.setBounds(27, 161, 46, 24);
 		panel_5.add(lblNewLabel_16);
 		
 		JPanel panel_6 = new JPanel();
@@ -550,7 +552,8 @@ public class AdminDashboard extends JFrame {
 		lblNewLabel_14.setBounds(95, 161, 105, 26);
 		panel_6.add(lblNewLabel_14);
 		
-		JLabel lblNewLabel_17 = new JLabel("99");
+		JLabel lblNewLabel_17 = new JLabel("0");
+		lblNewLabel_17.setText(String.valueOf(db.getCourseCode().size()));
 		lblNewLabel_17.setFont(new Font("Century Gothic", Font.PLAIN, 30));
 		lblNewLabel_17.setBounds(48, 150, 43, 44);
 		panel_6.add(lblNewLabel_17);

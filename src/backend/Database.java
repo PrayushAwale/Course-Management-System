@@ -164,7 +164,28 @@ public Database() {
 					studentPassword.add(password);
 //					System.out.println(student_name + password);
 				}
-//				System.out.println(studentId.size());
+//		Fetching data of assignmnet
+				String QueryAssignment = "SELECT * FROM `student`";
+				ResultSet executeQueryAssignmnet = createStatement.executeQuery(QueryAssignment);
+				while(executeQueryAssignmnet.next()) {
+//					Insertion for student table
+					String student_id = executeQueryAssignmnet.getString("uni_id");
+					String student_name = executeQueryAssignmnet.getString("student_name");
+					String phone_number = executeQueryAssignmnet.getString("phone_num");
+					String level = executeQueryAssignmnet.getString("level");
+					String address = executeQueryAssignmnet.getString("address");
+					String course = executeQueryAssignmnet.getString("course");
+					String password = executeQueryAssignmnet.getString("password");
+					studentId.add(student_id);
+					studentName.add(student_name);
+					phoneNum.add(phone_number);
+					studentAddress.add(address);
+					_level.add(level);
+					studentCourse.add(course);
+					studentPassword.add(password);
+//					System.out.println(student_name + password);
+				}
+				
 			
 	}catch(SQLException e) {
 		e.printStackTrace();

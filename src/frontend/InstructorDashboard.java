@@ -27,10 +27,14 @@ import javax.swing.UIManager;
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.sql.SQLException;
+
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
+
+import com.mysql.cj.api.jdbc.Statement;
 
 import backend.Database;
 
@@ -92,15 +96,13 @@ public class InstructorDashboard extends JFrame {
 				"Teacher ID","Teacher Name", "Phone Number", "Module", "Address", "Full Time"
 			}
 		);
-	private JTextField textField;
-	private JTextField textField_1;
-	private JTextField textField_2;
-	private JTextField textField_3;
-	private JTextField textField_4;
-	private JTextField textField_5;
-	private JTextField textField_6;
-	private JTextField textField_7;
-	private JTextField textField_8;
+	private JTextField question1TextField;
+	private JTextField question2TextField;
+	private JTextField question4TextField;
+	private JTextField mark;
+	private JTextField dueDate;
+	private JTextField module;
+	private JTextField question3TextField;
 	
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -660,94 +662,118 @@ public class InstructorDashboard extends JFrame {
 		panel_7.setBounds(25, 76, 976, 2);
 		createAssignmnet.add(panel_7);
 		
-		textField = new JTextField();
-		textField.setBounds(42, 166, 959, 39);
-		createAssignmnet.add(textField);
-		textField.setColumns(10);
+		question1TextField = new JTextField();
+		question1TextField.setBounds(42, 176, 959, 39);
+		createAssignmnet.add(question1TextField);
+		question1TextField.setColumns(10);
 		
 		JLabel lblNewLabel_20 = new JLabel("Question 1");
 		lblNewLabel_20.setFont(new Font("Century Gothic", Font.BOLD, 15));
-		lblNewLabel_20.setBounds(42, 130, 93, 26);
+		lblNewLabel_20.setBounds(42, 140, 93, 26);
 		createAssignmnet.add(lblNewLabel_20);
 		
 		JLabel lblNewLabel_20_1 = new JLabel("Question 2");
 		lblNewLabel_20_1.setFont(new Font("Century Gothic", Font.BOLD, 15));
-		lblNewLabel_20_1.setBounds(42, 273, 93, 26);
+		lblNewLabel_20_1.setBounds(42, 244, 93, 26);
 		createAssignmnet.add(lblNewLabel_20_1);
 		
-		textField_1 = new JTextField();
-		textField_1.setColumns(10);
-		textField_1.setBounds(42, 309, 959, 39);
-		createAssignmnet.add(textField_1);
+		question2TextField = new JTextField();
+		question2TextField.setColumns(10);
+		question2TextField.setBounds(42, 280, 959, 39);
+		createAssignmnet.add(question2TextField);
 		
-		JLabel lblNewLabel_20_2 = new JLabel("Question 3");
+		JLabel lblNewLabel_20_2 = new JLabel("Question 4");
 		lblNewLabel_20_2.setFont(new Font("Century Gothic", Font.BOLD, 15));
-		lblNewLabel_20_2.setBounds(42, 421, 93, 26);
+		lblNewLabel_20_2.setBounds(42, 431, 93, 26);
 		createAssignmnet.add(lblNewLabel_20_2);
 		
-		textField_2 = new JTextField();
-		textField_2.setColumns(10);
-		textField_2.setBounds(42, 457, 959, 39);
-		createAssignmnet.add(textField_2);
+		question4TextField = new JTextField();
+		question4TextField.setColumns(10);
+		question4TextField.setBounds(42, 467, 959, 39);
+		createAssignmnet.add(question4TextField);
 		
-		textField_3 = new JTextField();
-		textField_3.setColumns(10);
-		textField_3.setBounds(108, 215, 215, 39);
-		createAssignmnet.add(textField_3);
-		
-		JLabel lblNewLabel_20_3 = new JLabel("Module");
-		lblNewLabel_20_3.setFont(new Font("Century Gothic", Font.BOLD, 15));
-		lblNewLabel_20_3.setBounds(42, 224, 65, 26);
-		createAssignmnet.add(lblNewLabel_20_3);
-		
-		JLabel lblNewLabel_20_3_1 = new JLabel("Marks");
-		lblNewLabel_20_3_1.setFont(new Font("Century Gothic", Font.BOLD, 15));
-		lblNewLabel_20_3_1.setBounds(355, 224, 65, 26);
-		createAssignmnet.add(lblNewLabel_20_3_1);
-		
-		textField_4 = new JTextField();
-		textField_4.setColumns(10);
-		textField_4.setBounds(421, 215, 185, 39);
-		createAssignmnet.add(textField_4);
-		
-		JLabel lblNewLabel_20_3_2 = new JLabel("Module");
-		lblNewLabel_20_3_2.setFont(new Font("Century Gothic", Font.BOLD, 15));
-		lblNewLabel_20_3_2.setBounds(42, 370, 65, 26);
-		createAssignmnet.add(lblNewLabel_20_3_2);
-		
-		textField_5 = new JTextField();
-		textField_5.setColumns(10);
-		textField_5.setBounds(108, 361, 215, 39);
-		createAssignmnet.add(textField_5);
-		
-		JLabel lblNewLabel_20_3_1_1 = new JLabel("Marks");
-		lblNewLabel_20_3_1_1.setFont(new Font("Century Gothic", Font.BOLD, 15));
-		lblNewLabel_20_3_1_1.setBounds(355, 370, 65, 26);
-		createAssignmnet.add(lblNewLabel_20_3_1_1);
-		
-		textField_6 = new JTextField();
-		textField_6.setColumns(10);
-		textField_6.setBounds(421, 361, 185, 39);
-		createAssignmnet.add(textField_6);
-		
-		JLabel lblNewLabel_20_3_2_1 = new JLabel("Module");
-		lblNewLabel_20_3_2_1.setFont(new Font("Century Gothic", Font.BOLD, 15));
-		lblNewLabel_20_3_2_1.setBounds(42, 515, 65, 26);
-		createAssignmnet.add(lblNewLabel_20_3_2_1);
-		
-		textField_7 = new JTextField();
-		textField_7.setColumns(10);
-		textField_7.setBounds(108, 506, 215, 39);
-		createAssignmnet.add(textField_7);
-		
-		JLabel lblNewLabel_20_3_1_1_1 = new JLabel("Marks");
+		JLabel lblNewLabel_20_3_1_1_1 = new JLabel("Total Marks");
 		lblNewLabel_20_3_1_1_1.setFont(new Font("Century Gothic", Font.BOLD, 15));
-		lblNewLabel_20_3_1_1_1.setBounds(355, 515, 65, 26);
+		lblNewLabel_20_3_1_1_1.setBounds(42, 525, 93, 26);
 		createAssignmnet.add(lblNewLabel_20_3_1_1_1);
 		
-		textField_8 = new JTextField();
-		textField_8.setColumns(10);
-		textField_8.setBounds(421, 506, 185, 39);
-		createAssignmnet.add(textField_8);
+		mark = new JTextField();
+		mark.setColumns(10);
+		mark.setBounds(145, 521, 235, 39);
+		createAssignmnet.add(mark);
+		
+		JButton createAssignmentButton = new JButton("Create");
+		createAssignmentButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String newDueDate = dueDate.getText();
+				String newModule = module.getText();
+				String newQuestion1 = question1TextField.getText();
+				String newQuestion2= question2TextField.getText();
+				String newQuestion3 = question3TextField.getText();
+				String newQuestion4 = question4TextField.getText();
+				String newmark = mark.getText();
+						Statement statement =  (Statement) UpdateDB.getStatement();
+						
+						String insertQuery = "INSERT INTO `assignment` ( `module`,  `due_date`, `question_1`, `question_2`, `question_3`, `question_4`, `mark`) " + "VALUES ( '"+newModule+"','"+newDueDate+"','"+newQuestion1+"','"+newQuestion2+"','"+newQuestion3+"','"+newQuestion4+"','"+newmark+"')";
+							
+					try {
+						int success = statement.executeUpdate(insertQuery);
+					
+						if (success==1) {
+                            JOptionPane.showMessageDialog(null, "Added Assignment successfully!");
+                            dueDate.setText("");
+                            module.setText("");
+                            question1TextField.setText("");
+                            question2TextField.setText("");
+                            question3TextField.setText("");
+                            question4TextField.setText("");
+                            mark.setText("");
+                          
+						}
+						
+					} catch (SQLException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+						JOptionPane.showMessageDialog(null, "Unable to add the Assignment, please try!");
+					}
+				
+				
+			}
+		});
+		createAssignmentButton.setBackground(new Color(45, 204, 112));
+		createAssignmentButton.setForeground(new Color(255, 255, 255));
+		createAssignmentButton.setFont(new Font("Century Gothic", Font.BOLD, 20));
+		createAssignmentButton.setBounds(42, 596, 242, 39);
+		createAssignmnet.add(createAssignmentButton);
+		
+		dueDate = new JTextField();
+		dueDate.setColumns(10);
+		dueDate.setBounds(610, 98, 360, 39);
+		createAssignmnet.add(dueDate);
+		
+		JLabel lblNewLabel_20_3_1_2 = new JLabel("Due Date");
+		lblNewLabel_20_3_1_2.setFont(new Font("Century Gothic", Font.BOLD, 15));
+		lblNewLabel_20_3_1_2.setBounds(528, 102, 72, 26);
+		createAssignmnet.add(lblNewLabel_20_3_1_2);
+		
+		module = new JTextField();
+		module.setColumns(10);
+		module.setBounds(108, 98, 379, 39);
+		createAssignmnet.add(module);
+		
+		JLabel lblNewLabel_20_3_1_2_1 = new JLabel("Module");
+		lblNewLabel_20_3_1_2_1.setFont(new Font("Century Gothic", Font.BOLD, 15));
+		lblNewLabel_20_3_1_2_1.setBounds(42, 104, 81, 26);
+		createAssignmnet.add(lblNewLabel_20_3_1_2_1);
+		
+		JLabel lblNewLabel_20_2_1 = new JLabel("Question 3");
+		lblNewLabel_20_2_1.setFont(new Font("Century Gothic", Font.BOLD, 15));
+		lblNewLabel_20_2_1.setBounds(42, 339, 93, 26);
+		createAssignmnet.add(lblNewLabel_20_2_1);
+		
+		question3TextField = new JTextField();
+		question3TextField.setColumns(10);
+		question3TextField.setBounds(42, 375, 959, 39);
+		createAssignmnet.add(question3TextField);
 	}
 }
