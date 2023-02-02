@@ -427,6 +427,11 @@ public class InstructorDashboard extends JFrame {
 		panel_6.add(lblNewLabel_17);
 		
 		JButton btnNewButton_1 = new JButton("Create Assignments");
+		btnNewButton_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				cardPanel.show(panel,"name_1027892276699800");
+			}
+		});
 		btnNewButton_1.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnNewButton_1.setBackground(new Color(255, 255, 255));
 		btnNewButton_1.setFont(new Font("Century Gothic", Font.BOLD, 20));
@@ -631,5 +636,19 @@ public class InstructorDashboard extends JFrame {
 		lblNewLabel_18.setIcon(new ImageIcon(InstructorDashboard.class.getResource("/images/250.jpg")));
 		lblNewLabel_18.setBounds(98, 86, 270, 244);
 		panel_1.add(lblNewLabel_18);
+		
+		JPanel createAssignmnet = new JPanel();
+		panel.add(createAssignmnet, "name_1027892276699800");
+		createAssignmnet.setLayout(null);
+		
+		JLabel lblNewLabel_19 = new JLabel("Create Activites");
+		lblNewLabel_19.setFont(new Font("Century Gothic", Font.BOLD, 25));
+		lblNewLabel_19.setBounds(42, 27, 198, 39);
+		createAssignmnet.add(lblNewLabel_19);
+		
+		JPanel panel_7 = new JPanel();
+		panel_7.setBackground(new Color(192, 192, 192));
+		panel_7.setBounds(25, 76, 976, 2);
+		createAssignmnet.add(panel_7);
 	}
 }
