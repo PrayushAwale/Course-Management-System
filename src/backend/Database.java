@@ -72,6 +72,29 @@ public List<String> getTeacherId() {
 	}
 
 
+	public List<String> getModule() {
+		return module;
+	}
+	public List<String> getDueDate() {
+		return dueDate;
+	}
+	public List<String> getQuestion_1() {
+		return question1;
+	}
+	public List<String> getQuestion_2() {
+		return question2;
+	}
+	public List<String> getQuestion_3() {
+		return question3;
+	}
+	public List<String> getQuestion_4() {
+		return question4;
+	}
+	public List<String> getMark() {
+		return mark;
+	}
+
+
 	//	Array for module table
 	List<String> courseCode = new ArrayList<String>();
 	List<String> courseTitle= new ArrayList<String>();
@@ -93,6 +116,14 @@ public List<String> getTeacherId() {
 		List<String> studentAddress= new ArrayList<String>();
 		List<String> studentCourse = new ArrayList<String>();
 		List<String> studentPassword = new ArrayList<String>();
+//Array for student table
+				List<String> module = new ArrayList<String>();
+				List<String> dueDate= new ArrayList<String>();
+				List<String> question1= new ArrayList<String>();
+				List<String> question2 = new ArrayList<String>();
+				List<String> question3= new ArrayList<String>();
+				List<String> question4 = new ArrayList<String>();
+				List<String> mark = new ArrayList<String>();
 
 public Database() {
 	try {
@@ -164,26 +195,25 @@ public Database() {
 					studentPassword.add(password);
 //					System.out.println(student_name + password);
 				}
-//		Fetching data of assignmnet
-				String QueryAssignment = "SELECT * FROM `student`";
+//		Fetching data of Assignment
+				String QueryAssignment = "SELECT * FROM `assignment`";
 				ResultSet executeQueryAssignmnet = createStatement.executeQuery(QueryAssignment);
 				while(executeQueryAssignmnet.next()) {
 //					Insertion for student table
-					String student_id = executeQueryAssignmnet.getString("uni_id");
-					String student_name = executeQueryAssignmnet.getString("student_name");
-					String phone_number = executeQueryAssignmnet.getString("phone_num");
-					String level = executeQueryAssignmnet.getString("level");
-					String address = executeQueryAssignmnet.getString("address");
-					String course = executeQueryAssignmnet.getString("course");
-					String password = executeQueryAssignmnet.getString("password");
-					studentId.add(student_id);
-					studentName.add(student_name);
-					phoneNum.add(phone_number);
-					studentAddress.add(address);
-					_level.add(level);
-					studentCourse.add(course);
-					studentPassword.add(password);
-//					System.out.println(student_name + password);
+					String modules = executeQueryAssignmnet.getString("module");
+					String due_date = executeQueryAssignmnet.getString("due_date");
+					String question_1 = executeQueryAssignmnet.getString("question_1");
+					String question_2 = executeQueryAssignmnet.getString("question_2");
+					String question_3 = executeQueryAssignmnet.getString("question_3");
+					String question_4 = executeQueryAssignmnet.getString("question_4");
+					String marks = executeQueryAssignmnet.getString("mark");
+					module.add(modules);
+					dueDate.add(due_date);
+					question1.add(question_1);
+					question2.add(question_2);
+					question3.add(question_3);
+					question4.add(question_4);
+					mark.add(marks);
 				}
 				
 			

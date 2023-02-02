@@ -92,6 +92,10 @@ public class StudentDashboard extends JFrame {
 				"Teacher ID","Teacher Name", "Phone Number", "Module", "Address", "Full Time"
 			}
 		);
+	private JTextField question1textField;
+	private JTextField question2textField;
+	private JTextField question3textField;
+	private JTextField question4textField;
 	
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -642,7 +646,7 @@ public class StudentDashboard extends JFrame {
 		assignments.setLayout(null);
 		
 		JPanel panel_7 = new JPanel();
-		panel_7.setBackground(new Color(192, 192, 192));
+		panel_7.setBackground(new Color(255, 255, 255));
 		panel_7.setBounds(752, 24, 246, 638);
 		assignments.add(panel_7);
 		panel_7.setLayout(null);
@@ -656,6 +660,46 @@ public class StudentDashboard extends JFrame {
 		panel_9.setBounds(10, 62, 226, 2);
 		panel_7.add(panel_9);
 		
+		JLabel lblNewLabel_20 = new JLabel("OOP");
+		lblNewLabel_20.setFont(new Font("Century Gothic", Font.BOLD, 20));
+		lblNewLabel_20.setBounds(45, 98, 66, 32);
+		panel_7.add(lblNewLabel_20);
+		
+		JLabel lblNewLabel_20_1 = new JLabel("0");
+		lblNewLabel_20_1.setFont(new Font("Century Gothic", Font.BOLD, 20));
+		lblNewLabel_20_1.setBounds(169, 98, 44, 32);
+		panel_7.add(lblNewLabel_20_1);
+		
+		JLabel lblNewLabel_20_1_1 = new JLabel("0");
+		lblNewLabel_20_1_1.setFont(new Font("Century Gothic", Font.BOLD, 20));
+		lblNewLabel_20_1_1.setBounds(169, 160, 44, 32);
+		panel_7.add(lblNewLabel_20_1_1);
+		
+		JLabel lblNewLabel_20_2 = new JLabel("NMC");
+		lblNewLabel_20_2.setFont(new Font("Century Gothic", Font.BOLD, 20));
+		lblNewLabel_20_2.setBounds(45, 160, 66, 32);
+		panel_7.add(lblNewLabel_20_2);
+		
+		JLabel lblNewLabel_20_1_2 = new JLabel("0");
+		lblNewLabel_20_1_2.setFont(new Font("Century Gothic", Font.BOLD, 20));
+		lblNewLabel_20_1_2.setBounds(169, 217, 44, 32);
+		panel_7.add(lblNewLabel_20_1_2);
+		
+		JLabel lblNewLabel_20_3 = new JLabel("AI");
+		lblNewLabel_20_3.setFont(new Font("Century Gothic", Font.BOLD, 20));
+		lblNewLabel_20_3.setBounds(45, 217, 53, 32);
+		panel_7.add(lblNewLabel_20_3);
+		
+		JLabel lblNewLabel_21 = new JLabel("To Do");
+		lblNewLabel_21.setFont(new Font("Century", Font.PLAIN, 10));
+		lblNewLabel_21.setBounds(158, 75, 45, 13);
+		panel_7.add(lblNewLabel_21);
+		
+		JLabel lblNewLabel_21_1 = new JLabel("Module");
+		lblNewLabel_21_1.setFont(new Font("Century", Font.PLAIN, 10));
+		lblNewLabel_21_1.setBounds(53, 74, 45, 13);
+		panel_7.add(lblNewLabel_21_1);
+		
 		JLabel lblNewLabel_19 = new JLabel("Activites");
 		lblNewLabel_19.setFont(new Font("Century Gothic", Font.BOLD, 25));
 		lblNewLabel_19.setBounds(38, 24, 125, 51);
@@ -665,5 +709,107 @@ public class StudentDashboard extends JFrame {
 		panel_8.setBackground(new Color(192, 192, 192));
 		panel_8.setBounds(17, 85, 725, 3);
 		assignments.add(panel_8);
+		
+		JButton btnNewButton_2 = new JButton("Object Oriented Programming");
+		btnNewButton_2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				cardPanel.show(panel,"name_1055731468530900");
+			}
+		});
+		btnNewButton_2.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		btnNewButton_2.setBackground(new Color(255, 255, 255));
+		btnNewButton_2.setFont(new Font("Century Gothic", Font.BOLD, 20));
+		btnNewButton_2.setBounds(17, 117, 343, 76);
+		assignments.add(btnNewButton_2);
+		
+		JButton btnNewButton_2_1 = new JButton("Numerical Methods & Concurrency");
+		btnNewButton_2_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				cardPanel.show(panel,"name_1055731468530900");
+			}
+		});
+		btnNewButton_2_1.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		btnNewButton_2_1.setBackground(new Color(255, 255, 255));
+		btnNewButton_2_1.setFont(new Font("Century Gothic", Font.BOLD, 20));
+		btnNewButton_2_1.setBounds(375, 117, 343, 76);
+		assignments.add(btnNewButton_2_1);
+		
+		JButton btnNewButton_2_1_1 = new JButton("Artificial Intelligence");
+		btnNewButton_2_1_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				cardPanel.show(panel,"name_1055731468530900");
+			}
+		});
+		btnNewButton_2_1_1.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		btnNewButton_2_1_1.setBackground(new Color(255, 255, 255));
+		btnNewButton_2_1_1.setFont(new Font("Century Gothic", Font.BOLD, 20));
+		btnNewButton_2_1_1.setBounds(17, 227, 343, 76);
+		assignments.add(btnNewButton_2_1_1);
+		
+		JPanel OOP = new JPanel();
+		panel.add(OOP, "name_1055731468530900");
+		OOP.setLayout(null);
+		
+		JButton btnNewButton_3 = new JButton("Go Back");
+		btnNewButton_3.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				cardPanel.show(panel,"name_950178954078100");
+			}
+		});
+		btnNewButton_3.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		btnNewButton_3.setBackground(new Color(255, 255, 255));
+		btnNewButton_3.setForeground(new Color(0, 0, 0));
+		btnNewButton_3.setFont(new Font("Century Gothic", Font.BOLD, 15));
+		btnNewButton_3.setBounds(30, 26, 124, 35);
+		OOP.add(btnNewButton_3);
+		
+		JLabel question1 = new JLabel("No Question Provided");
+		
+		question1.setText(String.valueOf(db.getQuestion_1().get(1)));
+		
+		question1.setBounds(30, 90, 962, 35);
+		OOP.add(question1);
+		
+		JLabel question2 = new JLabel("WHat is OOP?");
+		question2.setText(String.valueOf(db.getQuestion_2().get(1)));
+		question2.setBounds(30, 204, 962, 35);
+		OOP.add(question2);
+		
+		JLabel question3 = new JLabel("WHat is OOP?");
+		question3.setText(String.valueOf(db.getQuestion_3().get(1)));
+		question3.setBounds(30, 322, 962, 35);
+		OOP.add(question3);
+		
+		JLabel question4 = new JLabel("WHat is OOP?");
+		question4.setText(String.valueOf(db.getQuestion_4().get(1)));
+		question4.setBounds(30, 448, 962, 35);
+		OOP.add(question4);
+		
+		question1textField = new JTextField();
+		question1textField.setBounds(30, 135, 962, 28);
+		OOP.add(question1textField);
+		question1textField.setColumns(10);
+		
+		question2textField = new JTextField();
+		question2textField.setColumns(10);
+		question2textField.setBounds(30, 249, 962, 28);
+		OOP.add(question2textField);
+		
+		question3textField = new JTextField();
+		question3textField.setColumns(10);
+		question3textField.setBounds(30, 371, 962, 28);
+		OOP.add(question3textField);
+		
+		question4textField = new JTextField();
+		question4textField.setColumns(10);
+		question4textField.setBounds(30, 493, 962, 28);
+		OOP.add(question4textField);
+		
+		JButton submitButton = new JButton("Submit");
+		submitButton.setFont(new Font("Century Gothic", Font.BOLD, 15));
+		submitButton.setBackground(new Color(45, 204, 112));
+		submitButton.setForeground(new Color(255, 255, 255));
+		submitButton.setBounds(30, 565, 146, 35);
+		OOP.add(submitButton);
 	}
 }
