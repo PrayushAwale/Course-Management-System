@@ -92,6 +92,15 @@ public class InstructorDashboard extends JFrame {
 				"Teacher ID","Teacher Name", "Phone Number", "Module", "Address", "Full Time"
 			}
 		);
+	private JTextField textField;
+	private JTextField textField_1;
+	private JTextField textField_2;
+	private JTextField textField_3;
+	private JTextField textField_4;
+	private JTextField textField_5;
+	private JTextField textField_6;
+	private JTextField textField_7;
+	private JTextField textField_8;
 	
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -650,5 +659,95 @@ public class InstructorDashboard extends JFrame {
 		panel_7.setBackground(new Color(192, 192, 192));
 		panel_7.setBounds(25, 76, 976, 2);
 		createAssignmnet.add(panel_7);
+		
+		textField = new JTextField();
+		textField.setBounds(42, 166, 959, 39);
+		createAssignmnet.add(textField);
+		textField.setColumns(10);
+		
+		JLabel lblNewLabel_20 = new JLabel("Question 1");
+		lblNewLabel_20.setFont(new Font("Century Gothic", Font.BOLD, 15));
+		lblNewLabel_20.setBounds(42, 130, 93, 26);
+		createAssignmnet.add(lblNewLabel_20);
+		
+		JLabel lblNewLabel_20_1 = new JLabel("Question 2");
+		lblNewLabel_20_1.setFont(new Font("Century Gothic", Font.BOLD, 15));
+		lblNewLabel_20_1.setBounds(42, 273, 93, 26);
+		createAssignmnet.add(lblNewLabel_20_1);
+		
+		textField_1 = new JTextField();
+		textField_1.setColumns(10);
+		textField_1.setBounds(42, 309, 959, 39);
+		createAssignmnet.add(textField_1);
+		
+		JLabel lblNewLabel_20_2 = new JLabel("Question 3");
+		lblNewLabel_20_2.setFont(new Font("Century Gothic", Font.BOLD, 15));
+		lblNewLabel_20_2.setBounds(42, 421, 93, 26);
+		createAssignmnet.add(lblNewLabel_20_2);
+		
+		textField_2 = new JTextField();
+		textField_2.setColumns(10);
+		textField_2.setBounds(42, 457, 959, 39);
+		createAssignmnet.add(textField_2);
+		
+		textField_3 = new JTextField();
+		textField_3.setColumns(10);
+		textField_3.setBounds(108, 215, 215, 39);
+		createAssignmnet.add(textField_3);
+		
+		JLabel lblNewLabel_20_3 = new JLabel("Module");
+		lblNewLabel_20_3.setFont(new Font("Century Gothic", Font.BOLD, 15));
+		lblNewLabel_20_3.setBounds(42, 224, 65, 26);
+		createAssignmnet.add(lblNewLabel_20_3);
+		
+		JLabel lblNewLabel_20_3_1 = new JLabel("Marks");
+		lblNewLabel_20_3_1.setFont(new Font("Century Gothic", Font.BOLD, 15));
+		lblNewLabel_20_3_1.setBounds(355, 224, 65, 26);
+		createAssignmnet.add(lblNewLabel_20_3_1);
+		
+		textField_4 = new JTextField();
+		textField_4.setColumns(10);
+		textField_4.setBounds(421, 215, 185, 39);
+		createAssignmnet.add(textField_4);
+		
+		JLabel lblNewLabel_20_3_2 = new JLabel("Module");
+		lblNewLabel_20_3_2.setFont(new Font("Century Gothic", Font.BOLD, 15));
+		lblNewLabel_20_3_2.setBounds(42, 370, 65, 26);
+		createAssignmnet.add(lblNewLabel_20_3_2);
+		
+		textField_5 = new JTextField();
+		textField_5.setColumns(10);
+		textField_5.setBounds(108, 361, 215, 39);
+		createAssignmnet.add(textField_5);
+		
+		JLabel lblNewLabel_20_3_1_1 = new JLabel("Marks");
+		lblNewLabel_20_3_1_1.setFont(new Font("Century Gothic", Font.BOLD, 15));
+		lblNewLabel_20_3_1_1.setBounds(355, 370, 65, 26);
+		createAssignmnet.add(lblNewLabel_20_3_1_1);
+		
+		textField_6 = new JTextField();
+		textField_6.setColumns(10);
+		textField_6.setBounds(421, 361, 185, 39);
+		createAssignmnet.add(textField_6);
+		
+		JLabel lblNewLabel_20_3_2_1 = new JLabel("Module");
+		lblNewLabel_20_3_2_1.setFont(new Font("Century Gothic", Font.BOLD, 15));
+		lblNewLabel_20_3_2_1.setBounds(42, 515, 65, 26);
+		createAssignmnet.add(lblNewLabel_20_3_2_1);
+		
+		textField_7 = new JTextField();
+		textField_7.setColumns(10);
+		textField_7.setBounds(108, 506, 215, 39);
+		createAssignmnet.add(textField_7);
+		
+		JLabel lblNewLabel_20_3_1_1_1 = new JLabel("Marks");
+		lblNewLabel_20_3_1_1_1.setFont(new Font("Century Gothic", Font.BOLD, 15));
+		lblNewLabel_20_3_1_1_1.setBounds(355, 515, 65, 26);
+		createAssignmnet.add(lblNewLabel_20_3_1_1_1);
+		
+		textField_8 = new JTextField();
+		textField_8.setColumns(10);
+		textField_8.setBounds(421, 506, 185, 39);
+		createAssignmnet.add(textField_8);
 	}
 }

@@ -8,6 +8,8 @@ import javax.swing.border.EmptyBorder;
 
 import com.mysql.cj.api.jdbc.Statement;
 
+import backend.Database;
+
 import java.awt.Color;
 import java.awt.BorderLayout;
 import javax.swing.JLabel;
@@ -31,6 +33,7 @@ import javax.swing.DefaultComboBoxModel;
 import java.awt.event.ItemListener;
 import java.sql.SQLException;
 import java.awt.event.ItemEvent;
+import java.awt.Cursor;
 
 public class LogIn extends JFrame {
 	
@@ -39,6 +42,7 @@ public class LogIn extends JFrame {
 	private String newstudentPhoneNum = "";
 	private String newstudentCourse = "";
 	private String newstudentLevel = "";
+	private String newstudentPassword = "";
 
 	private JPanel contentPane;
 	private JTextField usernameField;
@@ -49,6 +53,7 @@ public class LogIn extends JFrame {
 	/**
 	 * Launch the application.
 	 */
+	Database db = new Database();
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -86,23 +91,23 @@ public class LogIn extends JFrame {
 		
 		JLabel usernameLabel = new JLabel("Username");
 		usernameLabel.setFont(new Font("Century Gothic", Font.BOLD, 20));
-		usernameLabel.setBounds(91, 151, 125, 49);
+		usernameLabel.setBounds(90, 140, 125, 49);
 		loginPanel.add(usernameLabel);
 		
 		usernameField = new JTextField();
 		usernameField.setFont(new Font("Century Gothic", Font.PLAIN, 12));
-		usernameField.setBounds(91, 194, 218, 34);
+		usernameField.setBounds(90, 183, 218, 34);
 		loginPanel.add(usernameField);
 		usernameField.setColumns(10);
 		
 		JLabel passwordLabel = new JLabel("Password");
 		passwordLabel.setFont(new Font("Century Gothic", Font.BOLD, 20));
-		passwordLabel.setBounds(91, 238, 163, 34);
+		passwordLabel.setBounds(90, 227, 163, 34);
 		loginPanel.add(passwordLabel);
 		
 		passwordField = new JPasswordField();
 		passwordField.setFont(new Font("Century Gothic", Font.PLAIN, 12));
-		passwordField.setBounds(91, 271, 218, 34);
+		passwordField.setBounds(90, 260, 218, 34);
 		loginPanel.add(passwordField);
 		
 		JButton loginButton = new JButton("Log in");
@@ -113,11 +118,19 @@ public class LogIn extends JFrame {
 					frameLogin.setVisible(true);
 					frame.dispose();
 				}
-				if(loginAs.equals("Student") && usernameField.getText().equals("student")&& Arrays.equals(passwordField.getPassword(),new char[] {'1','2','3'})) {
-					StudentDashboard frameLogin = new StudentDashboard();
-					frameLogin.setVisible(true);
-					frame.dispose();
+				if(loginAs.equals("Student")){
+					System.out.println("student");
+					for(int i =0;i<db.getStudentId().size();i++) {
+						if(usernameField.getText().trim().equals(db.getStudentName().get(i).trim()) && String.valueOf(passwordField.getPassword()).trim().equals(db.getStudentPassword().get(i).trim())) {
+							System.out.println(db.getStudentName().get(i) + db.getStudentPassword().get(i));
+							StudentDashboard frameLogin = new StudentDashboard();
+							frameLogin.setVisible(true);
+							frame.dispose();
+						}
+					}
 				}
+				
+				
 				if(loginAs.equals("Instructor") &&  usernameField.getText().equals("teacher")&& Arrays.equals(passwordField.getPassword(),new char[] {'1','2','3'})) {
 					InstructorDashboard frameLogin = new InstructorDashboard();
 					frameLogin.setVisible(true);
@@ -127,45 +140,41 @@ public class LogIn extends JFrame {
 				else {
 					lblNewLabel.setVisible(true);
 				}
-//				if(usernameField.getText().equals("std")&& Arrays.equals(passwordField.getPassword(),new char[] {'s','t','d'})) {
-//					StudentDashboard frame = new StudentDashboard();
-//					frame.setVisible(true);
-//				}if(usernameField.getText().equals("std")&& Arrays.equals(passwordField.getPassword(),new char[] {'s','t','d'})) {
-//					StudentDashboard frame = new StudentDashboard();
-//					frame.setVisible(true);
-//				}
 			}
 		});
 		loginButton.setFont(new Font("Century Gothic", Font.BOLD, 16));
 		loginButton.setBackground(new Color(254, 179, 22));
-		loginButton.setBounds(91, 345, 85, 34);
+		loginButton.setBounds(90, 327, 218, 34);
 		loginPanel.add(loginButton);
 		
 		JLabel welcomeText = new JLabel("Welcome,");
 		welcomeText.setForeground(new Color(1, 53, 111));
 		welcomeText.setFont(new Font("Century Gothic", Font.BOLD, 35));
-		welcomeText.setBounds(91, 21, 229, 84);
+		welcomeText.setBounds(90, 10, 229, 84);
 		loginPanel.add(welcomeText);
 		
 		JLabel SMStext = new JLabel("To               Management System");
 		SMStext.setFont(new Font("Century Gothic", Font.PLAIN, 15));
-		SMStext.setBounds(91, 104, 274, 21);
+		SMStext.setBounds(90, 93, 274, 21);
 		loginPanel.add(SMStext);
 		
 		JLabel lblNewLabel_4 = new JLabel("Course");
 		lblNewLabel_4.setBackground(new Color(253, 99, 63));
 		lblNewLabel_4.setForeground(new Color(253, 99, 63));
 		lblNewLabel_4.setFont(new Font("Century Gothic", Font.BOLD, 15));
-		lblNewLabel_4.setBounds(111, 108, 57, 13);
+		lblNewLabel_4.setBounds(110, 97, 57, 13);
 		loginPanel.add(lblNewLabel_4);
 		
 		lblNewLabel = new JLabel("Cannot Login Please Try Again!");
 		lblNewLabel.setForeground(new Color(255, 0, 0));
 		lblNewLabel.setFont(new Font("Century Gothic", Font.PLAIN, 15));
-		lblNewLabel.setBounds(91, 315, 285, 13);
+		lblNewLabel.setBounds(90, 304, 285, 13);
 		loginPanel.add(lblNewLabel);
 		
 		JButton btnNewButton = new JButton("Sign up");
+		btnNewButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		btnNewButton.setForeground(new Color(253, 99, 63));
+		btnNewButton.setBorder(null);
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				UpdateStudentModal frameLogin = new UpdateStudentModal();
@@ -177,7 +186,7 @@ public class LogIn extends JFrame {
 				JTextField studentNameValue = frameLogin.getNameTextField();
 				JTextField studentPhoneNumValue = frameLogin.getPhoneNumField();
 				JTextField studentAddressValue = frameLogin.getAddressTextField();
-				JTextField studentIdValue = frameLogin.getIdTextField();
+				JTextField studentPasswordValue = frameLogin.getPasswordTextField();
 				JTextField studentLevelValue = frameLogin.getLeveltextField();
 				JTextField studentCourseValue = frameLogin.getCoursetextFiled();
 
@@ -194,10 +203,11 @@ public class LogIn extends JFrame {
 						newstudentAddress = studentAddressValue.getText();
 						newstudentLevel= studentLevelValue.getText();
 						newstudentCourse= studentCourseValue.getText();
-						
+						newstudentPassword = studentPasswordValue.getText();
+								
 						Statement statement =  (Statement) UpdateDB.getStatement();
 						
-						String insertQuery = "INSERT INTO `student` (  `student_name`,`address`, `phone_num`, `level`, `course`) " + "VALUES ( '"+newstudentName+"','"+newstudentAddress+"','"+newstudentPhoneNum+"','"+newstudentLevel+"','"+newstudentCourse+"')";
+						String insertQuery = "INSERT INTO `student` (  `student_name`,`address`, `phone_num`, `level`, `course`,`password`) " + "VALUES ( '"+newstudentName+"','"+newstudentAddress+"','"+newstudentPhoneNum+"','"+newstudentLevel+"','"+newstudentCourse+"','"+newstudentPassword+"')";
 							
 					try {
 						int success = statement.executeUpdate(insertQuery);
@@ -223,15 +233,10 @@ public class LogIn extends JFrame {
 			
 			}
 		});
-		btnNewButton.setFont(new Font("Century Gothic", Font.BOLD, 16));
-		btnNewButton.setBackground(new Color(254, 179, 22));
-		btnNewButton.setBounds(215, 345, 94, 34);
+		btnNewButton.setFont(new Font("Century Gothic", Font.BOLD, 14));
+		btnNewButton.setBackground(new Color(255, 255, 255));
+		btnNewButton.setBounds(230, 366, 57, 21);
 		loginPanel.add(btnNewButton);
-		
-		JLabel lblNewLabel_1 = new JLabel("or");
-		lblNewLabel_1.setFont(new Font("Century Gothic", Font.BOLD, 16));
-		lblNewLabel_1.setBounds(186, 356, 45, 13);
-		loginPanel.add(lblNewLabel_1);
 		
 		JComboBox comboBox = new JComboBox();
 		comboBox.addItemListener(new ItemListener() {
@@ -243,8 +248,13 @@ public class LogIn extends JFrame {
 		});
 		comboBox.setBackground(new Color(255, 255, 255));
 		comboBox.setModel(new DefaultComboBoxModel(new String[] {"Select", "Admin", "Instructor", "Student"}));
-		comboBox.setBounds(91, 135, 218, 21);
+		comboBox.setBounds(90, 124, 218, 21);
 		loginPanel.add(comboBox);
+		
+		JLabel lblNewLabel_1 = new JLabel("Don't have an acoount?");
+		lblNewLabel_1.setFont(new Font("Century Gothic", Font.BOLD, 12));
+		lblNewLabel_1.setBounds(90, 371, 145, 13);
+		loginPanel.add(lblNewLabel_1);
 		lblNewLabel.setVisible(false);
 		Image img = new ImageIcon(this.getClass().getResource("/bg.jpg")).getImage();
 		

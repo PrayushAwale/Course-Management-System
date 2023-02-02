@@ -67,6 +67,10 @@ public List<String> getTeacherId() {
 		return studentCourse;
 	}
 
+	public List<String> getStudentPassword() {
+		return studentPassword;
+	}
+
 
 	//	Array for module table
 	List<String> courseCode = new ArrayList<String>();
@@ -88,6 +92,7 @@ public List<String> getTeacherId() {
 		List<String> _level = new ArrayList<String>();
 		List<String> studentAddress= new ArrayList<String>();
 		List<String> studentCourse = new ArrayList<String>();
+		List<String> studentPassword = new ArrayList<String>();
 
 public Database() {
 	try {
@@ -149,13 +154,17 @@ public Database() {
 					String level = executeQueryStudent.getString("level");
 					String address = executeQueryStudent.getString("address");
 					String course = executeQueryStudent.getString("course");
+					String password = executeQueryStudent.getString("password");
 					studentId.add(student_id);
 					studentName.add(student_name);
 					phoneNum.add(phone_number);
 					studentAddress.add(address);
 					_level.add(level);
 					studentCourse.add(course);
+					studentPassword.add(password);
+//					System.out.println(student_name + password);
 				}
+//				System.out.println(studentId.size());
 			
 	}catch(SQLException e) {
 		e.printStackTrace();

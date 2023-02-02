@@ -79,6 +79,8 @@ public class AdminDashboard extends JFrame {
 	private String newteacherPhoneNum = "";
 	private String newteacherModule = "";
 	private String newteacherIsPartTime = "";
+	private boolean isClicked = false;
+	private boolean isClicked2 = false;
 	
 	
 //	For Students
@@ -575,12 +577,15 @@ public class AdminDashboard extends JFrame {
 		courseTitle.setFont(new Font("Century Gothic", Font.BOLD, 30));
 		headerCourses.add(courseTitle);
 		UIManager.getDefaults().put("TableHeader.cellBorder" , BorderFactory.createEmptyBorder(0,0,0,0));
+		//For course Table Fetching data from database
 		for(int i = 0 ; i<db.getCourseCode().size();i++) {
 			modalValue.addRow(new Object[] {db.getCourseCode().get(i),db.getCourseTitle().get(i),db.getCourseDuration().get(i),db.getCourseMark().get(i),db.getCourseLeader().get(i)});
 		}
-		for(int i = 0 ; i<db.getStudentId().size();i++) {
-			studentValue.addRow(new Object[] {db.getStudentId().get(i),db.getStudentName().get(i),db.getPhoneNum().get(i),db.getStudentAddress().get(i),db.get_level().get(i),db.getStudentCourse().get(i)});
-		}
+		//For Student Table Fetching data from database
+//		for(int i = 0 ; i<db.getStudentId().size();i++) {
+//			
+//			studentValue.addRow(new Object[] {db.getStudentId().get(i),db.getStudentName().get(i),db.getPhoneNum().get(i),db.getStudentAddress().get(i),db.get_level().get(i),db.getStudentCourse().get(i)});
+//		}
 		
 		JPanel panel_7 = new JPanel();
 		panel_7.setBackground(new Color(255, 255, 255));
@@ -695,6 +700,7 @@ public class AdminDashboard extends JFrame {
 		JButton btnNewButton_1_1 = new JButton("View");
 		btnNewButton_1_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
 				cardPanel.show(panel,"name_796135818434000");
 			}
 		});
@@ -786,6 +792,28 @@ public class AdminDashboard extends JFrame {
 		JButton btnNewButton_1_1_2 = new JButton("View");
 		btnNewButton_1_1_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				if(isClicked==false) {
+					studentTables.setModel(studentValue);
+					for(int i = 0 ; i<db.getStudentId().size();i++) {
+						if(db.getStudentCourse().get(i).equals("BIT")) {
+							studentValue.addRow(new Object[] {db.getStudentId().get(i),db.getStudentName().get(i),db.getPhoneNum().get(i),db.getStudentAddress().get(i),db.get_level().get(i),db.getStudentCourse().get(i)});
+						}
+					}
+					studentValue =  new DefaultTableModel(
+							new Object[][] {
+								
+								
+								
+							},
+							new String[] {
+								"University ID","Student Name", "Phone Number", "Address", "Level", "Course"
+							}
+						);
+					
+				}
+				isClicked = true;
+				isClicked2=false;
+				
 				cardPanel.show(panel,"name_797954346157000");
 			}
 		});
@@ -818,6 +846,27 @@ public class AdminDashboard extends JFrame {
 		JButton btnNewButton_1_1_2_1 = new JButton("View");
 		btnNewButton_1_1_2_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				if(isClicked2==false) {
+					studentTables.setModel(studentValue);
+					for(int i = 0 ; i<db.getStudentId().size();i++) {		
+						if(db.getStudentCourse().get(i).equals("BIBM")) {
+							studentValue.addRow(new Object[] {db.getStudentId().get(i),db.getStudentName().get(i),db.getPhoneNum().get(i),db.getStudentAddress().get(i),db.get_level().get(i),db.getStudentCourse().get(i)});
+						}
+					}
+					studentValue =  new DefaultTableModel(
+							new Object[][] {
+								
+								
+								
+							},
+							new String[] {
+								"University ID","Student Name", "Phone Number", "Address", "Level", "Course"
+							}
+						);
+					
+				}
+				isClicked2 = true;
+				isClicked=false;
 				cardPanel.show(panel,"name_797954346157000");
 			}
 		});
@@ -1337,6 +1386,9 @@ public class AdminDashboard extends JFrame {
 					JTextField studentLevelValue = updateStudent.getLeveltextField();
 					JTextField studentCourseValue = updateStudent.getCoursetextFiled();
 					
+					updateStudent.getPasswordTextField().setVisible(false);
+					updateStudent.getPaswordlable().setVisible(false);
+					
 					selectedRow = studentTables.getSelectedRow();
 					for(int columnIndex = 0; columnIndex < studentTables.getColumnCount(); columnIndex++) {
 					
@@ -1455,6 +1507,7 @@ public class AdminDashboard extends JFrame {
 		scrollPane_4.setViewportView(studentTables);
 		
 		JButton addCourseButton_1_1 = new JButton("Add");
+		addCourseButton_1_1.setVisible(false);
 		addCourseButton_1_1.setForeground(Color.WHITE);
 		addCourseButton_1_1.setFont(new Font("Century Gothic", Font.BOLD, 20));
 		addCourseButton_1_1.setBackground(new Color(45, 204, 112));
