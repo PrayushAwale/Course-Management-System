@@ -79,6 +79,7 @@ public class AdminDashboard extends JFrame {
 	private String newteacherPhoneNum = "";
 	private String newteacherModule = "";
 	private String newteacherIsPartTime = "";
+	private String newteacherPassword = "";
 	private boolean isClicked = false;
 	private boolean isClicked2 = false;
 	
@@ -584,6 +585,8 @@ public class AdminDashboard extends JFrame {
 		for(int i = 0 ; i<db.getCourseCode().size();i++) {
 			modalValue.addRow(new Object[] {db.getCourseCode().get(i),db.getCourseTitle().get(i),db.getCourseDuration().get(i),db.getCourseMark().get(i),db.getCourseLeader().get(i)});
 		}
+		
+		
 		//For Student Table Fetching data from database
 //		for(int i = 0 ; i<db.getStudentId().size();i++) {
 //			
@@ -795,6 +798,7 @@ public class AdminDashboard extends JFrame {
 		JButton btnNewButton_1_1_2 = new JButton("View");
 		btnNewButton_1_1_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				//For BIT Student Table Fetching data from database
 				if(isClicked==false) {
 					studentTables.setModel(studentValue);
 					for(int i = 0 ; i<db.getStudentId().size();i++) {
@@ -850,6 +854,7 @@ public class AdminDashboard extends JFrame {
 		btnNewButton_1_1_2_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if(isClicked2==false) {
+					//For BIBMStudent Table Fetching data from database
 					studentTables.setModel(studentValue);
 					for(int i = 0 ; i<db.getStudentId().size();i++) {		
 						if(db.getStudentCourse().get(i).equals("BIBM")) {
@@ -1179,7 +1184,8 @@ public class AdminDashboard extends JFrame {
 					JTextField teacherIdValue = updateTeacher.getIdTextField();
 					JTextField teacherModuleValue = updateTeacher.getModuleTextField();
 					JTextField teacherIsPartTimeValue = updateTeacher.getIsPartTimeTextField();
-					
+					updateTeacher.getPasswordTextField().setVisible(false);		
+					updateTeacher.getHidePassword().setVisible(false);
 					selectedRow = instructorTables.getSelectedRow();
 					for(int columnIndex = 0; columnIndex < instructorTables.getColumnCount(); columnIndex++) {
 					
@@ -1314,7 +1320,7 @@ public class AdminDashboard extends JFrame {
 				JTextField teacherAddressValue = updateTeacher.getAddressTextField();
 				JTextField teacherModuleValue = updateTeacher.getModuleTextField();
 				JTextField teacherIsPartTimeValue = updateTeacher.getIsPartTimeTextField();
-
+				JTextField teacherPasswordValue = updateTeacher.getPasswordTextField();
 				JButton addButton = updateTeacher.getAddButton();
 				addButton.setText("Add");
 				
@@ -1328,10 +1334,10 @@ public class AdminDashboard extends JFrame {
 						newteacherAddress = teacherAddressValue.getText();
 						newteacherModule= teacherModuleValue.getText();
 						newteacherIsPartTime= teacherIsPartTimeValue.getText();
-						
+						newteacherPassword = teacherPasswordValue.getText();
 						Statement statement =  (Statement) UpdateDB.getStatement();
 						
-						String insertQuery = "INSERT INTO `teacher` ( `teacher_name`,  `phone_number`,`address`, `module`, `full_time`) " + "VALUES ( '"+newteacherName+"','"+newteacherPhoneNum+"','"+newteacherAddress+"','"+newteacherModule+"','"+newteacherIsPartTime+"')";
+						String insertQuery = "INSERT INTO `teacher` ( `teacher_name`,  `phone_number`,`address`, `module`, `full_time`,`password`) " + "VALUES ( '"+newteacherName+"','"+newteacherPhoneNum+"','"+newteacherAddress+"','"+newteacherModule+"','"+newteacherIsPartTime+"','"+newteacherPassword+"')";
 							
 					try {
 						int success = statement.executeUpdate(insertQuery);

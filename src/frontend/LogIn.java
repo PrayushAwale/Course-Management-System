@@ -119,10 +119,9 @@ public class LogIn extends JFrame {
 					frame.dispose();
 				}
 				if(loginAs.equals("Student")){
-					System.out.println("student");
+				
 					for(int i =0;i<db.getStudentId().size();i++) {
 						if(usernameField.getText().trim().equals(db.getStudentName().get(i).trim()) && String.valueOf(passwordField.getPassword()).trim().equals(db.getStudentPassword().get(i).trim())) {
-							System.out.println(db.getStudentName().get(i) + db.getStudentPassword().get(i));
 							StudentDashboard frameLogin = new StudentDashboard();
 							frameLogin.setVisible(true);
 							frame.dispose();
@@ -130,12 +129,18 @@ public class LogIn extends JFrame {
 					}
 				}
 				
-				
-				if(loginAs.equals("Instructor") &&  usernameField.getText().equals("teacher")&& Arrays.equals(passwordField.getPassword(),new char[] {'1','2','3'})) {
-					InstructorDashboard frameLogin = new InstructorDashboard();
-					frameLogin.setVisible(true);
-					frame.dispose();
+				if(loginAs.equals("Instructor")){
+					for(int i =0;i<db.getTeacherId().size();i++) {
+						if(usernameField.getText().trim().equals(db.getTeacherName().get(i).trim()) && String.valueOf(passwordField.getPassword()).trim().equals(db.getTeacherPassword().get(i).trim())) {
+							InstructorDashboard frameLogin = new InstructorDashboard();
+							frameLogin.setVisible(true);
+							frame.dispose();
+						}
+					}
 				}
+				
+				
+
 				
 				else {
 					lblNewLabel.setVisible(true);

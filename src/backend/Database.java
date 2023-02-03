@@ -46,8 +46,11 @@ public List<String> getTeacherId() {
 	public List<String> get_fullTime() {
 		return _fullTime;
 	}
+	
 
-
+	public List<String> getTeacherPassword() {
+		return teacherPassword;
+	}
 	public List<String> getStudentId() {
 		return studentId;
 	}
@@ -108,6 +111,7 @@ public List<String> getTeacherId() {
 	List<String> _module= new ArrayList<String>();
 	List<String> _address= new ArrayList<String>();
 	List<String> _fullTime= new ArrayList<String>();
+	List<String> teacherPassword = new ArrayList<String>();
 //Array for student table
 		List<String> studentId = new ArrayList<String>();
 		List<String> studentName= new ArrayList<String>();
@@ -166,12 +170,14 @@ public Database() {
 			String module = executeQueryTeacher.getString("module");
 			String address = executeQueryTeacher.getString("address");
 			String full_time = executeQueryTeacher.getString("full_time");
+			String teacherPasswords = executeQueryTeacher.getString("password");
 			teacherId.add(teacher_id);
 			teacherName.add(teacher_name);
 			phoneNumber.add(phone_number);
 			_module.add(module);
 			_address.add(address);
 			_fullTime.add(full_time);
+			teacherPassword.add(teacherPasswords);
 		}
 
 		//Fetching data for students
