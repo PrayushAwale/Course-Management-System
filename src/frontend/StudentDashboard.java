@@ -27,10 +27,14 @@ import javax.swing.UIManager;
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.sql.SQLException;
+
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
+
+import com.mysql.cj.api.jdbc.Statement;
 
 import backend.Database;
 
@@ -57,7 +61,11 @@ public class StudentDashboard extends JFrame {
 	static int moduleTitleColumnIndex = 0;
 	static int moduleDurationColumnIndex = 0;
 	static int moduleMarkColumnIndex = 0;
+	String currentStudentName = "";
+	String currentStudentId="";
 	Database db = new Database();
+//	LogIn valueofStudent = new LogIn();
+	
 	/**
 	 * Launch the application.
 	 */
@@ -73,6 +81,14 @@ public class StudentDashboard extends JFrame {
 			}
 		);
 	
+	public void setCurrentStudentName(String currentStudentName) {
+		this.currentStudentName = currentStudentName;
+	}
+
+	public void setCurrentStudentId(String currentStudentId) {
+		this.currentStudentId = currentStudentId;
+	}
+
 	DefaultTableModel studentValue =  new DefaultTableModel(
 			new Object[][] {
 				
@@ -82,7 +98,7 @@ public class StudentDashboard extends JFrame {
 					"University ID","Student Name", "Phone Number", "Address", "Level", "Course"
 			}
 		);
-	DefaultTableModel teacherValue =  new DefaultTableModel(
+		DefaultTableModel teacherValue =  new DefaultTableModel(
 			new Object[][] {
 				
 				
@@ -114,8 +130,8 @@ public class StudentDashboard extends JFrame {
 	 * Create the frame.
 	 */
 	public StudentDashboard() {
-		setType(Type.UTILITY);
 		setResizable(false);
+		setType(Type.UTILITY);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1290, 720);
 		StudentDashboard = new JPanel();
@@ -806,6 +822,46 @@ public class StudentDashboard extends JFrame {
 		OOP.add(question4textField);
 		
 		JButton submitButton = new JButton("Submit");
+		submitButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+//				String currentStudentId = valueofStudent.getCurrentStudentId();
+//				String currentStudentName = valueofStudent.getCurrentStudentName();
+				System.out.println("This is your account"+currentStudentId + currentStudentName);
+//				JTextField mouduleTitleValue = updateCourse.getModuleTitleTextfield();
+//				JTextField moduleDurationValue = updateCourse.getModuleDurationTextfield();
+//				JTextField moduleMarkValue = updateCourse.getModuleMarkTextfield();
+//				JTextField moduleLeaderValue = updateCourse.getModuleLeaderTextfield();
+//				JButton addButton = updateCourse.getSubmitbutton();
+//				newmoduleTitle = mouduleTitleValue.getText();
+//				newmoduleDuration= moduleDurationValue.getText();
+//				newmoduleMark= moduleMarkValue.getText();
+//				newmoduleLeader= moduleLeaderValue.getText();
+//				Statement statement =  (Statement) UpdateDB.getStatement();
+//				
+//				String insertQuery = "INSERT INTO `course` ( `module_title`,  `module_duration`,`module_mark`, `module_leader`) " + "VALUES ( '"+newmoduleTitle+"','"+newmoduleDuration+"','"+newmoduleMark+"','"+newmoduleLeader+"')";
+//					
+//			try {
+//				int success = statement.executeUpdate(insertQuery);
+//			
+//				if (success==1) {
+//					frame.showDataFromDatabase();
+//					updateCourse.dispose();
+//                    JOptionPane.showMessageDialog(null, "Added course successfully!");
+//				}
+//				
+//			} catch (SQLException e1) {
+//				// TODO Auto-generated catch block
+//				e1.printStackTrace();
+//				JOptionPane.showMessageDialog(null, "Unable to add the course, please try!");
+//			}
+			
+				
+				
+			
+				
+			
+			}
+		});
 		submitButton.setFont(new Font("Century Gothic", Font.BOLD, 15));
 		submitButton.setBackground(new Color(45, 204, 112));
 		submitButton.setForeground(new Color(255, 255, 255));

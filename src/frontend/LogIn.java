@@ -43,7 +43,8 @@ public class LogIn extends JFrame {
 	private String newstudentCourse = "";
 	private String newstudentLevel = "";
 	private String newstudentPassword = "";
-
+	private String currentStudentName = "";
+	private String currentStudentId = "";
 	private JPanel contentPane;
 	private JTextField usernameField;
 	private JPasswordField passwordField;
@@ -53,7 +54,19 @@ public class LogIn extends JFrame {
 	/**
 	 * Launch the application.
 	 */
+	
+	
+	
 	Database db = new Database();
+	StudentDashboard valuesofStudents = new StudentDashboard();
+	public String getCurrentStudentName() {
+		return currentStudentName;
+	}
+
+	public String getCurrentStudentId() {
+		return currentStudentId;
+	}
+
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -122,8 +135,13 @@ public class LogIn extends JFrame {
 				
 					for(int i =0;i<db.getStudentId().size();i++) {
 						if(usernameField.getText().trim().equals(db.getStudentName().get(i).trim()) && String.valueOf(passwordField.getPassword()).trim().equals(db.getStudentPassword().get(i).trim())) {
+							currentStudentName = String.valueOf(db.getStudentName().get(i));
+							currentStudentId = String.valueOf(db.getStudentId().get(i));
+		
 							StudentDashboard frameLogin = new StudentDashboard();
 							frameLogin.setVisible(true);
+							valuesofStudents.setCurrentStudentName(currentStudentName);
+							valuesofStudents.setCurrentStudentId(currentStudentId);
 							frame.dispose();
 						}
 					}

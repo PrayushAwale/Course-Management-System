@@ -103,6 +103,7 @@ public class InstructorDashboard extends JFrame {
 	private JTextField dueDate;
 	private JTextField module;
 	private JTextField question3TextField;
+	private JTable assignmentTable;
 	
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -446,8 +447,20 @@ public class InstructorDashboard extends JFrame {
 		btnNewButton_1.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		btnNewButton_1.setBackground(new Color(255, 255, 255));
 		btnNewButton_1.setFont(new Font("Century Gothic", Font.BOLD, 20));
-		btnNewButton_1.setBounds(59, 175, 859, 56);
+		btnNewButton_1.setBounds(59, 175, 689, 56);
 		panel_2.add(btnNewButton_1);
+		
+		JButton checkAssignmnet = new JButton("Check");
+		checkAssignmnet.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				cardPanel.show(panel,"name_1124097311106900");
+			}
+		});
+		checkAssignmnet.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		checkAssignmnet.setFont(new Font("Century Gothic", Font.BOLD, 20));
+		checkAssignmnet.setBackground(Color.WHITE);
+		checkAssignmnet.setBounds(745, 175, 179, 56);
+		panel_2.add(checkAssignmnet);
 		mainDashBoardFrame.setLayout(gl_mainDashBoardFrame);
 		
 		JPanel courses = new JPanel();
@@ -775,5 +788,33 @@ public class InstructorDashboard extends JFrame {
 		question3TextField.setColumns(10);
 		question3TextField.setBounds(42, 375, 959, 39);
 		createAssignmnet.add(question3TextField);
+		
+		JPanel chekcAssignmentPanle = new JPanel();
+		panel.add(chekcAssignmentPanle, "name_1124097311106900");
+		chekcAssignmentPanle.setLayout(null);
+		
+		JScrollPane scrollPane_2 = new JScrollPane();
+		scrollPane_2.setBounds(0, 0, 1028, 551);
+		chekcAssignmentPanle.add(scrollPane_2);
+		
+		assignmentTable = new JTable();
+		assignmentTable.setModel(new DefaultTableModel(
+			new Object[][] {
+				{null, null, null, null},
+				{null, null, null, null},
+			},
+			new String[] {
+				"Student ID", "Student Name", "Module", "Submitted Date"
+			}
+		));
+		assignmentTable.getTableHeader().setBackground(Color.decode("#d6eaf7"));
+		assignmentTable.getTableHeader().setFont(new Font("Century Gothic", Font.BOLD, 20));
+		assignmentTable.setShowVerticalLines(false);
+		assignmentTable.setRowHeight(35);
+		assignmentTable.setIntercellSpacing(new Dimension(5, 5));
+		assignmentTable.setFont(new Font("Century Gothic", Font.PLAIN, 15));
+		assignmentTable.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
+		assignmentTable.setBackground(Color.WHITE);
+		scrollPane_2.setViewportView(assignmentTable);
 	}
 }
