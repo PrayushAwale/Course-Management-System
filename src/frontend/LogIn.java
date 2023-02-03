@@ -140,8 +140,8 @@ public class LogIn extends JFrame {
 		
 							StudentDashboard frameLogin = new StudentDashboard();
 							frameLogin.setVisible(true);
-							valuesofStudents.setCurrentStudentName(currentStudentName);
-							valuesofStudents.setCurrentStudentId(currentStudentId);
+							frameLogin.setCurrentStudentName(currentStudentName);
+							frameLogin.setCurrentStudentId(currentStudentId);
 							frame.dispose();
 						}
 					}

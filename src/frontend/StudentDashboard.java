@@ -824,36 +824,24 @@ public class StudentDashboard extends JFrame {
 		JButton submitButton = new JButton("Submit");
 		submitButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-//				String currentStudentId = valueofStudent.getCurrentStudentId();
-//				String currentStudentName = valueofStudent.getCurrentStudentName();
-				System.out.println("This is your account"+currentStudentId + currentStudentName);
-//				JTextField mouduleTitleValue = updateCourse.getModuleTitleTextfield();
-//				JTextField moduleDurationValue = updateCourse.getModuleDurationTextfield();
-//				JTextField moduleMarkValue = updateCourse.getModuleMarkTextfield();
-//				JTextField moduleLeaderValue = updateCourse.getModuleLeaderTextfield();
-//				JButton addButton = updateCourse.getSubmitbutton();
-//				newmoduleTitle = mouduleTitleValue.getText();
-//				newmoduleDuration= moduleDurationValue.getText();
-//				newmoduleMark= moduleMarkValue.getText();
-//				newmoduleLeader= moduleLeaderValue.getText();
-//				Statement statement =  (Statement) UpdateDB.getStatement();
-//				
-//				String insertQuery = "INSERT INTO `course` ( `module_title`,  `module_duration`,`module_mark`, `module_leader`) " + "VALUES ( '"+newmoduleTitle+"','"+newmoduleDuration+"','"+newmoduleMark+"','"+newmoduleLeader+"')";
-//					
-//			try {
-//				int success = statement.executeUpdate(insertQuery);
-//			
-//				if (success==1) {
-//					frame.showDataFromDatabase();
-//					updateCourse.dispose();
-//                    JOptionPane.showMessageDialog(null, "Added course successfully!");
-//				}
-//				
-//			} catch (SQLException e1) {
-//				// TODO Auto-generated catch block
-//				e1.printStackTrace();
-//				JOptionPane.showMessageDialog(null, "Unable to add the course, please try!");
-//			}
+
+				Statement statement =  (Statement) UpdateDB.getStatement();
+				
+				String insertQuery = "INSERT INTO `submittedassignments` ( `student_id`,  `submitted_by`,`module`,`answer1`,`answer2`,`answer3`,`answer4`) " + "VALUES ( '"+currentStudentId+"','"+currentStudentName+"', 'OOP' ,'"+question1textField.getText()+"','"+question2textField.getText()+"','"+question3textField.getText()+"','"+question4textField.getText()+"')";
+					
+			try {
+				int success = statement.executeUpdate(insertQuery);
+			
+				if (success==1) {
+
+                    JOptionPane.showMessageDialog(null, "Assignment Submitted successfully!");
+				}
+				
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+				JOptionPane.showMessageDialog(null, "Unable to submit assignment, please try!");
+			}
 			
 				
 				
