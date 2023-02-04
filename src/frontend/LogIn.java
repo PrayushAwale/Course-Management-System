@@ -142,7 +142,11 @@ public class LogIn extends JFrame {
 							frameLogin.setVisible(true);
 							frameLogin.setCurrentStudentName(currentStudentName);
 							frameLogin.setCurrentStudentId(currentStudentId);
-							frameLogin.getLblNewLabel_23().setText(currentStudentName);;
+							frameLogin.getLblNewLabel_23().setText(currentStudentName);
+							frameLogin.getLblNewLabel_23_1().setText(currentStudentId);
+							frameLogin.getLblNewLabel_23_2().setText(String.valueOf(db.getPhoneNum().get(i)));
+							frameLogin.getLblNewLabel_23_3().setText(String.valueOf(db.getStudentCourse().get(i)));
+							frameLogin.getLblNewLabel_23_4().setText(String.valueOf(db.getStudentAddress().get(i)));
 							frame.dispose();
 						}
 					}
@@ -153,6 +157,11 @@ public class LogIn extends JFrame {
 						if(usernameField.getText().trim().equals(db.getTeacherName().get(i).trim()) && String.valueOf(passwordField.getPassword()).trim().equals(db.getTeacherPassword().get(i).trim())) {
 							InstructorDashboard frameLogin = new InstructorDashboard();
 							frameLogin.setVisible(true);
+							frameLogin.getLblNewLabel_22().setText(String.valueOf(db.getTeacherName().get(i)));
+							frameLogin.getLblNewLabel_22_1().setText(String.valueOf(db.getTeacherId().get(i)));
+							frameLogin.getLblNewLabel_22_1_1().setText(String.valueOf(db.getPhoneNumber().get(i)));
+							frameLogin.getLblNewLabel_22_1_1_1().setText(String.valueOf(db.get_module().get(i)));
+							frameLogin.getLblNewLabel_22_1_1_1_1().setText(String.valueOf(db.get_address().get(i)));
 							frame.dispose();
 						}
 					}

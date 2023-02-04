@@ -63,8 +63,14 @@ public class StudentDashboard extends JFrame {
 	static int moduleMarkColumnIndex = 0;
 	String currentStudentName = "";
 	String currentStudentId="";
+	String currentStudentPhoneNumber="";
+	String currentStudentAddress="";
+	String currentStudentPhoneNo = "";
+	String currentStudentModule = "";
+	
 	Database db = new Database();
 //	LogIn valueofStudent = new LogIn();
+	
 	
 	/**
 	 * Launch the application.
@@ -72,9 +78,7 @@ public class StudentDashboard extends JFrame {
 	
 	DefaultTableModel modalValue =  new DefaultTableModel(
 			new Object[][] {
-				
-				
-				
+		
 			},
 			new String[] {
 				"Module Code","Module Title", "Moudle Duration", "Moudle Mark", "Module Leader"
@@ -88,6 +92,7 @@ public class StudentDashboard extends JFrame {
 	public void setCurrentStudentId(String currentStudentId) {
 		this.currentStudentId = currentStudentId;
 	}
+	
 
 	DefaultTableModel studentValue =  new DefaultTableModel(
 			new Object[][] {
