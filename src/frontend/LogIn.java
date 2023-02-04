@@ -142,6 +142,7 @@ public class LogIn extends JFrame {
 							frameLogin.setVisible(true);
 							frameLogin.setCurrentStudentName(currentStudentName);
 							frameLogin.setCurrentStudentId(currentStudentId);
+							frameLogin.getLblNewLabel_23().setText(currentStudentName);;
 							frame.dispose();
 						}
 					}

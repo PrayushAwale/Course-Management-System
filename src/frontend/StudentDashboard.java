@@ -108,10 +108,39 @@ public class StudentDashboard extends JFrame {
 				"Teacher ID","Teacher Name", "Phone Number", "Module", "Address", "Full Time"
 			}
 		);
+		
+
+
+		public JLabel getLblNewLabel_23() {
+			return lblNewLabel_23;
+		}
+
+		public JLabel getLblNewLabel_23_1() {
+			return lblNewLabel_23_1;
+		}
+
+		public JLabel getLblNewLabel_23_2() {
+			return lblNewLabel_23_2;
+		}
+
+		public JLabel getLblNewLabel_23_3() {
+			return lblNewLabel_23_3;
+		}
+
+		public JLabel getLblNewLabel_23_4() {
+			return lblNewLabel_23_4;
+		}
+
 	private JTextField question1textField;
 	private JTextField question2textField;
 	private JTextField question3textField;
 	private JTextField question4textField;
+	private JLabel lblNewLabel_22;
+	private JLabel lblNewLabel_23;
+	private JLabel lblNewLabel_23_1;
+	private JLabel lblNewLabel_23_2;
+	private JLabel lblNewLabel_23_3;
+	private JLabel lblNewLabel_23_4;
 	
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -606,6 +635,57 @@ public class StudentDashboard extends JFrame {
 		settingTitle.setHorizontalAlignment(SwingConstants.CENTER);
 		settingTitle.setFont(new Font("Century Gothic", Font.BOLD, 30));
 		headerSetting.add(settingTitle, BorderLayout.CENTER);
+		
+		lblNewLabel_22 = new JLabel("Name:");
+		lblNewLabel_22.setFont(new Font("Century Gothic", Font.BOLD, 20));
+		lblNewLabel_22.setBounds(66, 141, 99, 32);
+		mainSetting.add(lblNewLabel_22);
+		
+		JLabel lblNewLabel_22_1 = new JLabel("University ID:");
+		lblNewLabel_22_1.setFont(new Font("Century Gothic", Font.BOLD, 20));
+		lblNewLabel_22_1.setBounds(66, 183, 149, 32);
+		mainSetting.add(lblNewLabel_22_1);
+		
+		JLabel lblNewLabel_22_1_1 = new JLabel("Phone Number:");
+		lblNewLabel_22_1_1.setFont(new Font("Century Gothic", Font.BOLD, 20));
+		lblNewLabel_22_1_1.setBounds(66, 225, 169, 32);
+		mainSetting.add(lblNewLabel_22_1_1);
+		
+		JLabel lblNewLabel_22_1_1_1 = new JLabel("Module:");
+		lblNewLabel_22_1_1_1.setFont(new Font("Century Gothic", Font.BOLD, 20));
+		lblNewLabel_22_1_1_1.setBounds(66, 270, 169, 32);
+		mainSetting.add(lblNewLabel_22_1_1_1);
+		
+		JLabel lblNewLabel_22_1_1_2 = new JLabel("Address:");
+		lblNewLabel_22_1_1_2.setFont(new Font("Century Gothic", Font.BOLD, 20));
+		lblNewLabel_22_1_1_2.setBounds(66, 312, 169, 32);
+		mainSetting.add(lblNewLabel_22_1_1_2);
+		
+		lblNewLabel_23 = new JLabel("");
+		lblNewLabel_23.setText(currentStudentId);
+		lblNewLabel_23.setFont(new Font("Century Gothic", Font.PLAIN, 20));
+		lblNewLabel_23.setBounds(226, 141, 527, 32);
+		mainSetting.add(lblNewLabel_23);
+		
+		lblNewLabel_23_1 = new JLabel("");
+		lblNewLabel_23_1.setFont(new Font("Century Gothic", Font.PLAIN, 20));
+		lblNewLabel_23_1.setBounds(226, 183, 466, 32);
+		mainSetting.add(lblNewLabel_23_1);
+		
+		lblNewLabel_23_2 = new JLabel("");
+		lblNewLabel_23_2.setFont(new Font("Century Gothic", Font.PLAIN, 20));
+		lblNewLabel_23_2.setBounds(226, 225, 466, 32);
+		mainSetting.add(lblNewLabel_23_2);
+		
+		lblNewLabel_23_3 = new JLabel("");
+		lblNewLabel_23_3.setFont(new Font("Century Gothic", Font.PLAIN, 20));
+		lblNewLabel_23_3.setBounds(226, 267, 466, 32);
+		mainSetting.add(lblNewLabel_23_3);
+		
+		lblNewLabel_23_4 = new JLabel("");
+		lblNewLabel_23_4.setFont(new Font("Century Gothic", Font.PLAIN, 20));
+		lblNewLabel_23_4.setBounds(226, 312, 466, 32);
+		mainSetting.add(lblNewLabel_23_4);
 		
 		JPanel logOut = new JPanel();
 		panel.add(logOut, "name_484982008089500");

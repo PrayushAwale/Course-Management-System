@@ -611,6 +611,46 @@ public class InstructorDashboard extends JFrame {
 		settingTitle.setFont(new Font("Century Gothic", Font.BOLD, 30));
 		headerSetting.add(settingTitle, BorderLayout.CENTER);
 		
+		JLabel lblNewLabel_21 = new JLabel("Name:");
+		lblNewLabel_21.setFont(new Font("Century Gothic", Font.BOLD, 20));
+		lblNewLabel_21.setBounds(51, 118, 72, 31);
+		mainSetting.add(lblNewLabel_21);
+		
+		JLabel lblNewLabel_21_1 = new JLabel("ID:");
+		lblNewLabel_21_1.setFont(new Font("Century Gothic", Font.BOLD, 20));
+		lblNewLabel_21_1.setBounds(51, 159, 72, 31);
+		mainSetting.add(lblNewLabel_21_1);
+		
+		JLabel lblNewLabel_21_1_1 = new JLabel("Phone Number:");
+		lblNewLabel_21_1_1.setFont(new Font("Century Gothic", Font.BOLD, 20));
+		lblNewLabel_21_1_1.setBounds(51, 200, 163, 31);
+		mainSetting.add(lblNewLabel_21_1_1);
+		
+		JLabel lblNewLabel_21_1_1_1 = new JLabel("Level:");
+		lblNewLabel_21_1_1_1.setFont(new Font("Century Gothic", Font.BOLD, 20));
+		lblNewLabel_21_1_1_1.setBounds(51, 242, 163, 31);
+		mainSetting.add(lblNewLabel_21_1_1_1);
+		
+		JLabel lblNewLabel_22 = new JLabel("");
+		lblNewLabel_22.setFont(new Font("Century Gothic", Font.PLAIN, 20));
+		lblNewLabel_22.setBounds(223, 118, 437, 26);
+		mainSetting.add(lblNewLabel_22);
+		
+		JLabel lblNewLabel_22_1 = new JLabel("");
+		lblNewLabel_22_1.setFont(new Font("Century Gothic", Font.PLAIN, 20));
+		lblNewLabel_22_1.setBounds(223, 159, 437, 26);
+		mainSetting.add(lblNewLabel_22_1);
+		
+		JLabel lblNewLabel_22_1_1 = new JLabel("");
+		lblNewLabel_22_1_1.setFont(new Font("Century Gothic", Font.PLAIN, 20));
+		lblNewLabel_22_1_1.setBounds(224, 202, 437, 26);
+		mainSetting.add(lblNewLabel_22_1_1);
+		
+		JLabel lblNewLabel_22_1_1_1 = new JLabel("");
+		lblNewLabel_22_1_1_1.setFont(new Font("Century Gothic", Font.PLAIN, 20));
+		lblNewLabel_22_1_1_1.setBounds(224, 244, 437, 26);
+		mainSetting.add(lblNewLabel_22_1_1_1);
+		
 		JPanel logOut = new JPanel();
 		panel.add(logOut, "name_484982008089500");
 		logOut.setLayout(null);
