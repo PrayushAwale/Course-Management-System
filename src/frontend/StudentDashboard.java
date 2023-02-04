@@ -771,12 +771,12 @@ public class StudentDashboard extends JFrame {
 		lblNewLabel_20.setBounds(45, 98, 66, 32);
 		panel_7.add(lblNewLabel_20);
 		
-		JLabel lblNewLabel_20_1 = new JLabel("0");
+		JLabel lblNewLabel_20_1 = new JLabel("1");
 		lblNewLabel_20_1.setFont(new Font("Century Gothic", Font.BOLD, 20));
 		lblNewLabel_20_1.setBounds(169, 98, 44, 32);
 		panel_7.add(lblNewLabel_20_1);
 		
-		JLabel lblNewLabel_20_1_1 = new JLabel("0");
+		JLabel lblNewLabel_20_1_1 = new JLabel("1");
 		lblNewLabel_20_1_1.setFont(new Font("Century Gothic", Font.BOLD, 20));
 		lblNewLabel_20_1_1.setBounds(169, 160, 44, 32);
 		panel_7.add(lblNewLabel_20_1_1);
@@ -786,7 +786,7 @@ public class StudentDashboard extends JFrame {
 		lblNewLabel_20_2.setBounds(45, 160, 66, 32);
 		panel_7.add(lblNewLabel_20_2);
 		
-		JLabel lblNewLabel_20_1_2 = new JLabel("0");
+		JLabel lblNewLabel_20_1_2 = new JLabel("1");
 		lblNewLabel_20_1_2.setFont(new Font("Century Gothic", Font.BOLD, 20));
 		lblNewLabel_20_1_2.setBounds(169, 217, 44, 32);
 		panel_7.add(lblNewLabel_20_1_2);
@@ -882,17 +882,17 @@ public class StudentDashboard extends JFrame {
 		question1.setBounds(30, 90, 962, 35);
 		OOP.add(question1);
 		
-		question2 = new JLabel("WHat is OOP?");
+		question2 = new JLabel("No Question Provided");
 //		question2.setText(String.valueOf(db.getQuestion_2().get(3)));
 		question2.setBounds(30, 204, 962, 35);
 		OOP.add(question2);
 		
-		question3 = new JLabel("WHat is OOP?");
+		question3 = new JLabel("No Question Provided");
 //		question3.setText(String.valueOf(db.getQuestion_3().get(3)));
 		question3.setBounds(30, 322, 962, 35);
 		OOP.add(question3);
 		
-		question4 = new JLabel("WHat is OOP?");
+		question4 = new JLabel("No Question Provided");
 		
 		question4.setBounds(30, 448, 962, 35);
 		OOP.add(question4);

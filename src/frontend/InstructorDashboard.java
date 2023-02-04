@@ -894,7 +894,10 @@ public class InstructorDashboard extends JFrame {
 		assignmentTable.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-//				giveMarks.getAnswer4().setText(assignmentTable.getSelectedRow().getText());
+				giveMarks.getAnswer1().setText(String.valueOf(db.getCheckAssignment1().get(assignmentTable.getSelectedRow())));
+				giveMarks.getAnswer2().setText(String.valueOf(db.getCheckAssignment2().get(assignmentTable.getSelectedRow())));
+				giveMarks.getAnswer3().setText(String.valueOf(db.getCheckAssignment3().get(assignmentTable.getSelectedRow())));
+				giveMarks.getAnswer4().setText(String.valueOf(db.getCheckAssignment4().get(assignmentTable.getSelectedRow())));
 				giveMarks.setVisible(true);
 			}
 		});
