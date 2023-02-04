@@ -1116,8 +1116,6 @@ public class AdminDashboard extends JFrame {
 				JTextField moduleLeaderValue = updateCourse.getModuleLeaderTextfield();
 				JButton addButton = updateCourse.getSubmitbutton();
 				addButton.setText("Add");
-				
-				
 				addButton.addActionListener(new ActionListener() {
 
 					@Override

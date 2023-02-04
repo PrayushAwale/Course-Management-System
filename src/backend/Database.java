@@ -97,6 +97,43 @@ public List<String> getTeacherId() {
 		return mark;
 	}
 
+	
+
+	public List<String> getQuestion1() {
+		return question1;
+	}
+	public List<String> getQuestion2() {
+		return question2;
+	}
+	public List<String> getQuestion3() {
+		return question3;
+	}
+	public List<String> getQuestion4() {
+		return question4;
+	}
+	public List<String> getCheckStudentId() {
+		return checkStudentId;
+	}
+	public List<String> getSubmittedBy() {
+		return submittedBy;
+	}
+	public List<String> getCheckModule() {
+		return checkModule;
+	}
+	public List<String> getCheckAssignment1() {
+		return checkAssignment1;
+	}
+	public List<String> getCheckAssignment2() {
+		return checkAssignment2;
+	}
+	public List<String> getCheckAssignment3() {
+		return checkAssignment3;
+	}
+	public List<String> getCheckAssignment4() {
+		return checkAssignment4;
+	}
+
+
 
 	//	Array for module table
 	List<String> courseCode = new ArrayList<String>();
@@ -120,7 +157,7 @@ public List<String> getTeacherId() {
 		List<String> studentAddress= new ArrayList<String>();
 		List<String> studentCourse = new ArrayList<String>();
 		List<String> studentPassword = new ArrayList<String>();
-//Array for student table
+//Array for assignment table
 				List<String> module = new ArrayList<String>();
 				List<String> dueDate= new ArrayList<String>();
 				List<String> question1= new ArrayList<String>();
@@ -128,6 +165,14 @@ public List<String> getTeacherId() {
 				List<String> question3= new ArrayList<String>();
 				List<String> question4 = new ArrayList<String>();
 				List<String> mark = new ArrayList<String>();
+//Array for chekc assignment table
+				List<String> checkStudentId = new ArrayList<String>();
+				List<String> submittedBy= new ArrayList<String>();
+				List<String> checkModule= new ArrayList<String>();
+				List<String> checkAssignment1 = new ArrayList<String>();
+				List<String> checkAssignment2= new ArrayList<String>();
+				List<String> checkAssignment3 = new ArrayList<String>();
+				List<String> checkAssignment4 = new ArrayList<String>();
 
 public Database() {
 	try {
@@ -221,6 +266,26 @@ public Database() {
 					question4.add(question_4);
 					mark.add(marks);
 				}
+//				Fetching data of Check Assignment
+						String QueryCheckAssignment = "SELECT * FROM `submittedassignments`";
+						ResultSet executeQueryCheckAssignmnet = createStatement.executeQuery(QueryCheckAssignment);
+						while(executeQueryCheckAssignmnet.next()) {
+//							Insertion for student table
+							String student_id = executeQueryCheckAssignmnet.getString("student_id");
+							String submitted_by = executeQueryCheckAssignmnet.getString("submitted_by");
+							String module = executeQueryCheckAssignmnet.getString("module");
+							String answer1 = executeQueryCheckAssignmnet.getString("answer1");
+							String answer2 = executeQueryCheckAssignmnet.getString("answer2");
+							String answer3 = executeQueryCheckAssignmnet.getString("answer3");
+							String answer4 = executeQueryCheckAssignmnet.getString("answer4");
+							checkStudentId.add(student_id);
+							submittedBy.add(submitted_by);
+							checkModule.add(module);
+							checkAssignment1.add(answer1);
+							checkAssignment2.add(answer2);
+							checkAssignment3.add(answer3);
+							checkAssignment4.add(answer4);
+						}
 				
 			
 	}catch(SQLException e) {

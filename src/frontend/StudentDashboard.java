@@ -141,6 +141,11 @@ public class StudentDashboard extends JFrame {
 	private JLabel lblNewLabel_23_2;
 	private JLabel lblNewLabel_23_3;
 	private JLabel lblNewLabel_23_4;
+	private JLabel globalLabel;
+	private JLabel question1;
+	private JLabel question2;
+	private JLabel question3;
+	private JLabel question4;
 	
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -810,6 +815,8 @@ public class StudentDashboard extends JFrame {
 		btnNewButton_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				cardPanel.show(panel,"name_1055731468530900");
+				globalLabel.setText("OOP");
+				buttonCLicked();
 			}
 		});
 		btnNewButton_2.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
@@ -822,6 +829,8 @@ public class StudentDashboard extends JFrame {
 		btnNewButton_2_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				cardPanel.show(panel,"name_1055731468530900");
+				globalLabel.setText("NMC");
+				buttonCLicked();
 			}
 		});
 		btnNewButton_2_1.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
@@ -834,6 +843,8 @@ public class StudentDashboard extends JFrame {
 		btnNewButton_2_1_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				cardPanel.show(panel,"name_1055731468530900");
+				globalLabel.setText("AI");
+				buttonCLicked();
 			}
 		});
 		btnNewButton_2_1_1.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
@@ -859,27 +870,34 @@ public class StudentDashboard extends JFrame {
 		btnNewButton_3.setBounds(30, 26, 124, 35);
 		OOP.add(btnNewButton_3);
 		
-		JLabel question1 = new JLabel("No Question Provided");
+		question1 = new JLabel("No Question Provided");
 		
-		question1.setText(String.valueOf(db.getQuestion_1().get(1)));
+//		question1.setText(String.valueOf(db.getQuestion_1().get(3)));
 		
 		question1.setBounds(30, 90, 962, 35);
 		OOP.add(question1);
 		
-		JLabel question2 = new JLabel("WHat is OOP?");
-		question2.setText(String.valueOf(db.getQuestion_2().get(1)));
+		question2 = new JLabel("WHat is OOP?");
+//		question2.setText(String.valueOf(db.getQuestion_2().get(3)));
 		question2.setBounds(30, 204, 962, 35);
 		OOP.add(question2);
 		
-		JLabel question3 = new JLabel("WHat is OOP?");
-		question3.setText(String.valueOf(db.getQuestion_3().get(1)));
+		question3 = new JLabel("WHat is OOP?");
+//		question3.setText(String.valueOf(db.getQuestion_3().get(3)));
 		question3.setBounds(30, 322, 962, 35);
 		OOP.add(question3);
 		
-		JLabel question4 = new JLabel("WHat is OOP?");
-		question4.setText(String.valueOf(db.getQuestion_4().get(1)));
+		question4 = new JLabel("WHat is OOP?");
+		
 		question4.setBounds(30, 448, 962, 35);
 		OOP.add(question4);
+		
+		globalLabel = new JLabel("New label");
+		globalLabel.setFont(new Font("Century Gothic", Font.BOLD, 25));
+		globalLabel.setBounds(486, 11, 137, 57);
+		OOP.add(globalLabel);
+		
+		
 		
 		question1textField = new JTextField();
 		question1textField.setBounds(30, 135, 962, 28);
@@ -907,7 +925,7 @@ public class StudentDashboard extends JFrame {
 
 				Statement statement =  (Statement) UpdateDB.getStatement();
 				
-				String insertQuery = "INSERT INTO `submittedassignments` ( `student_id`,  `submitted_by`,`module`,`answer1`,`answer2`,`answer3`,`answer4`) " + "VALUES ( '"+currentStudentId+"','"+currentStudentName+"', 'OOP' ,'"+question1textField.getText()+"','"+question2textField.getText()+"','"+question3textField.getText()+"','"+question4textField.getText()+"')";
+				String insertQuery = "INSERT INTO `submittedassignments` ( `student_id`,  `submitted_by`,`module`,`answer1`,`answer2`,`answer3`,`answer4`) " + "VALUES ( '"+currentStudentId+"','"+currentStudentName+"', '"+globalLabel.getText()+"' ,'"+question1textField.getText()+"','"+question2textField.getText()+"','"+question3textField.getText()+"','"+question4textField.getText()+"')";
 					
 			try {
 				int success = statement.executeUpdate(insertQuery);
@@ -915,6 +933,10 @@ public class StudentDashboard extends JFrame {
 				if (success==1) {
 
                     JOptionPane.showMessageDialog(null, "Assignment Submitted successfully!");
+                    question1textField.setText("");
+                    question2textField.setText("");
+                    question3textField.setText("");
+                    question4textField.setText("");
 				}
 				
 			} catch (SQLException e1) {
@@ -935,5 +957,17 @@ public class StudentDashboard extends JFrame {
 		submitButton.setForeground(new Color(255, 255, 255));
 		submitButton.setBounds(30, 565, 146, 35);
 		OOP.add(submitButton);
+		
+		
+	}
+	private void buttonCLicked() {
+		for(int i = 0;i<db.getQuestion_1().size();i++) {
+			if(db.getModule().get(i).equals(globalLabel.getText())) {
+				question1.setText(String.valueOf(db.getQuestion_1().get(i)));
+				question2.setText(String.valueOf(db.getQuestion_2().get(i)));
+				question3.setText(String.valueOf(db.getQuestion_3().get(i)));
+				question4.setText(String.valueOf(db.getQuestion_4().get(i)));
+			}
+		}
 	}
 }

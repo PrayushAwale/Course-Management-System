@@ -62,9 +62,20 @@ public class InstructorDashboard extends JFrame {
 	static int moduleDurationColumnIndex = 0;
 	static int moduleMarkColumnIndex = 0;
 	Database db = new Database();
+	GiveMarks giveMarks = new GiveMarks();
 	/**
 	 * Launch the application.
 	 */
+	DefaultTableModel checkAssignent = new DefaultTableModel(
+			new Object[][] {
+				
+				
+				
+			},
+			new String[] {
+					"Student ID", "Student Name", "Module", "Status"
+			}
+		);
 	
 	DefaultTableModel modalValue =  new DefaultTableModel(
 			new Object[][] {
@@ -512,6 +523,9 @@ public class InstructorDashboard extends JFrame {
 		for(int i = 0 ; i<db.getStudentId().size();i++) {
 			studentValue.addRow(new Object[] {db.getStudentId().get(i),db.getStudentName().get(i),db.getPhoneNum().get(i),db.getStudentAddress().get(i),db.get_level().get(i),db.getStudentCourse().get(i)});
 		}
+		for(int i = 0 ; i<db.getCheckStudentId().size();i++) {
+			checkAssignent.addRow(new Object[] {db.getCheckStudentId().get(i),db.getSubmittedBy().get(i),db.getCheckModule().get(i),"Compeleted"});
+		}
 		courseTable.setModel(modalValue);
 		
 		scrollPaneCourse.setViewportView(courseTable);
@@ -838,15 +852,15 @@ public class InstructorDashboard extends JFrame {
 		chekcAssignmentPanle.add(scrollPane_2);
 		
 		assignmentTable = new JTable();
-		assignmentTable.setModel(new DefaultTableModel(
-			new Object[][] {
-				{null, null, null, null},
-				{null, null, null, null},
-			},
-			new String[] {
-				"Student ID", "Student Name", "Module", "Submitted Date"
+		assignmentTable.setModel(checkAssignent);
+		assignmentTable.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				
+				giveMarks.setVisible(true);
 			}
-		));
+		});
+		assignmentTable.setDefaultEditor(Object.class,null);
 		assignmentTable.getTableHeader().setBackground(Color.decode("#d6eaf7"));
 		assignmentTable.getTableHeader().setFont(new Font("Century Gothic", Font.BOLD, 20));
 		assignmentTable.setShowVerticalLines(false);
