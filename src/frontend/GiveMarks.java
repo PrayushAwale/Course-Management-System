@@ -19,12 +19,13 @@ import java.awt.Cursor;
 public class GiveMarks extends JFrame {
 
 	private JPanel contentPane;
-	private JTextField textField;
+	private JTextField markTextField;
 	Database db = new Database();
 	private JLabel answer1;
 	private JLabel answer2;
 	private JLabel answer3;
 	private JLabel answer4;
+	private JButton doneButton;
 	/**
 	 * Launch the application.
 	 */
@@ -41,6 +42,12 @@ public class GiveMarks extends JFrame {
 			}
 		});
 	}
+
+	
+	public JButton getDoneButton() {
+		return doneButton;
+	}
+
 
 	public JLabel getAnswer1() {
 		return answer1;
@@ -59,6 +66,11 @@ public class GiveMarks extends JFrame {
 	public JLabel getAnswer4() {
 		return answer4;
 	}
+
+	public JTextField getMarkTextField() {
+		return markTextField;
+	}
+
 
 	/**
 	 * Create the frame.
@@ -79,18 +91,18 @@ public class GiveMarks extends JFrame {
 		contentPane.add(panel);
 		panel.setLayout(null);
 		
-		textField = new JTextField();
-		textField.setBounds(142, 495, 144, 35);
-		panel.add(textField);
-		textField.setColumns(10);
+		markTextField = new JTextField();
+		markTextField.setBounds(142, 495, 144, 35);
+		panel.add(markTextField);
+		markTextField.setColumns(10);
 		
-		JButton btnNewButton = new JButton("Done");
-		btnNewButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		btnNewButton.setBackground(new Color(45, 204, 112));
-		btnNewButton.setFont(new Font("Century Gothic", Font.BOLD, 15));
-		btnNewButton.setForeground(new Color(255, 255, 255));
-		btnNewButton.setBounds(76, 551, 599, 41);
-		panel.add(btnNewButton);
+		doneButton = new JButton("Done");
+		doneButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		doneButton.setBackground(new Color(45, 204, 112));
+		doneButton.setFont(new Font("Century Gothic", Font.BOLD, 15));
+		doneButton.setForeground(new Color(255, 255, 255));
+		doneButton.setBounds(76, 551, 599, 41);
+		panel.add(doneButton);
 		
 		JLabel lblNewLabel = new JLabel("Mark");
 		lblNewLabel.setFont(new Font("Century Gothic", Font.BOLD, 20));

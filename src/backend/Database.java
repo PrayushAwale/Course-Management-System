@@ -75,6 +75,15 @@ public List<String> getTeacherId() {
 	}
 
 
+	public List<String> getOop_mark() {
+		return oop_mark;
+	}
+	public List<String> getNmc_mark() {
+		return nmc_mark;
+	}
+	public List<String> getAi_mark() {
+		return ai_mark;
+	}
 	public List<String> getModule() {
 		return module;
 	}
@@ -157,6 +166,9 @@ public List<String> getTeacherId() {
 		List<String> studentAddress= new ArrayList<String>();
 		List<String> studentCourse = new ArrayList<String>();
 		List<String> studentPassword = new ArrayList<String>();
+		List<String> oop_mark = new ArrayList<String>();
+		List<String> nmc_mark = new ArrayList<String>();
+		List<String> ai_mark = new ArrayList<String>();
 //Array for assignment table
 				List<String> module = new ArrayList<String>();
 				List<String> dueDate= new ArrayList<String>();
@@ -237,6 +249,9 @@ public Database() {
 					String address = executeQueryStudent.getString("address");
 					String course = executeQueryStudent.getString("course");
 					String password = executeQueryStudent.getString("password");
+					String oopMark = executeQueryStudent.getString("oop_mark");
+					String nmcMark = executeQueryStudent.getString("nmc_mark");
+					String aiMark = executeQueryStudent.getString("ai_mark");
 					studentId.add(student_id);
 					studentName.add(student_name);
 					phoneNum.add(phone_number);
@@ -244,6 +259,9 @@ public Database() {
 					_level.add(level);
 					studentCourse.add(course);
 					studentPassword.add(password);
+					oop_mark.add(oopMark);
+					nmc_mark.add(aiMark);
+					ai_mark.add(aiMark);
 //					System.out.println(student_name + password);
 				}
 //		Fetching data of Assignment

@@ -899,6 +899,48 @@ public class InstructorDashboard extends JFrame {
 				giveMarks.getAnswer3().setText(String.valueOf(db.getCheckAssignment3().get(assignmentTable.getSelectedRow())));
 				giveMarks.getAnswer4().setText(String.valueOf(db.getCheckAssignment4().get(assignmentTable.getSelectedRow())));
 				giveMarks.setVisible(true);
+				JButton doneButton = giveMarks.getDoneButton();
+				doneButton.addMouseListener(new MouseAdapter() {
+					public void mouseClicked(MouseEvent e) {
+						Statement statement =  (Statement) UpdateDB.getStatement();
+						try {
+							if(String.valueOf(db.getCheckModule().get(assignmentTable.getSelectedRow())).equals("OOP")) {				
+								String updateQuery = "UPDATE `student` SET `oop_mark` ='"+giveMarks.getMarkTextField().getText()+"'"
+										+ " WHERE uni_id='"+String.valueOf(db.getCheckStudentId().get(assignmentTable.getSelectedRow()))+"'";
+								int success = statement.executeUpdate(updateQuery);
+								if (success==1) {
+									giveMarks.dispose();
+		                            JOptionPane.showMessageDialog(null, "Added Mark successfully!");
+								}
+							}
+							if(String.valueOf(db.getCheckModule().get(assignmentTable.getSelectedRow())).equals("NMC")) {				
+								String updateQuery = "UPDATE `student` SET `nmc_mark` ='"+giveMarks.getMarkTextField().getText()+"'"
+										+ " WHERE uni_id='"+String.valueOf(db.getCheckStudentId().get(assignmentTable.getSelectedRow()))+"'";
+								int success = statement.executeUpdate(updateQuery);
+								if (success==1) {
+									giveMarks.dispose();
+		                            JOptionPane.showMessageDialog(null, "Added Mark successfully!");
+								}
+							}
+							if(String.valueOf(db.getCheckModule().get(assignmentTable.getSelectedRow())).equals("AI")) {				
+								String updateQuery = "UPDATE `student` SET `ai_mark` ='"+giveMarks.getMarkTextField().getText()+"'"
+										+ " WHERE uni_id='"+String.valueOf(db.getCheckStudentId().get(assignmentTable.getSelectedRow()))+"'";
+								int success = statement.executeUpdate(updateQuery);
+								if (success==1) {
+									giveMarks.dispose();
+		                            JOptionPane.showMessageDialog(null, "Added Mark successfully!");
+								}
+							}
+							
+						}catch (SQLException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+							JOptionPane.showMessageDialog(null, "Unable to Add the mark, please try!");
+						}
+					}
+					
+				});
+				
 			}
 		});
 		assignmentTable.setDefaultEditor(Object.class,null);

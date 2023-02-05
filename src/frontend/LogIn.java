@@ -147,6 +147,9 @@ public class LogIn extends JFrame {
 							frameLogin.getLblNewLabel_23_2().setText(String.valueOf(db.getPhoneNum().get(i)));
 							frameLogin.getLblNewLabel_23_3().setText(String.valueOf(db.getStudentCourse().get(i)));
 							frameLogin.getLblNewLabel_23_4().setText(String.valueOf(db.getStudentAddress().get(i)));
+							frameLogin.getAiMark().setText(String.valueOf(db.getAi_mark().get(i)));
+							frameLogin.getOopMark().setText(String.valueOf(db.getOop_mark().get(i)));
+							frameLogin.getNmcMark().setText(String.valueOf(db.getNmc_mark().get(i)));
 							frame.dispose();
 						}
 					}

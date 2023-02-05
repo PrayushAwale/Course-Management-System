@@ -94,6 +94,23 @@ public class StudentDashboard extends JFrame {
 	}
 	
 
+	public Database getDb() {
+		return db;
+	}
+
+	public JLabel getOopMark() {
+		return oopMark;
+	}
+
+	public JLabel getNmcMark() {
+		return NmcMark;
+	}
+
+	public JLabel getAiMark() {
+		return AiMark;
+	}
+
+
 	DefaultTableModel studentValue =  new DefaultTableModel(
 			new Object[][] {
 				
@@ -151,6 +168,9 @@ public class StudentDashboard extends JFrame {
 	private JLabel question2;
 	private JLabel question3;
 	private JLabel question4;
+	private JLabel oopMark;
+	private JLabel NmcMark;
+	private JLabel AiMark;
 	
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -771,39 +791,39 @@ public class StudentDashboard extends JFrame {
 		lblNewLabel_20.setBounds(45, 98, 66, 32);
 		panel_7.add(lblNewLabel_20);
 		
-		JLabel lblNewLabel_20_1 = new JLabel("1");
-		lblNewLabel_20_1.setFont(new Font("Century Gothic", Font.BOLD, 20));
-		lblNewLabel_20_1.setBounds(169, 98, 44, 32);
-		panel_7.add(lblNewLabel_20_1);
+		oopMark = new JLabel("0");
+		oopMark.setFont(new Font("Century Gothic", Font.BOLD, 20));
+		oopMark.setBounds(169, 98, 44, 32);
+		panel_7.add(oopMark);
 		
-		JLabel lblNewLabel_20_1_1 = new JLabel("1");
-		lblNewLabel_20_1_1.setFont(new Font("Century Gothic", Font.BOLD, 20));
-		lblNewLabel_20_1_1.setBounds(169, 160, 44, 32);
-		panel_7.add(lblNewLabel_20_1_1);
+		NmcMark = new JLabel("0");
+		NmcMark.setFont(new Font("Century Gothic", Font.BOLD, 20));
+		NmcMark.setBounds(169, 160, 44, 32);
+		panel_7.add(NmcMark);
 		
 		JLabel lblNewLabel_20_2 = new JLabel("NMC");
 		lblNewLabel_20_2.setFont(new Font("Century Gothic", Font.BOLD, 20));
 		lblNewLabel_20_2.setBounds(45, 160, 66, 32);
 		panel_7.add(lblNewLabel_20_2);
 		
-		JLabel lblNewLabel_20_1_2 = new JLabel("1");
-		lblNewLabel_20_1_2.setFont(new Font("Century Gothic", Font.BOLD, 20));
-		lblNewLabel_20_1_2.setBounds(169, 217, 44, 32);
-		panel_7.add(lblNewLabel_20_1_2);
+		AiMark = new JLabel("0");
+		AiMark.setFont(new Font("Century Gothic", Font.BOLD, 20));
+		AiMark.setBounds(169, 217, 44, 32);
+		panel_7.add(AiMark);
 		
 		JLabel lblNewLabel_20_3 = new JLabel("AI");
 		lblNewLabel_20_3.setFont(new Font("Century Gothic", Font.BOLD, 20));
 		lblNewLabel_20_3.setBounds(45, 217, 53, 32);
 		panel_7.add(lblNewLabel_20_3);
 		
-		JLabel lblNewLabel_21 = new JLabel("To Do");
-		lblNewLabel_21.setFont(new Font("Century", Font.PLAIN, 10));
+		JLabel lblNewLabel_21 = new JLabel("Mark");
+		lblNewLabel_21.setFont(new Font("Century", Font.PLAIN, 15));
 		lblNewLabel_21.setBounds(158, 75, 45, 13);
 		panel_7.add(lblNewLabel_21);
 		
 		JLabel lblNewLabel_21_1 = new JLabel("Module");
-		lblNewLabel_21_1.setFont(new Font("Century", Font.PLAIN, 10));
-		lblNewLabel_21_1.setBounds(53, 74, 45, 13);
+		lblNewLabel_21_1.setFont(new Font("Century", Font.PLAIN, 15));
+		lblNewLabel_21_1.setBounds(45, 74, 58, 13);
 		panel_7.add(lblNewLabel_21_1);
 		
 		JLabel lblNewLabel_19 = new JLabel("Activites");
