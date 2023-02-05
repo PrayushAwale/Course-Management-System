@@ -132,12 +132,11 @@ public class LogIn extends JFrame {
 					frame.dispose();
 				}
 				if(loginAs.equals("Student")){
-				
+
 					for(int i =0;i<db.getStudentId().size();i++) {
 						if(usernameField.getText().trim().equals(db.getStudentName().get(i).trim()) && String.valueOf(passwordField.getPassword()).trim().equals(db.getStudentPassword().get(i).trim())) {
 							currentStudentName = String.valueOf(db.getStudentName().get(i));
 							currentStudentId = String.valueOf(db.getStudentId().get(i));
-		
 							StudentDashboard frameLogin = new StudentDashboard();
 							frameLogin.setVisible(true);
 							frameLogin.setCurrentStudentName(currentStudentName);
@@ -228,10 +227,7 @@ public class LogIn extends JFrame {
 
 				JButton addButton = frameLogin.getAddButton();
 				addButton.setText("Add");
-				
-				
 				addButton.addActionListener(new ActionListener() {
-
 					@Override
 					public void actionPerformed(ActionEvent e) {
 						newstudentName = studentNameValue.getText();
@@ -240,11 +236,9 @@ public class LogIn extends JFrame {
 						newstudentLevel= studentLevelValue.getText();
 						newstudentCourse= studentCourseValue.getText();
 						newstudentPassword = studentPasswordValue.getText();
-								
 						Statement statement =  (Statement) UpdateDB.getStatement();
-						
-						String insertQuery = "INSERT INTO `student` (  `student_name`,`address`, `phone_num`, `level`, `course`,`password`) " + "VALUES ( '"+newstudentName+"','"+newstudentAddress+"','"+newstudentPhoneNum+"','"+newstudentLevel+"','"+newstudentCourse+"','"+newstudentPassword+"')";
-							
+						String insertQuery = "INSERT INTO `student` ( `student_name`,`address`, `phone_num`, `level`, `course`,`password`,`oop_mark`,`ai_mark`,`nmc_mark`) " + "VALUES ( '"+newstudentName+"','"+newstudentAddress+"','"+newstudentPhoneNum+"','"+newstudentLevel+"','"+newstudentCourse+"','"+newstudentPassword+"','0','0','0')";
+			
 					try {
 						int success = statement.executeUpdate(insertQuery);
 					

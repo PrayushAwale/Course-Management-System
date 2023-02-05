@@ -899,7 +899,13 @@ public class InstructorDashboard extends JFrame {
 				giveMarks.getAnswer3().setText(String.valueOf(db.getCheckAssignment3().get(assignmentTable.getSelectedRow())));
 				giveMarks.getAnswer4().setText(String.valueOf(db.getCheckAssignment4().get(assignmentTable.getSelectedRow())));
 				giveMarks.setVisible(true);
+				
 				JButton doneButton = giveMarks.getDoneButton();
+//				System.out.println(lblNewLabel_22_1_1_1.getText() + String.valueOf(db.getCheckModule().get(assignmentTable.getSelectedRow())));
+//				if(!lblNewLabel_22_1_1_1.getText().equals(String.valueOf(db.getCheckModule().get(assignmentTable.getSelectedRow())))) {
+//					System.out.println("Ematche");
+//					doneButton.setVisible(false);
+//				}
 				doneButton.addMouseListener(new MouseAdapter() {
 					public void mouseClicked(MouseEvent e) {
 						Statement statement =  (Statement) UpdateDB.getStatement();

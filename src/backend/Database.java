@@ -260,7 +260,7 @@ public Database() {
 					studentCourse.add(course);
 					studentPassword.add(password);
 					oop_mark.add(oopMark);
-					nmc_mark.add(aiMark);
+					nmc_mark.add(nmcMark);
 					ai_mark.add(aiMark);
 //					System.out.println(student_name + password);
 				}
