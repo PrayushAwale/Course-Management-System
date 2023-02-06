@@ -125,7 +125,18 @@ public class AdminDashboard extends JFrame {
 	 * Launch the application.
 	 */
 	
-	static //Default value for module
+	static//Default value for module
+	DefaultTableModel studentReportValue =  new DefaultTableModel(
+			new Object[][] {
+				
+				
+				
+			},
+			new String[] {
+				"Student ID","Student Name", "Level", "OOP Mark", "NMC Mark", "AI Mark"
+			}
+		);
+	static//Default value for module
 	DefaultTableModel modalValue =  new DefaultTableModel(
 			new Object[][] {
 				
@@ -223,6 +234,7 @@ public class AdminDashboard extends JFrame {
 	private JTable courseTables;
 	private JTable instructorTables;
 	private JTable studentTables;
+	private JTable generateReportTable;
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -308,7 +320,7 @@ public class AdminDashboard extends JFrame {
 		coursesButton.setBounds(0, 151, 251, 70);
 		sideBar.add(coursesButton);
 		
-		settingButton = new JButton("Setting");
+		settingButton = new JButton("Generate");
 		settingButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		settingButton.addMouseListener(new MouseAdapter() {
 			@Override
@@ -326,7 +338,7 @@ public class AdminDashboard extends JFrame {
 			}
 			
 		});
-		settingButton.setIcon(new ImageIcon(AdminDashboard.class.getResource("/Images/settings.png")));
+		settingButton.setIcon(new ImageIcon(AdminDashboard.class.getResource("/images/generatereal.png")));
 		settingButton.setBackground(new Color(52, 73, 94));
 		settingButton.setForeground(new Color(255, 255, 255));
 		settingButton.setFont(new Font("Century Gothic", Font.BOLD, 20));
@@ -913,10 +925,32 @@ public class AdminDashboard extends JFrame {
 		mainSetting.add(headerSetting);
 		headerSetting.setLayout(new BorderLayout(0, 0));
 		
-		JLabel settingTitle = new JLabel("Setting");
+		JLabel settingTitle = new JLabel("Generate");
 		settingTitle.setHorizontalAlignment(SwingConstants.CENTER);
 		settingTitle.setFont(new Font("Century Gothic", Font.BOLD, 30));
 		headerSetting.add(settingTitle, BorderLayout.CENTER);
+		
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(0, 81, 1028, 602);
+		mainSetting.add(scrollPane);
+		
+		for(int i = 0 ; i<db.getStudentId().size();i++) {		
+			studentReportValue.addRow(new Object[] {db.getStudentId().get(i),db.getStudentName().get(i),db.get_level().get(i),db.getOop_mark().get(i),db.getNmc_mark().get(i),db.getAi_mark().get(i)});
+		}
+		
+		generateReportTable = new JTable();
+		generateReportTable.setModel(studentReportValue);
+		generateReportTable.setDefaultEditor(Object.class,null);
+		generateReportTable.getTableHeader().setBackground(Color.decode("#d6eaf7"));
+		generateReportTable.getTableHeader().setFont(new Font("Century Gothic", Font.BOLD, 20));
+		generateReportTable.setShowVerticalLines(false);
+		generateReportTable.setRowHeight(35);
+		generateReportTable.setIntercellSpacing(new Dimension(5, 5));
+		generateReportTable.setFont(new Font("Century Gothic", Font.PLAIN, 15));
+		generateReportTable.setFillsViewportHeight(true);
+		generateReportTable.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
+		generateReportTable.setBackground(Color.WHITE);
+		scrollPane.setViewportView(generateReportTable);
 		
 		JPanel logOut = new JPanel();
 		panel.add(logOut, "name_484982008089500");

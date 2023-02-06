@@ -140,8 +140,8 @@ public class LogIn extends JFrame {
 							StudentDashboard frameLogin = new StudentDashboard();
 							frameLogin.setVisible(true);
 							frameLogin.setCurrentStudentName(currentStudentName);
-							frameLogin.setCurrentStudentId(currentStudentId);
-							frameLogin.getLblNewLabel_23().setText(currentStudentName);
+								frameLogin.setCurrentStudentId(currentStudentId);
+								frameLogin.getLblNewLabel_23().setText(currentStudentName);
 							frameLogin.getLblNewLabel_23_1().setText(currentStudentId);
 							frameLogin.getLblNewLabel_23_2().setText(String.valueOf(db.getPhoneNum().get(i)));
 							frameLogin.getLblNewLabel_23_3().setText(String.valueOf(db.getStudentCourse().get(i)));
@@ -237,7 +237,7 @@ public class LogIn extends JFrame {
 						newstudentCourse= studentCourseValue.getText();
 						newstudentPassword = studentPasswordValue.getText();
 						Statement statement =  (Statement) UpdateDB.getStatement();
-						String insertQuery = "INSERT INTO `student` ( `student_name`,`address`, `phone_num`, `level`, `course`,`password`,`oop_mark`,`ai_mark`,`nmc_mark`) " + "VALUES ( '"+newstudentName+"','"+newstudentAddress+"','"+newstudentPhoneNum+"','"+newstudentLevel+"','"+newstudentCourse+"','"+newstudentPassword+"','0','0','0')";
+						String insertQuery = "INSERT INTO `student` ( `student_name`,`address`, `phone_num`, `level`, `course`,`password`,`oop_mark`,`ai_mark`,`nmc_mark`,`average`, `remark`, `message`) " + "VALUES ( '"+newstudentName+"','"+newstudentAddress+"','"+newstudentPhoneNum+"','"+newstudentLevel+"','"+newstudentCourse+"','"+newstudentPassword+"','0','0','0','0','Not Provided Yet','Not Provided Yet')";
 			
 					try {
 						int success = statement.executeUpdate(insertQuery);
