@@ -171,6 +171,12 @@ public class StudentDashboard extends JFrame {
 	private JLabel oopMark;
 	private JLabel NmcMark;
 	private JLabel AiMark;
+	private JLabel reportOop;
+	private JLabel reportAi;
+	private JLabel reportNmc;
+	private JLabel reportAverage;
+	private JLabel reportRemark;
+	private JLabel reportMessage;
 	
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -257,7 +263,7 @@ public class StudentDashboard extends JFrame {
 		coursesButton.setBounds(0, 151, 251, 70);
 		sideBar.add(coursesButton);
 		
-		settingButton = new JButton("Setting");
+		settingButton = new JButton("Report");
 		settingButton.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		settingButton.addMouseListener(new MouseAdapter() {
 			@Override
@@ -275,7 +281,7 @@ public class StudentDashboard extends JFrame {
 			}
 			
 		});
-		settingButton.setIcon(new ImageIcon(StudentDashboard.class.getResource("/Images/settings.png")));
+		settingButton.setIcon(new ImageIcon(StudentDashboard.class.getResource("/images/generatereal.png")));
 		settingButton.setBackground(new Color(52, 73, 94));
 		settingButton.setForeground(new Color(255, 255, 255));
 		settingButton.setFont(new Font("Century Gothic", Font.BOLD, 20));
@@ -661,7 +667,7 @@ public class StudentDashboard extends JFrame {
 		mainSetting.add(headerSetting);
 		headerSetting.setLayout(new BorderLayout(0, 0));
 		
-		JLabel settingTitle = new JLabel("Setting");
+		JLabel settingTitle = new JLabel("View Report");
 		settingTitle.setHorizontalAlignment(SwingConstants.CENTER);
 		settingTitle.setFont(new Font("Century Gothic", Font.BOLD, 30));
 		headerSetting.add(settingTitle, BorderLayout.CENTER);
@@ -716,6 +722,70 @@ public class StudentDashboard extends JFrame {
 		lblNewLabel_23_4.setFont(new Font("Century Gothic", Font.PLAIN, 20));
 		lblNewLabel_23_4.setBounds(226, 312, 466, 32);
 		mainSetting.add(lblNewLabel_23_4);
+		
+		JPanel panel_10 = new JPanel();
+		panel_10.setBounds(66, 360, 914, 3);
+		mainSetting.add(panel_10);
+		
+		JLabel lblNewLabel_22_1_1_2_1 = new JLabel("OOP:");
+		lblNewLabel_22_1_1_2_1.setFont(new Font("Century Gothic", Font.BOLD, 20));
+		lblNewLabel_22_1_1_2_1.setBounds(66, 388, 169, 32);
+		mainSetting.add(lblNewLabel_22_1_1_2_1);
+		
+		JLabel lblNewLabel_22_1_1_2_1_1 = new JLabel("AI:");
+		lblNewLabel_22_1_1_2_1_1.setFont(new Font("Century Gothic", Font.BOLD, 20));
+		lblNewLabel_22_1_1_2_1_1.setBounds(66, 430, 169, 32);
+		mainSetting.add(lblNewLabel_22_1_1_2_1_1);
+		
+		JLabel lblNewLabel_22_1_1_2_1_2 = new JLabel("NMC:");
+		lblNewLabel_22_1_1_2_1_2.setFont(new Font("Century Gothic", Font.BOLD, 20));
+		lblNewLabel_22_1_1_2_1_2.setBounds(66, 471, 169, 32);
+		mainSetting.add(lblNewLabel_22_1_1_2_1_2);
+		
+		JLabel lblNewLabel_22_1_1_2_1_2_1 = new JLabel("Average:");
+		lblNewLabel_22_1_1_2_1_2_1.setFont(new Font("Century Gothic", Font.BOLD, 20));
+		lblNewLabel_22_1_1_2_1_2_1.setBounds(66, 513, 169, 32);
+		mainSetting.add(lblNewLabel_22_1_1_2_1_2_1);
+		
+		JLabel lblNewLabel_22_1_1_2_1_2_1_1 = new JLabel("Remark:");
+		lblNewLabel_22_1_1_2_1_2_1_1.setFont(new Font("Century Gothic", Font.BOLD, 20));
+		lblNewLabel_22_1_1_2_1_2_1_1.setBounds(66, 552, 169, 32);
+		mainSetting.add(lblNewLabel_22_1_1_2_1_2_1_1);
+		
+		JLabel lblNewLabel_22_1_1_2_1_2_1_2 = new JLabel("Message:");
+		lblNewLabel_22_1_1_2_1_2_1_2.setFont(new Font("Century Gothic", Font.BOLD, 20));
+		lblNewLabel_22_1_1_2_1_2_1_2.setBounds(66, 594, 169, 32);
+		mainSetting.add(lblNewLabel_22_1_1_2_1_2_1_2);
+		
+		reportOop = new JLabel("");
+		reportOop.setFont(new Font("Century Gothic", Font.PLAIN, 20));
+		reportOop.setBounds(226, 388, 466, 32);
+		mainSetting.add(reportOop);
+		
+		reportAi = new JLabel("");
+		reportAi.setFont(new Font("Century Gothic", Font.PLAIN, 20));
+		reportAi.setBounds(226, 430, 466, 32);
+		mainSetting.add(reportAi);
+		
+		reportNmc = new JLabel("");
+		reportNmc.setFont(new Font("Century Gothic", Font.PLAIN, 20));
+		reportNmc.setBounds(226, 472, 466, 32);
+		mainSetting.add(reportNmc);
+		
+		reportAverage = new JLabel("");
+		reportAverage.setFont(new Font("Century Gothic", Font.PLAIN, 20));
+		reportAverage.setBounds(226, 513, 466, 32);
+		mainSetting.add(reportAverage);
+		
+		reportRemark = new JLabel("");
+		reportRemark.setFont(new Font("Century Gothic", Font.PLAIN, 20));
+		reportRemark.setBounds(226, 552, 466, 32);
+		mainSetting.add(reportRemark);
+		
+		reportMessage = new JLabel("");
+		reportMessage.setFont(new Font("Century Gothic", Font.PLAIN, 20));
+		reportMessage.setBounds(226, 594, 754, 32);
+		mainSetting.add(reportMessage);
 		
 		JPanel logOut = new JPanel();
 		panel.add(logOut, "name_484982008089500");

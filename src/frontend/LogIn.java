@@ -140,8 +140,8 @@ public class LogIn extends JFrame {
 							StudentDashboard frameLogin = new StudentDashboard();
 							frameLogin.setVisible(true);
 							frameLogin.setCurrentStudentName(currentStudentName);
-								frameLogin.setCurrentStudentId(currentStudentId);
-								frameLogin.getLblNewLabel_23().setText(currentStudentName);
+							frameLogin.setCurrentStudentId(currentStudentId);
+							frameLogin.getLblNewLabel_23().setText(currentStudentName);
 							frameLogin.getLblNewLabel_23_1().setText(currentStudentId);
 							frameLogin.getLblNewLabel_23_2().setText(String.valueOf(db.getPhoneNum().get(i)));
 							frameLogin.getLblNewLabel_23_3().setText(String.valueOf(db.getStudentCourse().get(i)));

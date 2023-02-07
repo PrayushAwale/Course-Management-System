@@ -953,12 +953,42 @@ public class AdminDashboard extends JFrame {
 		generateReportTable.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				
 				grm.getRemarkStudentTd().setText(String.valueOf(db.getStudentId().get(generateReportTable.getSelectedRow())));
 				grm.getRemarkStudentName().setText(String.valueOf(db.getStudentName().get(generateReportTable.getSelectedRow())));
 				grm.getRemarkAiMark().setText(String.valueOf(db.getAi_mark().get(generateReportTable.getSelectedRow())));
 				grm.getRemarkOopMark().setText(String.valueOf(db.getOop_mark().get(generateReportTable.getSelectedRow())));
 				grm.getRemarkNmcMark().setText(String.valueOf(db.getNmc_mark().get(generateReportTable.getSelectedRow())));
+				grm.getRemarkAverage().setText(String.valueOf((Integer.valueOf(String.valueOf(db.getAi_mark().get(generateReportTable.getSelectedRow())))+Integer.valueOf(String.valueOf(db.getOop_mark().get(generateReportTable.getSelectedRow())))+Integer.valueOf(String.valueOf(db.getNmc_mark().get(generateReportTable.getSelectedRow()))))/3));
+				String uniId = String.valueOf(db.getStudentId().get(generateReportTable.getSelectedRow()));
 				grm.setVisible(true);
+				JButton generate = grm.getGenerateButton();
+				generate.addMouseListener(new MouseAdapter() {
+					@Override
+					public void mouseClicked(MouseEvent e) {
+						String newAverage = String.valueOf((Integer.valueOf(String.valueOf(db.getAi_mark().get(generateReportTable.getSelectedRow())))+Integer.valueOf(String.valueOf(db.getOop_mark().get(generateReportTable.getSelectedRow())))+Integer.valueOf(String.valueOf(db.getNmc_mark().get(generateReportTable.getSelectedRow()))))/3);
+						String newRemark = grm.getRemarkTextField().getText();
+						String newMessage = grm.getMessageTextField().getText();
+						Statement statement =  (Statement) UpdateDB.getStatement();
+						String updateQuery = "UPDATE `student` SET `average` ='"+newAverage+"', remark='"+newRemark+"',"
+								+ "message='"+newMessage+"' WHERE uni_id='"+uniId+"'";
+						try {
+							int success = statement.executeUpdate(updateQuery);
+						
+							if (success==1) {
+								frame.showDataFromDatabase();
+								grm.dispose();
+	                            JOptionPane.showMessageDialog(null, "Generated Student Report successfully!");
+							}
+							
+						} catch (SQLException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+							JOptionPane.showMessageDialog(null, "Unable to generate the Student report, please try!");
+						}
+					
+					}});
+				
 			}});
 		
 		JPanel logOut = new JPanel();

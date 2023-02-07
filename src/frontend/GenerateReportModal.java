@@ -22,6 +22,7 @@ public class GenerateReportModal extends JFrame {
 	private JLabel remarkOopMark;
 	private JLabel remarkStudentName;
 	private JLabel remarkStudentTd;
+	private JButton generateButton;
 
 	/**
 	 * Launch the application.
@@ -37,6 +38,10 @@ public class GenerateReportModal extends JFrame {
 				}
 			}
 		});
+	}
+
+	public JButton getGenerateButton() {
+		return generateButton;
 	}
 
 	public JTextField getRemarkTextField() {
@@ -138,7 +143,7 @@ public class GenerateReportModal extends JFrame {
 		panel.setBounds(57, 124, 528, 3);
 		contentPane.add(panel);
 		
-		JButton generateButton = new JButton("Generate");
+		generateButton = new JButton("Generate");
 		generateButton.setBackground(new Color(255, 255, 255));
 		generateButton.setFont(new Font("Century Gothic", Font.BOLD, 20));
 		generateButton.setBounds(57, 424, 528, 41);
