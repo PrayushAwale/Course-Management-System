@@ -898,14 +898,43 @@ public class InstructorDashboard extends JFrame {
 				giveMarks.getAnswer2().setText(String.valueOf(db.getCheckAssignment2().get(assignmentTable.getSelectedRow())));
 				giveMarks.getAnswer3().setText(String.valueOf(db.getCheckAssignment3().get(assignmentTable.getSelectedRow())));
 				giveMarks.getAnswer4().setText(String.valueOf(db.getCheckAssignment4().get(assignmentTable.getSelectedRow())));
+				Statement statement =  (Statement) UpdateDB.getStatement();
+				if(String.valueOf(db.getCheckModule().get(assignmentTable.getSelectedRow())).equals("OOP")) {
+					int index = db.getModule().indexOf("OOP");
+					String question1 = db.getQuestion1().get(index);
+					String question2 = db.getQuestion2().get(index);
+					String question3 = db.getQuestion3().get(index);
+					String question4 = db.getQuestion4().get(index);
+					giveMarks.getQuenstion1Answer().setText(question1);
+					giveMarks.getQuenstion2Answer().setText(question2);
+					giveMarks.getQuenstion3Answer().setText(question3);
+					giveMarks.getQuenstion4Answer().setText(question4);
+				}
+				if(String.valueOf(db.getCheckModule().get(assignmentTable.getSelectedRow())).equals("AI")) {
+					int index = db.getModule().indexOf("AI");
+					String question1 = db.getQuestion1().get(index);
+					String question2 = db.getQuestion2().get(index);
+					String question3 = db.getQuestion3().get(index);
+					String question4 = db.getQuestion4().get(index);
+					giveMarks.getQuenstion1Answer().setText(question1);
+					giveMarks.getQuenstion2Answer().setText(question2);
+					giveMarks.getQuenstion3Answer().setText(question3);
+					giveMarks.getQuenstion4Answer().setText(question4);
+				}
+				if(String.valueOf(db.getCheckModule().get(assignmentTable.getSelectedRow())).equals("NMC")) {
+					int index = db.getModule().indexOf("NMC");
+					String question1 = db.getQuestion1().get(index);
+					String question2 = db.getQuestion2().get(index);
+					String question3 = db.getQuestion3().get(index);
+					String question4 = db.getQuestion4().get(index);
+					giveMarks.getQuenstion1Answer().setText(question1);
+					giveMarks.getQuenstion2Answer().setText(question2);
+					giveMarks.getQuenstion3Answer().setText(question3);
+					giveMarks.getQuenstion4Answer().setText(question4);
+				}
 				giveMarks.setVisible(true);
 				
 				JButton doneButton = giveMarks.getDoneButton();
-//				System.out.println(lblNewLabel_22_1_1_1.getText() + String.valueOf(db.getCheckModule().get(assignmentTable.getSelectedRow())));
-//				if(!lblNewLabel_22_1_1_1.getText().equals(String.valueOf(db.getCheckModule().get(assignmentTable.getSelectedRow())))) {
-//					System.out.println("Ematche");
-//					doneButton.setVisible(false);
-//				}
 				doneButton.addMouseListener(new MouseAdapter() {
 					public void mouseClicked(MouseEvent e) {
 						Statement statement =  (Statement) UpdateDB.getStatement();

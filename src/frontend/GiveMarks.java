@@ -26,6 +26,10 @@ public class GiveMarks extends JFrame {
 	private JLabel answer3;
 	private JLabel answer4;
 	private JButton doneButton;
+	private JLabel quenstion1Answer;
+	private JLabel quenstion2Answer;
+	private JLabel quenstion3Answer;
+	private JLabel quenstion4Answer;
 	/**
 	 * Launch the application.
 	 */
@@ -44,6 +48,36 @@ public class GiveMarks extends JFrame {
 	}
 
 	
+	
+	
+	public JLabel getQuenstion1Answer() {
+		return quenstion1Answer;
+	}
+
+
+
+
+	public JLabel getQuenstion2Answer() {
+		return quenstion2Answer;
+	}
+
+
+
+
+	public JLabel getQuenstion3Answer() {
+		return quenstion3Answer;
+	}
+
+
+
+
+	public JLabel getQuenstion4Answer() {
+		return quenstion4Answer;
+	}
+
+
+
+
 	public JButton getDoneButton() {
 		return doneButton;
 	}
@@ -109,25 +143,25 @@ public class GiveMarks extends JFrame {
 		lblNewLabel.setBounds(86, 491, 56, 35);
 		panel.add(lblNewLabel);
 		
-		JLabel lblNewLabel_1 = new JLabel("Question 1 Answer");
-		lblNewLabel_1.setFont(new Font("Century Gothic", Font.BOLD, 20));
-		lblNewLabel_1.setBounds(76, 33, 189, 26);
-		panel.add(lblNewLabel_1);
+		quenstion1Answer = new JLabel("Question 1 Answer");
+		quenstion1Answer.setFont(new Font("Century Gothic", Font.BOLD, 20));
+		quenstion1Answer.setBounds(76, 33, 628, 26);
+		panel.add(quenstion1Answer);
 		
-		JLabel lblNewLabel_1_1 = new JLabel("Question 2 Answer");
-		lblNewLabel_1_1.setFont(new Font("Century Gothic", Font.BOLD, 20));
-		lblNewLabel_1_1.setBounds(76, 135, 189, 26);
-		panel.add(lblNewLabel_1_1);
+		quenstion2Answer = new JLabel("Question 2 Answer");
+		quenstion2Answer.setFont(new Font("Century Gothic", Font.BOLD, 20));
+		quenstion2Answer.setBounds(76, 135, 628, 26);
+		panel.add(quenstion2Answer);
 		
-		JLabel lblNewLabel_1_2 = new JLabel("Question 3 Answer");
-		lblNewLabel_1_2.setFont(new Font("Century Gothic", Font.BOLD, 20));
-		lblNewLabel_1_2.setBounds(76, 249, 189, 26);
-		panel.add(lblNewLabel_1_2);
+		quenstion3Answer = new JLabel("Question 3 Answer");
+		quenstion3Answer.setFont(new Font("Century Gothic", Font.BOLD, 20));
+		quenstion3Answer.setBounds(76, 249, 628, 26);
+		panel.add(quenstion3Answer);
 		
-		JLabel lblNewLabel_1_3 = new JLabel("Question 4 Answer");
-		lblNewLabel_1_3.setFont(new Font("Century Gothic", Font.BOLD, 20));
-		lblNewLabel_1_3.setBounds(76, 369, 189, 26);
-		panel.add(lblNewLabel_1_3);
+		quenstion4Answer = new JLabel("Question 4 Answer");
+		quenstion4Answer.setFont(new Font("Century Gothic", Font.BOLD, 20));
+		quenstion4Answer.setBounds(76, 369, 628, 26);
+		panel.add(quenstion4Answer);
 		
 		answer1 = new JLabel("");
 		answer1.setFont(new Font("Century Gothic", Font.PLAIN, 10));
