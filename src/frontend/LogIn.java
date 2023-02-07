@@ -149,6 +149,12 @@ public class LogIn extends JFrame {
 							frameLogin.getAiMark().setText(String.valueOf(db.getAi_mark().get(i)));
 							frameLogin.getOopMark().setText(String.valueOf(db.getOop_mark().get(i)));
 							frameLogin.getNmcMark().setText(String.valueOf(db.getNmc_mark().get(i)));
+							frameLogin.getReportAi().setText(String.valueOf(db.getAi_mark().get(i)));
+							frameLogin.getReportOop().setText(String.valueOf(db.getOop_mark().get(i)));
+							frameLogin.getReportNmc().setText(String.valueOf(db.getNmc_mark().get(i)));
+							frameLogin.getReportAverage().setText(String.valueOf(db.getAverage().get(i)));
+							frameLogin.getReportMessage().setText(String.valueOf(db.getMessage().get(i)));
+							frameLogin.getReportRemark().setText(String.valueOf(db.getRemark().get(i)));
 							frame.dispose();
 						}
 					}

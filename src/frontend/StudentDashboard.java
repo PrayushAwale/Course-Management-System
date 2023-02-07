@@ -152,6 +152,7 @@ public class StudentDashboard extends JFrame {
 		public JLabel getLblNewLabel_23_4() {
 			return lblNewLabel_23_4;
 		}
+		
 
 	private JTextField question1textField;
 	private JTextField question2textField;
@@ -194,6 +195,7 @@ public class StudentDashboard extends JFrame {
 	/**
 	 * Create the frame.
 	 */
+	
 	public StudentDashboard() {
 		setResizable(false);
 		setType(Type.UTILITY);
@@ -1055,6 +1057,194 @@ public class StudentDashboard extends JFrame {
 		
 		
 	}
+	public JLabel getReportOop() {
+		return reportOop;
+	}
+
+	public void setReportOop(JLabel reportOop) {
+		this.reportOop = reportOop;
+	}
+
+	public JLabel getReportAi() {
+		return reportAi;
+	}
+
+	public void setReportAi(JLabel reportAi) {
+		this.reportAi = reportAi;
+	}
+
+	public JLabel getReportNmc() {
+		return reportNmc;
+	}
+
+	public void setReportNmc(JLabel reportNmc) {
+		this.reportNmc = reportNmc;
+	}
+
+	public JLabel getReportAverage() {
+		return reportAverage;
+	}
+
+	public void setReportAverage(JLabel reportAverage) {
+		this.reportAverage = reportAverage;
+	}
+
+	public JLabel getReportRemark() {
+		return reportRemark;
+	}
+
+	public void setReportRemark(JLabel reportRemark) {
+		this.reportRemark = reportRemark;
+	}
+
+	public JLabel getReportMessage() {
+		return reportMessage;
+	}
+
+	public void setReportMessage(JLabel reportMessage) {
+		this.reportMessage = reportMessage;
+	}
+
+	public JPanel getStudentDashboard() {
+		return StudentDashboard;
+	}
+
+	public JPanel getPanel() {
+		return panel;
+	}
+
+	public CardLayout getCardPanel() {
+		return cardPanel;
+	}
+
+	public JButton getCoursesButton() {
+		return coursesButton;
+	}
+
+	public JButton getDashboardButton() {
+		return dashboardButton;
+	}
+
+	public JButton getInstructorsButton() {
+		return instructorsButton;
+	}
+
+	public JButton getStudentsButton() {
+		return studentsButton;
+	}
+
+	public JButton getSettingButton() {
+		return settingButton;
+	}
+
+	public JTable getCourseTable() {
+		return courseTable;
+	}
+
+	public JTable getInstructorTable() {
+		return instructorTable;
+	}
+
+	public static StudentDashboard getFrame() {
+		return frame;
+	}
+
+	public JTable getStudentTable() {
+		return studentTable;
+	}
+
+	public static int getSelectedRow() {
+		return selectedRow;
+	}
+
+	public static int getModuleTitleColumnIndex() {
+		return moduleTitleColumnIndex;
+	}
+
+	public static int getModuleDurationColumnIndex() {
+		return moduleDurationColumnIndex;
+	}
+
+	public static int getModuleMarkColumnIndex() {
+		return moduleMarkColumnIndex;
+	}
+
+	public String getCurrentStudentName() {
+		return currentStudentName;
+	}
+
+	public String getCurrentStudentId() {
+		return currentStudentId;
+	}
+
+	public String getCurrentStudentPhoneNumber() {
+		return currentStudentPhoneNumber;
+	}
+
+	public String getCurrentStudentAddress() {
+		return currentStudentAddress;
+	}
+
+	public String getCurrentStudentPhoneNo() {
+		return currentStudentPhoneNo;
+	}
+
+	public String getCurrentStudentModule() {
+		return currentStudentModule;
+	}
+
+	public DefaultTableModel getModalValue() {
+		return modalValue;
+	}
+
+	public DefaultTableModel getStudentValue() {
+		return studentValue;
+	}
+
+	public DefaultTableModel getTeacherValue() {
+		return teacherValue;
+	}
+
+	public JTextField getQuestion1textField() {
+		return question1textField;
+	}
+
+	public JTextField getQuestion2textField() {
+		return question2textField;
+	}
+
+	public JTextField getQuestion3textField() {
+		return question3textField;
+	}
+
+	public JTextField getQuestion4textField() {
+		return question4textField;
+	}
+
+	public JLabel getLblNewLabel_22() {
+		return lblNewLabel_22;
+	}
+
+	public JLabel getGlobalLabel() {
+		return globalLabel;
+	}
+
+	public JLabel getQuestion1() {
+		return question1;
+	}
+
+	public JLabel getQuestion2() {
+		return question2;
+	}
+
+	public JLabel getQuestion3() {
+		return question3;
+	}
+
+	public JLabel getQuestion4() {
+		return question4;
+	}
+
 	private void buttonCLicked() {
 		for(int i = 0;i<db.getQuestion_1().size();i++) {
 			if(db.getModule().get(i).equals(globalLabel.getText())) {

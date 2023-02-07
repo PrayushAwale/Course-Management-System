@@ -108,6 +108,15 @@ public List<String> getTeacherId() {
 
 	
 
+	public List<String> getAverage() {
+		return average;
+	}
+	public List<String> getRemark() {
+		return remark;
+	}
+	public List<String> getMessage() {
+		return message;
+	}
 	public List<String> getQuestion1() {
 		return question1;
 	}
@@ -168,6 +177,9 @@ public List<String> getTeacherId() {
 		List<String> studentPassword = new ArrayList<String>();
 		List<String> oop_mark = new ArrayList<String>();
 		List<String> nmc_mark = new ArrayList<String>();
+		List<String> average = new ArrayList<String>();
+		List<String> remark = new ArrayList<String>();
+		List<String> message = new ArrayList<String>();
 		List<String> ai_mark = new ArrayList<String>();
 //Array for assignment table
 				List<String> module = new ArrayList<String>();
@@ -252,6 +264,9 @@ public Database() {
 					String oopMark = executeQueryStudent.getString("oop_mark");
 					String nmcMark = executeQueryStudent.getString("nmc_mark");
 					String aiMark = executeQueryStudent.getString("ai_mark");
+					String averages = executeQueryStudent.getString("average");
+					String remarks = executeQueryStudent.getString("remark");
+					String messages = executeQueryStudent.getString("message");
 					studentId.add(student_id);
 					studentName.add(student_name);
 					phoneNum.add(phone_number);
@@ -262,6 +277,10 @@ public Database() {
 					oop_mark.add(oopMark);
 					nmc_mark.add(nmcMark);
 					ai_mark.add(aiMark);
+					average.add(averages);
+					remark.add(remarks);
+					message.add(messages);
+					
 //					System.out.println(student_name + password);
 				}
 //		Fetching data of Assignment
