@@ -121,6 +121,7 @@ public class AdminDashboard extends JFrame {
 	UpdateModal updateCourse = new UpdateModal();
 	AddTeacherModal updateTeacher = new AddTeacherModal();
 	UpdateStudentModal updateStudent = new UpdateStudentModal();
+	GenerateReportModal grm = new GenerateReportModal();
 	/**
 	 * Launch the application.
 	 */
@@ -163,9 +164,6 @@ public class AdminDashboard extends JFrame {
 	//Default value for student
 	DefaultTableModel studentValue =  new DefaultTableModel(
 			new Object[][] {
-				
-				
-				
 			},
 			new String[] {
 				"University ID","Student Name", "Phone Number", "Address", "Level", "Course"
@@ -952,6 +950,17 @@ public class AdminDashboard extends JFrame {
 		generateReportTable.setBackground(Color.WHITE);
 		scrollPane.setViewportView(generateReportTable);
 		
+		generateReportTable.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				grm.getRemarkStudentTd().setText(String.valueOf(db.getStudentId().get(generateReportTable.getSelectedRow())));
+				grm.getRemarkStudentName().setText(String.valueOf(db.getStudentName().get(generateReportTable.getSelectedRow())));
+				grm.getRemarkAiMark().setText(String.valueOf(db.getAi_mark().get(generateReportTable.getSelectedRow())));
+				grm.getRemarkOopMark().setText(String.valueOf(db.getOop_mark().get(generateReportTable.getSelectedRow())));
+				grm.getRemarkNmcMark().setText(String.valueOf(db.getNmc_mark().get(generateReportTable.getSelectedRow())));
+				grm.setVisible(true);
+			}});
+		
 		JPanel logOut = new JPanel();
 		panel.add(logOut, "name_484982008089500");
 		logOut.setLayout(null);
@@ -1411,7 +1420,6 @@ public class AdminDashboard extends JFrame {
 		studentTables = new JTable();
 		studentTables.setFillsViewportHeight(true);
 		studentTables.setDefaultEditor(Object.class,null);
-		
 		studentTables.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -1501,33 +1509,35 @@ public class AdminDashboard extends JFrame {
 						}
 					});
 //				
-					
 					updateStudent.setVisible(true);
-					
 					
 				}
 				else if(optionSelected == 1) {
+					selectedRow = studentTables.getSelectedRow();
 					JTextField studentIdValue = updateStudent.getIdTextField();
 					studentId = (String) studentTables.getValueAt(studentTables.getSelectedRow(), 0);
 					studentIdValue.setText(studentId);
 					
+
 					
-					studentValue.removeRow(studentTables.getSelectedRow());
 					Statement statement =  (Statement) UpdateDB.getStatement();
-					String deleteQuery = "DELETE FROM student WHERE uni_id='"+studentIdValue.getText()+"'";
+					
 					try {
+						String deleteQuery = "DELETE FROM student WHERE uni_id='"+studentIdValue.getText()+"'";
 						int success = statement.executeUpdate(deleteQuery);
 					
 						if (success==1) {
 							updateStudent.dispose();
-                            JOptionPane.showMessageDialog(null, "Deleted successfully!");
+							JOptionPane.showMessageDialog(null, "Deleted successfully!");
 						}
+						
 						
 					} catch (SQLException e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
 						JOptionPane.showMessageDialog(null, "Unable to delete the Student List, please try!");
 					}
+					studentValue.removeRow(selectedRow);
 					
 					
 //					

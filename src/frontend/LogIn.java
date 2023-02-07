@@ -224,7 +224,6 @@ public class LogIn extends JFrame {
 				JTextField studentPasswordValue = frameLogin.getPasswordTextField();
 				JTextField studentLevelValue = frameLogin.getLeveltextField();
 				JTextField studentCourseValue = frameLogin.getCoursetextFiled();
-
 				JButton addButton = frameLogin.getAddButton();
 				addButton.setText("Add");
 				addButton.addActionListener(new ActionListener() {
